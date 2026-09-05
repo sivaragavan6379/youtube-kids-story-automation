@@ -27,6 +27,44 @@ The story should have:
 - A happy ending
 - Simple Tamil suitable for children
 
+IMPORTANT VISUAL STYLE:
+
+All scenes must look like they belong to the SAME 3D animated
+children's movie.
+
+Use this visual style for EVERY visual_prompt:
+- 3D animated children's movie style
+- Cute and colorful characters
+- Soft rounded cartoon features
+- Expressive friendly faces
+- Vibrant colors
+- Warm cinematic lighting
+- Beautiful child-friendly environments
+- High-quality 3D animation
+- Family-friendly
+- No photorealism
+- No realistic photography
+- No scary or disturbing elements
+- 16:9 landscape composition
+
+CHARACTER CONSISTENCY:
+
+The same character must look the same in every scene.
+
+When describing a character, keep their:
+- Name
+- Age
+- Appearance
+- Hair/fur color
+- Clothing
+- Body shape
+- Important visual features
+
+consistent throughout all scenes.
+
+Each visual_prompt must clearly describe the characters
+and environment needed for that particular scene.
+
 Return ONLY valid JSON.
 Do not use markdown.
 Do not add ```json or ```.
@@ -40,19 +78,22 @@ Use exactly this structure:
   "characters": [
     {
       "name": "Character name",
-      "description": "Short character description"
+      "description": "Detailed consistent visual description"
     }
   ],
   "scenes": [
     {
       "scene_number": 1,
       "narration": "Tamil narration for this scene",
-      "visual_prompt": "Detailed English description of the scene for an AI image generator"
+      "visual_prompt": "Detailed English 3D animated visual prompt for this scene"
     }
   ]
 }
 
 The scenes array MUST contain exactly 10 scenes.
+
+Every visual_prompt MUST include the 3D animated
+children's movie style and maintain character consistency.
 """
 
     data = {
@@ -62,7 +103,9 @@ The scenes array MUST contain exactly 10 scenes.
                 "role": "system",
                 "content": (
                     "You are an expert children's story writer "
-                    "who creates safe Tamil educational stories."
+                    "and visual story director. "
+                    "Create safe, colorful and consistent "
+                    "Tamil children's animated stories."
                 ),
             },
             {
@@ -86,7 +129,6 @@ The scenes array MUST contain exactly 10 scenes.
 
     content = result["choices"][0]["message"]["content"].strip()
 
-    # Remove markdown code fences if the model accidentally adds them
     if content.startswith("```"):
         content = content.replace("```json", "", 1)
         content = content.replace("```", "", 1)
