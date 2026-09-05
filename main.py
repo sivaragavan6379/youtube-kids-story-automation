@@ -3,6 +3,7 @@ import os
 
 from app.story_generator import generate_story
 from app.image_generator import generate_image
+from app.video_generator import animate_image
 
 
 def main():
@@ -42,11 +43,10 @@ def main():
 
         print(f"📝 Prompt: {scene['visual_prompt']}")
 
-        generate_image(
-            scene["visual_prompt"],
-            output_path
-        )
-
+        image_path, image_url = generate_image(
+    scene["visual_prompt"],
+    output_path
+)
         if os.path.exists(output_path):
             file_size = os.path.getsize(output_path)
 
@@ -54,7 +54,31 @@ def main():
             print(f"🖼️ Image saved: {output_path}")
             print(f"📦 File size: {file_size} bytes")
 
-            generated_images.append(output_path)
+           generated_images.append(image_path)
+
+# Test real AI animation on Scene 1 only
+if index == 1:
+    print("\n🎬 Starting AI animation test for Scene 1...")
+
+    motion_prompt = (
+        "The boy walks naturally along the village path while "
+        "the monkey walks beside him. Their arms and legs move "
+        "naturally as they walk. The boy looks happily at the monkey. "
+        "The monkey moves playfully beside him. Trees and leaves "
+        "gently move in the breeze. Small birds fly naturally in "
+        "the background. The camera smoothly tracks backward "
+        "with cinematic movement. Natural continuous motion, "
+        "3D children's animated movie style, colorful, cute, "
+        "family friendly, smooth character movement, no text."
+    )
+
+    animate_image(
+        image_url,
+        motion_prompt,
+        "scene_01_animated.mp4"
+    )
+
+    print("✅ Scene 1 AI animation test completed!")
 
         else:
             raise RuntimeError(
