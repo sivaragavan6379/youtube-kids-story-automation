@@ -43,4 +43,4 @@ def generate_image(prompt, output_path):
     with open(output_path, "wb") as image_file:
         image_file.write(image_response.content)
 
-    return output_path
+    return output_path, image_url
