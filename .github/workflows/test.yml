@@ -1,12 +1,13 @@
-name: Test Kids Story Automation
+name: YouTube Kids Story Automation
 
 on:
   workflow_dispatch:
+
   schedule:
     - cron: "30 15 * * *"
 
 jobs:
-  test:
+  automation:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,8 +19,5 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Test Python
-        run: |
-          python --version
-          echo "YouTube Kids Story Automation is running!"
-          echo "GitHub Actions is working successfully."
+      - name: Run Kids Story Automation
+        run: python main.py
