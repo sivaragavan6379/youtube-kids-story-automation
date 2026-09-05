@@ -22,5 +22,5 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run Kids Story Automation
-        run: python main.py
+      - name: Install dependencies
+        run: pip install -r requirements.txt
