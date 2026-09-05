@@ -43,13 +43,19 @@ def main():
 
         print(f"📝 Prompt: {scene['visual_prompt']}")
 
+        # --------------------------------------------------------
         # Generate image
+        # --------------------------------------------------------
+
         image_path, image_url = generate_image(
             scene["visual_prompt"],
             output_path
         )
 
+        # --------------------------------------------------------
         # Verify image exists
+        # --------------------------------------------------------
+
         if os.path.exists(output_path):
 
             file_size = os.path.getsize(output_path)
@@ -61,7 +67,7 @@ def main():
             generated_images.append(image_path)
 
             # ====================================================
-            # TEST REAL AI ANIMATION ON SCENE 1 ONLY
+            # STEP 3: TEST REAL AI ANIMATION ON SCENE 1 ONLY
             # ====================================================
 
             if index == 1:
@@ -69,15 +75,20 @@ def main():
                 print("\n🎬 Starting AI animation test for Scene 1...")
 
                 motion_prompt = (
-                    "The boy walks naturally along the village path while "
-                    "the monkey walks beside him. Their arms and legs move "
-                    "naturally as they walk. The boy looks happily at the monkey. "
-                    "The monkey moves playfully beside him. Trees and leaves "
-                    "gently move in the breeze. Small birds fly naturally in "
-                    "the background. The camera smoothly tracks backward "
-                    "with cinematic movement. Natural continuous motion, "
-                    "3D children's animated movie style, colorful, cute, "
-                    "family friendly, smooth character movement, no text."
+                    f"Animate the characters and scene shown in this image. "
+                    f"Preserve the exact identity, appearance, clothing, colors, "
+                    f"body shape, and number of characters from the input image. "
+                    f"Do not add, remove, replace, or transform any character. "
+                    f"The characters should move naturally according to the scene. "
+                    f"Use natural walking, body, head, arm, and facial movements "
+                    f"where appropriate. Background trees and leaves gently move "
+                    f"in the breeze. Birds, butterflies, or other small animals "
+                    f"move naturally if they are already visible in the image. "
+                    f"The camera makes a smooth cinematic movement while keeping "
+                    f"the main characters clearly visible. "
+                    f"Natural continuous motion, 3D children's animated movie style, "
+                    f"colorful, cute, family friendly, smooth animation, no text. "
+                    f"Scene description: {scene['visual_prompt']}"
                 )
 
                 animate_image(
@@ -95,7 +106,7 @@ def main():
             )
 
     # ============================================================
-    # STEP 3: Verify
+    # STEP 4: Verify All Images
     # ============================================================
 
     print("\n" + "=" * 60)
