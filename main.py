@@ -7,55 +7,39 @@ from app.video_generator import animate_image
 
 
 def build_motion_prompt(scene):
-    """
-    Create a scene-specific AI animation prompt.
-
-    The original image is treated as the visual source of truth.
-    Characters should remain consistent while the scene action
-    is animated naturally.
-    """
-
-    visual_prompt = scene["visual_prompt"]
-
-    motion_prompt = (
+    return (
         "Animate this exact scene from the input image. "
         "The input image is the visual source of truth. "
-        "Preserve every character exactly as shown, including "
-        "identity, species, face, eyes, hair, clothing, colors, "
-        "body shape, size, and number of characters. "
-        "Do not add new characters. Do not remove characters. "
+        "Preserve every character exactly as shown, including identity, "
+        "species, face, eyes, hair, clothing, colors, body shape, size, "
+        "and number of characters. "
+        "Do not add new characters. "
+        "Do not remove characters. "
         "Do not replace one character with another. "
         "Do not transform characters into different animals or people. "
         "Keep the original environment, objects, and composition consistent. "
-
-        "Create natural continuous movement based on the action "
-        "described in the scene. Characters should use believable "
-        "body, head, eye, facial, arm, leg, wing, or tail movement "
-        "when appropriate for their appearance and action. "
-
-        "Animate environmental elements that are already visible, "
-        "such as leaves gently moving in the breeze, grass softly "
-        "swaying, water naturally flowing, clouds slowly moving, "
-        "fireflies glowing, or birds and butterflies flying, "
-        "but only when those elements are already present. "
-
-        "Use subtle cinematic camera movement such as a smooth "
-        "tracking shot, gentle push-in, pull-back, or side movement. "
-        "Keep the main characters clearly visible and avoid sudden "
-        "camera movements. "
-
-        "The animation should feel like a polished 3D children's "
-        "animated movie scene: colorful, cute, expressive, "
-        "family friendly, natural motion, smooth movement, "
-        "consistent characters, no text, no subtitles. "
-
-        f"Scene action and visual description: {visual_prompt}"
+        "Create natural continuous movement based on the action described "
+        "in the scene. "
+        "Characters should use believable body, head, eye, facial, arm, "
+        "leg, wing, or tail movement when appropriate for their appearance "
+        "and action. "
+        "Animate environmental elements that are already visible, such as "
+        "leaves gently moving in the breeze, grass softly swaying, water "
+        "naturally flowing, clouds slowly moving, fireflies glowing, or "
+        "birds and butterflies flying, but only when those elements are "
+        "already present. "
+        "Use subtle cinematic camera movement such as a gentle tracking "
+        "shot or slow push-in while keeping the main characters clearly "
+        "visible. "
+        "Natural continuous motion, smooth character animation, "
+        "3D children's animated movie style, colorful, cute, "
+        "family friendly, no text. "
+        f"Scene description: {scene['visual_prompt']}"
     )
-
-    return motion_prompt
 
 
 def main():
+
     print("=" * 60)
     print("🎬 YouTube Kids Story Automation")
     print("=" * 60)
@@ -74,141 +58,130 @@ def main():
     print(f"✅ Scenes: {len(story['scenes'])}")
 
     # ============================================================
-    # STEP 2: Generate Scene Images
+    # STEP 2: TEST WITH FIRST 2 SCENES ONLY
     # ============================================================
 
-    print("\n🎨 Starting image generation for all scenes...")
+    print("\n🎨 Starting image generation for test scenes...")
 
     generated_images = []
+    generated_videos = []
 
-    for index, scene in enumerate(story["scenes"][:2], start=1):
+    # TEST ONLY 2 SCENES
+    test_scenes = story["scenes"][:2]
+
+    for index, scene in enumerate(test_scenes, start=1):
 
         scene_number = f"{index:02d}"
+
         output_path = f"scene_{scene_number}.png"
+        video_path = f"scene_{scene_number}_animated.mp4"
 
         print("\n" + "-" * 60)
-        print(f"🎨 Generating image for Scene {index}/10")
+        print(f"🎨 Generating image for Scene {index}/2")
         print("-" * 60)
 
         print(f"📝 Prompt: {scene['visual_prompt']}")
+
+        # --------------------------------------------------------
+        # Generate image
+        # --------------------------------------------------------
 
         image_path, image_url = generate_image(
             scene["visual_prompt"],
             output_path
         )
 
-        if os.path.exists(output_path):
+        # --------------------------------------------------------
+        # Verify image
+        # --------------------------------------------------------
 
-            file_size = os.path.getsize(output_path)
-
-            print("✅ IMAGE GENERATION SUCCESSFUL")
-            print(f"🖼️ Image saved: {output_path}")
-            print(f"📦 File size: {file_size} bytes")
-
-            generated_images.append(image_path)
-
-            # ====================================================
-            # STEP 3: AI ANIMATION FOR EVERY SCENE
-            # ====================================================
-
-            print(f"\n🎬 Starting AI animation for Scene {index}/10...")
-
-            motion_prompt = build_motion_prompt(scene)
-
-            print(f"🎞️ Motion prompt: {motion_prompt}")
-
-            animated_output = f"scene_{scene_number}_animated.mp4"
-
-            animate_image(
-                image_url,
-                motion_prompt,
-                animated_output
-            )
-
-            if os.path.exists(animated_output):
-
-                video_size = os.path.getsize(animated_output)
-
-                print("✅ AI ANIMATION SUCCESSFUL")
-                print(f"🎬 Video saved: {animated_output}")
-                print(f"📦 Video size: {video_size} bytes")
-
-            else:
-
-                raise RuntimeError(
-                    f"❌ Animation video was not created: "
-                    f"{animated_output}"
-                )
-
-        else:
+        if not os.path.exists(image_path):
 
             raise RuntimeError(
-                f"❌ Image was not created: {output_path}"
+                f"❌ Image was not created: {image_path}"
             )
 
+        file_size = os.path.getsize(image_path)
+
+        print("✅ IMAGE GENERATION SUCCESSFUL")
+        print(f"🖼️ Image saved: {image_path}")
+        print(f"📦 File size: {file_size} bytes")
+
+        generated_images.append(image_path)
+
+        # --------------------------------------------------------
+        # Generate real AI animation
+        # --------------------------------------------------------
+
+        print(f"\n🎬 Starting AI animation for Scene {index}/2...")
+
+        motion_prompt = build_motion_prompt(scene)
+
+        print(f"🎞️ Motion prompt: {motion_prompt}")
+
+        animate_image(
+            image_url,
+            motion_prompt,
+            video_path
+        )
+
+        # --------------------------------------------------------
+        # Verify video
+        # --------------------------------------------------------
+
+        if not os.path.exists(video_path):
+
+            raise RuntimeError(
+                f"❌ Animation video was not created: {video_path}"
+            )
+
+        video_size = os.path.getsize(video_path)
+
+        print("✅ AI ANIMATION SUCCESSFUL")
+        print(f"🎬 Video saved: {video_path}")
+        print(f"📦 Video size: {video_size} bytes")
+
+        generated_videos.append(video_path)
+
     # ============================================================
-    # STEP 4: Verify Images
+    # STEP 3: TEST SUMMARY
     # ============================================================
 
     print("\n" + "=" * 60)
-    print("📊 IMAGE GENERATION SUMMARY")
+    print("📊 TEST GENERATION SUMMARY")
     print("=" * 60)
 
-    print("✅ Expected images : 10")
+    print("✅ Expected images : 2")
     print(f"✅ Generated images: {len(generated_images)}")
 
     for image in generated_images:
         print(f"    🖼️ {image}")
 
-    if len(generated_images) != 10:
+    print("\n✅ Expected videos : 2")
+    print(f"✅ Generated videos: {len(generated_videos)}")
+
+    for video in generated_videos:
+        print(f"    🎬 {video}")
+
+    # ============================================================
+    # STEP 4: FINAL VALIDATION
+    # ============================================================
+
+    if len(generated_images) != 2:
 
         raise RuntimeError(
-            f"Expected 10 images but generated "
-            f"{len(generated_images)}"
+            f"Expected 2 images but generated {len(generated_images)}"
         )
-
-    # ============================================================
-    # STEP 5: Verify Animations
-    # ============================================================
-
-    print("\n" + "=" * 60)
-    print("🎬 AI ANIMATION SUMMARY")
-    print("=" * 60)
-
-    generated_videos = []
-
-    for index in range(1, 11):
-
-        video_file = f"scene_{index:02d}_animated.mp4"
-
-        if os.path.exists(video_file):
-
-            video_size = os.path.getsize(video_file)
-
-            generated_videos.append(video_file)
-
-            print(
-                f"    🎬 {video_file} "
-                f"({video_size} bytes)"
-            )
-
-        else:
-
-            raise RuntimeError(
-                f"Expected animation not found: {video_file}"
-            )
-
-    print("✅ Expected images : 2")
-    print(f"✅ Generated videos: {len(generated_videos)}")
 
     if len(generated_videos) != 2:
 
         raise RuntimeError(
-            f"Expected 10 videos but generated "
-            f"{len(generated_videos)}"
+            f"Expected 2 videos but generated {len(generated_videos)}"
         )
 
-    print("\n🎉 ALL 10 SCENE ANIMATIONS GENERATED SUCCESSFULLY!")
+    print("\n🎉 TEST SUCCESSFUL!")
+    print("🎉 2 images generated successfully!")
+    print("🎉 2 AI animated videos generated successfully!")
     print("=" * 60)
 
 
