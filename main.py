@@ -90,6 +90,7 @@ def main():
             scene["visual_prompt"],
             output_path
         )
+        generated_videos.append(video_path)
 
         # --------------------------------------------------------
         # Verify image
