@@ -10,6 +10,9 @@ jobs:
   automation:
     runs-on: ubuntu-latest
 
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
