@@ -1,5 +1,6 @@
 from datetime import datetime
 from app.story_generator import generate_story
+from app.image_generator import generate_image
 
 
 def main():
@@ -8,34 +9,31 @@ def main():
     print("=" * 60)
 
     print(f"⏰ Started: {datetime.now()}")
-    print("📖 Generating structured Tamil story using OpenRouter...")
 
+    # Generate story
+    print("\n📖 Generating Tamil story...")
     story = generate_story()
 
-    print("\n" + "=" * 60)
-    print("📖 STORY")
-    print("=" * 60)
+    print(f"✅ Story: {story['title']}")
+    print(f"✅ Scenes: {len(story['scenes'])}")
 
-    print(f"\n🎬 Title: {story['title']}")
-    print(f"\n📝 Description: {story['description']}")
-    print(f"\n💡 Moral: {story['moral']}")
+    # Get Scene 1
+    scene = story["scenes"][0]
 
-    print("\n🎭 CHARACTERS")
-    print("-" * 60)
+    print("\n🎨 Generating image for Scene 1...")
+    print(f"📝 Prompt: {scene['visual_prompt']}")
 
-    for character in story["characters"]:
-        print(f"• {character['name']}: {character['description']}")
+    output_path = "scene_01.png"
 
-    print("\n🎬 SCENES")
-    print("=" * 60)
-
-    for scene in story["scenes"]:
-        print(f"\nScene {scene['scene_number']}")
-        print(f"🗣️ Narration: {scene['narration']}")
-        print(f"🎨 Visual Prompt: {scene['visual_prompt']}")
+    generate_image(
+        scene["visual_prompt"],
+        output_path
+    )
 
     print("\n" + "=" * 60)
-    print(f"✅ Generated {len(story['scenes'])} scenes successfully.")
+    print("✅ IMAGE GENERATION SUCCESSFUL")
+    print("=" * 60)
+    print(f"🖼️ Image saved as: {output_path}")
     print("=" * 60)
 
 
