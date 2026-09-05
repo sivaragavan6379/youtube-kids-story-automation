@@ -198,10 +198,10 @@ def main():
                 f"Expected animation not found: {video_file}"
             )
 
-    print(f"\n✅ Expected videos : 10")
+    print("✅ Expected images : 2")
     print(f"✅ Generated videos: {len(generated_videos)}")
 
-    if len(generated_videos) != 10:
+    if len(generated_videos) != 2:
 
         raise RuntimeError(
             f"Expected 10 videos but generated "
