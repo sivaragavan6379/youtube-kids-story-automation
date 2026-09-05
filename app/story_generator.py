@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import time
 
 
 def generate_story():
@@ -18,82 +19,54 @@ Create a safe, educational and entertaining Tamil children's story.
 
 Target age: 5-10 years old.
 
-Create exactly 10 scenes.
+Create EXACTLY 10 scenes.
 
-The story should have:
+The story must contain:
 - A simple beginning
 - A small problem or adventure
 - Helpful and positive behavior
 - A happy ending
 - Simple Tamil suitable for children
 
-IMPORTANT VISUAL STYLE:
-
-All scenes must look like they belong to the SAME 3D animated
-children's movie.
-
-Use this visual style for EVERY visual_prompt:
-- 3D animated children's movie style
-- Cute and colorful characters
-- Soft rounded cartoon features
-- Expressive friendly faces
-- Vibrant colors
-- Warm cinematic lighting
-- Beautiful child-friendly environments
-- High-quality 3D animation
-- Family-friendly
-- No photorealism
-- No realistic photography
-- No scary or disturbing elements
-- 16:9 landscape composition
-
-CHARACTER CONSISTENCY:
-
-The same character must look the same in every scene.
-
-When describing a character, keep their:
-- Name
-- Age
-- Appearance
-- Hair/fur color
-- Clothing
-- Body shape
-- Important visual features
-
-consistent throughout all scenes.
-
-Each visual_prompt must clearly describe the characters
-and environment needed for that particular scene.
-
+IMPORTANT:
 Return ONLY valid JSON.
-Do not use markdown.
-Do not add ```json or ```.
+Do NOT use markdown.
+Do NOT use ```json.
+Do NOT add any text before or after the JSON.
 
-Use exactly this structure:
+Use exactly this JSON structure:
 
 {
   "title": "Tamil story title",
   "description": "Short Tamil description",
-  "moral": "Tamil moral of the story",
+  "moral": "Tamil moral",
   "characters": [
     {
       "name": "Character name",
-      "description": "Detailed consistent visual description"
+      "description": "Character appearance and personality"
     }
   ],
   "scenes": [
     {
-      "scene_number": 1,
-      "narration": "Tamil narration for this scene",
-      "visual_prompt": "Detailed English 3D animated visual prompt for this scene"
+      "scene": 1,
+      "narration": "Tamil narration",
+      "visual_prompt": "Detailed English visual prompt"
     }
   ]
 }
 
-The scenes array MUST contain exactly 10 scenes.
+There must be exactly 10 scene objects.
 
-Every visual_prompt MUST include the 3D animated
-children's movie style and maintain character consistency.
+VISUAL STYLE:
+- 3D children's animated movie style
+- Cute expressive characters
+- Bright colorful environment
+- Soft cinematic lighting
+- Consistent character appearance across all scenes
+- Family friendly
+- No text or letters inside the generated images
+
+Make the visual_prompt detailed enough for an AI image generator.
 """
 
     data = {
@@ -102,10 +75,8 @@ children's movie style and maintain character consistency.
             {
                 "role": "system",
                 "content": (
-                    "You are an expert children's story writer "
-                    "and visual story director. "
-                    "Create safe, colorful and consistent "
-                    "Tamil children's animated stories."
+                    "You are an expert children's story writer and "
+                    "structured JSON generator. Always return valid JSON."
                 ),
             },
             {
@@ -113,27 +84,64 @@ children's movie style and maintain character consistency.
                 "content": prompt,
             },
         ],
-        "temperature": 0.8,
+        "temperature": 0.7,
+        "max_tokens": 6000,
     }
 
-    response = requests.post(
-        url,
-        headers=headers,
-        json=data,
-        timeout=120,
-    )
+    for attempt in range(3):
+        try:
+            print(f"🔄 Story generation attempt {attempt + 1}/3...")
 
-    response.raise_for_status()
+            response = requests.post(
+                url,
+                headers=headers,
+                json=data,
+                timeout=120,
+            )
 
-    result = response.json()
+            response.raise_for_status()
 
-    content = result["choices"][0]["message"]["content"].strip()
+            result = response.json()
 
-    if content.startswith("```"):
-        content = content.replace("```json", "", 1)
-        content = content.replace("```", "", 1)
-        content = content.strip()
+            content = result["choices"][0]["message"]["content"].strip()
 
-    story = json.loads(content)
+            # Remove accidental markdown fences
+            if content.startswith("```"):
+                content = content.replace("```json", "", 1)
+                content = content.replace("```", "", 1)
+                content = content.strip()
 
-    return story
+            story = json.loads(content)
+
+            # Validate required fields
+            required_fields = [
+                "title",
+                "description",
+                "moral",
+                "characters",
+                "scenes",
+            ]
+
+            for field in required_fields:
+                if field not in story:
+                    raise ValueError(f"Missing field: {field}")
+
+            # Validate exactly 10 scenes
+            if len(story["scenes"]) != 10:
+                raise ValueError(
+                    f"Expected 10 scenes, got {len(story['scenes'])}"
+                )
+
+            print("✅ Valid story JSON received.")
+            return story
+
+        except Exception as e:
+            print(f"⚠️ Attempt {attempt + 1} failed: {e}")
+
+            if attempt < 2:
+                print("⏳ Retrying...")
+                time.sleep(3)
+            else:
+                raise RuntimeError(
+                    "❌ Story generation failed after 3 attempts."
+                ) from e
