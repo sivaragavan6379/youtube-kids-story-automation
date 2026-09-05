@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.story_generator import generate_story
 
 
 def main():
@@ -8,16 +9,17 @@ def main():
 
     print(f"⏰ Started: {datetime.now()}")
 
-    print("📖 Story Generator      : READY")
-    print("🎨 Image Generator      : NOT CONNECTED")
-    print("🎥 Video Generator      : NOT CONNECTED")
-    print("🎙️ Tamil TTS            : NOT CONNECTED")
-    print("📱 Short Generator      : NOT CONNECTED")
-    print("📺 YouTube Uploader     : NOT CONNECTED")
+    print("📖 Generating Tamil story using OpenRouter...")
+    
+    story = generate_story()
 
+    print("\n" + "=" * 50)
+    print("📖 GENERATED STORY")
     print("=" * 50)
-    print("✅ Automation engine is ready.")
+    print(story)
     print("=" * 50)
+
+    print("✅ Story generation completed.")
 
 
 if __name__ == "__main__":
