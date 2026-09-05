@@ -5,15 +5,19 @@ import requests
 def generate_image(prompt, output_path):
     api_key = os.environ["PIXAZO_API_KEY"]
 
-    url = "https://gateway.pixazo.ai/flux-1-schnell"
+    url = "https://gateway.pixazo.ai/flux-1-schnell/v1/getData"
 
     headers = {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
+        "Cache-Control": "no-cache",
+        "Ocp-Apim-Subscription-Key": api_key,
     }
 
     data = {
         "prompt": prompt,
+        "num_steps": 4,
+        "width": 1024,
+        "height": 576,
     }
 
     response = requests.post(
