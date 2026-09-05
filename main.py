@@ -3,7 +3,7 @@ import os
 
 from app.story_generator import generate_story
 from app.image_generator import generate_image
-from app.video_generator import animate_image
+from app.video_generator import animate_image, combine_videos
 
 
 def build_motion_prompt(scene):
