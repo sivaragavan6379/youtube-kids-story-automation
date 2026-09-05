@@ -143,7 +143,7 @@ def main():
         print(f"🎬 Video saved: {video_path}")
         print(f"📦 Video size: {video_size} bytes")
 
-        generated_videos.append(video_path)
+        
 
     # ============================================================
     # STEP 3: TEST SUMMARY
