@@ -81,7 +81,7 @@ def main():
 
     generated_images = []
 
-    for index, scene in enumerate(story["scenes"], start=1):
+    for index, scene in enumerate(story["scenes"][:2], start=1):
 
         scene_number = f"{index:02d}"
         output_path = f"scene_{scene_number}.png"
