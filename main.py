@@ -125,7 +125,7 @@ def main():
             motion_prompt,
             video_path
         )
-        generated_videos.append(video_path)
+        
 
         # --------------------------------------------------------
         # Verify video
@@ -142,6 +142,7 @@ def main():
         print("✅ AI ANIMATION SUCCESSFUL")
         print(f"🎬 Video saved: {video_path}")
         print(f"📦 Video size: {video_size} bytes")
+        generated_videos.append(video_path)
 
         
 
