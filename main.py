@@ -111,6 +111,28 @@ def main():
 
         generated_images.append(image_path)
 
+                # Generate Tamil voice
+        audio_path = f"scene_{scene_number}.mp3"
+
+        print(f"\n🎙️ Generating Tamil voice for Scene {index}/2...")
+
+        generate_tamil_voice(
+            scene["narration"],
+            audio_path
+        )
+
+        # Verify audio
+        if not os.path.exists(audio_path):
+            raise RuntimeError(
+                f"❌ Audio was not created: {audio_path}"
+            )
+
+        audio_size = os.path.getsize(audio_path)
+
+        print("✅ TAMIL VOICE GENERATION SUCCESSFUL")
+        print(f"🎵 Audio saved: {audio_path}")
+        print(f"📦 File size: {audio_size} bytes")
+
         # --------------------------------------------------------
         # Generate real AI animation
         # --------------------------------------------------------
