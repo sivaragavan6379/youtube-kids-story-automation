@@ -111,7 +111,7 @@ def main():
 
         generated_images.append(image_path)
 
-                # Generate Tamil voice
+        # Generate Tamil voice
         audio_path = f"scene_{scene_number}.mp3"
 
         print(f"\n🎙️ Generating Tamil voice for Scene {index}/2...")
