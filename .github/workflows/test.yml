@@ -3,7 +3,7 @@ name: YouTube Kids Story Automation
 on:
   workflow_dispatch:
 
-  schedule:
+  schedule: 
     - cron: "30 15 * * *"
 
 jobs:
