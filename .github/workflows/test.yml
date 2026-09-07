@@ -28,10 +28,11 @@ jobs:
         
       - name: Run Kids Story Automation
         run: python main.py 
-      - name: Upload generated images
+      - name: Upload generated test files
         uses: actions/upload-artifact@v4
         with:
-         name: all-scene-images
+         name: test-generation-files
          path: |
           scene_*.png
-          scene_01_animated.mp4
+          scene_*.mp3
+          scene_*_animated.mp4
