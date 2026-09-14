@@ -5,7 +5,7 @@ from app.story_generator import generate_story
 from app.image_generator import generate_image
 from app.video_generator import animate_image
 from app.tts_generator import generate_tamil_voice
-
+from final_video import create_final_short
 
 def build_motion_prompt(scene):
     return (
@@ -66,6 +66,7 @@ def main():
 
     generated_images = []
     generated_videos = []
+    generated_audios = []
 
     # TEST ONLY 2 SCENES
     test_scenes = story["scenes"][:2]
@@ -132,6 +133,7 @@ def main():
         print("✅ TAMIL VOICE GENERATION SUCCESSFUL")
         print(f"🎵 Audio saved: {audio_path}")
         print(f"📦 File size: {audio_size} bytes")
+        generated_audios.append(audio_path)
 
         # --------------------------------------------------------
         # Generate real AI animation
@@ -188,6 +190,27 @@ def main():
 
     for video in generated_videos:
         print(f"    🎬 {video}")
+    # ============================================================
+    # STEP 3: CREATE FINAL YOUTUBE SHORT
+    # ============================================================
+
+    print("\n" + "=" * 60)
+    print("🎬 Creating final YouTube Short...")
+    print("=" * 60)
+
+    final_video_path = create_final_short(
+        generated_videos,
+        generated_audios,
+        "final_short.mp4"
+    )
+
+    if not os.path.exists(final_video_path):
+        raise RuntimeError(
+            "❌ Final YouTube Short was not created."
+        )
+
+    print("✅ FINAL YOUTUBE SHORT CREATED")
+    print(f"🎬 File: {final_video_path}")    
 
     # ============================================================
     # STEP 4: FINAL VALIDATION
