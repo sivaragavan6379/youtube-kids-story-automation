@@ -69,7 +69,7 @@ def main():
     generated_audios = []
 
     # TEST ONLY 2 SCENES
-    test_scenes = story["scenes"][:2]
+    test_scenes = story["scenes"][:10]
 
     for index, scene in enumerate(test_scenes, start=1):
 
@@ -79,7 +79,7 @@ def main():
         video_path = f"scene_{scene_number}_animated.mp4"
 
         print("\n" + "-" * 60)
-        print(f"🎨 Generating image for Scene {index}/2")
+        print(f"\n🎬 Starting AI animation for Scene {index}/10...")
         print("-" * 60)
 
         print(f"📝 Prompt: {scene['visual_prompt']}")
@@ -115,7 +115,7 @@ def main():
         # Generate Tamil voice
         audio_path = f"scene_{scene_number}.mp3"
 
-        print(f"\n🎙️ Generating Tamil voice for Scene {index}/2...")
+        print(f"\n🎙️ Generating Tamil voice for Scene {index}/10...")
 
         generate_tamil_voice(
             scene["narration"],
@@ -139,7 +139,7 @@ def main():
         # Generate real AI animation
         # --------------------------------------------------------
 
-        print(f"\n🎬 Starting AI animation for Scene {index}/2...")
+        print(f"\n🎬 Starting AI animation for Scene {index}/10...")
 
         motion_prompt = build_motion_prompt(scene)
 
@@ -179,13 +179,13 @@ def main():
     print("📊 TEST GENERATION SUMMARY")
     print("=" * 60)
 
-    print("✅ Expected images : 2")
+    print("✅ Expected images : 10")
     print(f"✅ Generated images: {len(generated_images)}")
 
     for image in generated_images:
         print(f"    🖼️ {image}")
 
-    print("\n✅ Expected videos : 2")
+    print("\n✅ Expected videos : 10")
     print(f"✅ Generated videos: {len(generated_videos)}")
 
     for video in generated_videos:
@@ -216,13 +216,13 @@ def main():
     # STEP 4: FINAL VALIDATION
     # ============================================================
 
-    if len(generated_images) != 2:
+    if len(generated_images) != 10:
 
         raise RuntimeError(
             f"Expected 2 images but generated {len(generated_images)}"
         )
 
-    if len(generated_videos) != 2:
+    if len(generated_videos) != 10:
 
         raise RuntimeError(
             f"Expected 2 videos but generated {len(generated_videos)}"
