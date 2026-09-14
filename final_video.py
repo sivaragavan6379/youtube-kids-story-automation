@@ -2,9 +2,14 @@ import os
 import subprocess
 
 
-def create_final_short(video_files, audio_files, output_path="final_short.mp4"):
+def create_final_short(
+    video_files,
+    audio_files,
+    output_path="final_short.mp4"
+):
     """
-    Combine animated scene videos and Tamil audio into one vertical YouTube Short.
+    Combine animated scene videos and Tamil audio into one vertical Short.
+    Each video is looped until its matching audio finishes.
     """
 
     if not video_files:
@@ -31,35 +36,53 @@ def create_final_short(video_files, audio_files, output_path="final_short.mp4"):
 
         scene_output = f"scene_{index:02d}_with_audio.mp4"
 
-        print(f"🔊 Combining audio with Scene {index}...")
+        print(f"\n🔊 Combining audio with Scene {index}...")
+        print(f"🎬 Video: {video_path}")
+        print(f"🎵 Audio: {audio_path}")
 
         command = [
             "ffmpeg",
             "-y",
+
+            # Repeat the animation video continuously
+            "-stream_loop",
+            "-1",
             "-i",
             video_path,
+
+            # Add the Tamil narration
             "-i",
             audio_path,
+
             "-filter_complex",
             (
-                "[0:v]scale=720:1280:force_original_aspect_ratio=increase,"
-                "crop=720:1280,setsar=1[v]"
+                "[0:v]"
+                "scale=720:1280:force_original_aspect_ratio=increase,"
+                "crop=720:1280,"
+                "setsar=1"
+                "[v]"
             ),
+
             "-map",
             "[v]",
             "-map",
             "1:a",
+
             "-c:v",
             "libx264",
             "-preset",
             "veryfast",
             "-pix_fmt",
             "yuv420p",
+
             "-c:a",
             "aac",
             "-b:a",
             "128k",
+
+            # Stop when the audio finishes
             "-shortest",
+
             scene_output,
         ]
 
@@ -72,15 +95,16 @@ def create_final_short(video_files, audio_files, output_path="final_short.mp4"):
 
         scene_files.append(scene_output)
 
+        print(f"✅ Scene {index} completed: {scene_output}")
+
     concat_file = "concat_list.txt"
 
     with open(concat_file, "w", encoding="utf-8") as file:
         for scene_file in scene_files:
             absolute_path = os.path.abspath(scene_file)
-            safe_path = absolute_path.replace("'", "'\\''")
-            file.write(f"file '{safe_path}'\n")
+            file.write(f"file '{absolute_path}'\n")
 
-    print("🔗 Joining all scenes...")
+    print("\n🔗 Joining all scenes...")
 
     join_command = [
         "ffmpeg",
@@ -105,7 +129,7 @@ def create_final_short(video_files, audio_files, output_path="final_short.mp4"):
 
     final_size = os.path.getsize(output_path)
 
-    print("✅ FINAL SHORT CREATED")
+    print("\n✅ FINAL SHORT CREATED")
     print(f"🎬 Output: {output_path}")
     print(f"📦 File size: {final_size} bytes")
 
