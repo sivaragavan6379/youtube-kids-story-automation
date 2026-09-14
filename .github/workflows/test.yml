@@ -36,3 +36,4 @@ jobs:
           scene_*.png
           scene_*.mp3
           scene_*_animated.mp4
+          final_short.mp4
