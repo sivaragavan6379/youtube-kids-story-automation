@@ -1,4 +1,5 @@
 import os
+import time
 import requests
 
 
@@ -16,31 +17,58 @@ def generate_image(prompt, output_path):
     data = {
         "prompt": prompt,
         "num_steps": 4,
-        "width": 1024,
-        "height": 576,
+        "width": 768,
+        "height": 432,
     }
 
-    response = requests.post(
-        url,
-        headers=headers,
-        json=data,
-        timeout=120,
-    )
+    max_attempts = 3
 
-    response.raise_for_status()
+    for attempt in range(1, max_attempts + 1):
+        try:
+            print(
+                f"🖼️ Pixazo image attempt "
+                f"{attempt}/{max_attempts}"
+            )
 
-    result = response.json()
+            response = requests.post(
+                url,
+                headers=headers,
+                json=data,
+                timeout=(30, 240),
+            )
 
-    image_url = result["output"]
+            response.raise_for_status()
 
-    image_response = requests.get(
-        image_url,
-        timeout=120,
-    )
+            result = response.json()
+            image_url = result["output"]
 
-    image_response.raise_for_status()
+            print("⬇️ Downloading generated image...")
 
-    with open(output_path, "wb") as image_file:
-        image_file.write(image_response.content)
+            image_response = requests.get(
+                image_url,
+                timeout=(30, 180),
+            )
 
-    return output_path, image_url
+            image_response.raise_for_status()
+
+            with open(output_path, "wb") as image_file:
+                image_file.write(image_response.content)
+
+            print("✅ Image generated successfully")
+            return output_path, image_url
+
+        except requests.exceptions.RequestException as error:
+            print(f"⚠️ Pixazo attempt {attempt} failed: {error}")
+
+            if attempt == max_attempts:
+                raise RuntimeError(
+                    "Pixazo failed after 3 attempts. "
+                    "The service may be temporarily busy."
+                ) from error
+
+            wait_seconds = attempt * 20
+            print(
+                f"⏳ Waiting {wait_seconds} seconds "
+                "before retrying..."
+            )
+            time.sleep(wait_seconds)
