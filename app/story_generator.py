@@ -2,6 +2,7 @@ import os
 import json
 import requests
 import time
+from app.character_config import CHARACTER_BIBLE
 
 
 def clean_json_response(content):
@@ -94,6 +95,8 @@ def generate_story():
 
     prompt = """
 Create a safe, educational and entertaining Tamil children's story.
+Character design rules:
+{CHARACTER_BIBLE}
 
 Target age: 5-10 years old.
 
