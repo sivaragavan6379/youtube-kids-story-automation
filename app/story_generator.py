@@ -146,6 +146,13 @@ VISUAL STYLE:
 - Consistent character appearance across all scenes
 - Family friendly
 - No text or letters inside generated images
+IMPORTANT VISUAL RULES FOR LIP SYNC:
+- For scenes containing dialogue or narration by a character, show the speaking character in a medium close-up or close-up shot.
+- The character's face must be large, clearly visible, and facing the camera or slightly turned toward the camera.
+- Keep both eyes, nose, and mouth clearly visible.
+- Do not show the speaking character very far away.
+- Keep the character's appearance consistent in every scene.
+- Use a clean, uncluttered background around the face.
 
 IMPORTANT OUTPUT RULES:
 - Every JSON string must be complete.
