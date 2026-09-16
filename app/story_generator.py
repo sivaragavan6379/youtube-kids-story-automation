@@ -93,7 +93,7 @@ def generate_story():
         "Content-Type": "application/json",
     }
 
-    prompt = """
+    prompt = f"""
 Create a safe, educational and entertaining Tamil children's story.
 Character design rules:
 {CHARACTER_BIBLE}
