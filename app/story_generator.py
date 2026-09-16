@@ -93,7 +93,7 @@ def generate_story():
         "Content-Type": "application/json",
     }
 
-    prompt = f"""
+    prompt = """
 Create a safe, educational and entertaining Tamil children's story.
 Character design rules:
 {CHARACTER_BIBLE}
@@ -161,6 +161,10 @@ IMPORTANT OUTPUT RULES:
 - Keep visual_prompt concise but detailed.
 - Make the complete JSON fit within the response limit.
 """
+    prompt = prompt.replace(
+    "{CHARACTER_BIBLE}",
+    CHARACTER_BIBLE
+)
 
     data = {
         "model": "openrouter/free",
