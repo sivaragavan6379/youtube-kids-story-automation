@@ -95,8 +95,23 @@ def generate_story():
 
     prompt = """
 Create a safe, educational and entertaining Tamil children's story.
-Character design rules:
+
+CHARACTER DESIGN BIBLE:
 {CHARACTER_BIBLE}
+
+IMPORTANT:
+The character design described in CHARACTER DESIGN BIBLE is FIXED.
+
+The AI image generator will generate each scene independently.
+Therefore, EVERY scene's visual_prompt MUST repeat the important
+character identity details instead of saying things like:
+- "same girl"
+- "same character"
+- "as before"
+- "the girl from previous scene"
+
+Each visual_prompt must contain enough character information for the
+image generator to recreate the exact same characters independently.
 
 Target age: 5-10 years old.
 
@@ -108,6 +123,142 @@ The story must contain:
 - Helpful and positive behavior
 - A happy ending
 - Simple Tamil suitable for children
+
+IMPORTANT STORY CHARACTER RULE:
+Use Thamarai as the main character throughout the story.
+
+Use the puppy as her companion whenever appropriate.
+
+Do not create unnecessary additional human characters.
+Do not change Thamarai's appearance between scenes.
+Do not change the puppy's appearance between scenes.
+
+
+VISUAL PROMPT RULES
+===================
+
+Every visual_prompt MUST be written in English.
+
+Every visual_prompt MUST explicitly describe the characters
+when they appear in that scene.
+
+For Thamarai, include these identity details whenever she appears:
+
+"Thamarai, an 8-year-old Tamil village girl with warm medium-brown
+skin, a round friendly child face, large expressive dark-brown eyes,
+small black nose, straight black hair in exactly two short braids,
+a red ribbon bow on each braid, bright yellow short-sleeve shirt,
+blue knee-length skirt, and small brown sandals."
+
+For the puppy, include these identity details whenever it appears:
+
+"one small cute white-and-brown puppy with white fur, brown patches,
+floppy ears, round black eyes, small black nose, and a small red collar."
+
+Do NOT use vague references such as:
+- "the girl"
+- "the child"
+- "the puppy"
+- "same girl"
+- "same puppy"
+
+Instead, use the complete identity description.
+
+The visual_prompt must also describe:
+- character action
+- facial expression
+- body pose
+- environment
+- important objects
+- camera shot
+- lighting
+- animation style
+
+
+CAMERA RULES
+============
+
+For scenes where Thamarai is speaking or her facial expression is
+important:
+
+- Use a medium shot, medium close-up, or close-up.
+- Make her face large enough to clearly see.
+- Face the camera or slightly toward the camera.
+- Both eyes must be visible.
+- Nose and mouth must be clearly visible.
+- Do not use an extreme side profile.
+- Do not place her very far away.
+
+For action scenes:
+
+- A medium or wide shot may be used.
+- Keep Thamarai clearly recognizable.
+- Do not hide her face unnecessarily.
+
+
+VISUAL STYLE
+============
+
+Every scene must use:
+
+- high-quality 3D children's animated movie style
+- cute expressive characters
+- polished 3D character modeling
+- colorful Tamil village environment
+- bright natural colors
+- soft cinematic lighting
+- gentle depth of field
+- family-friendly appearance
+- consistent character proportions
+- consistent facial design
+- consistent clothing
+- consistent puppy design
+- cinematic composition
+- no text
+- no letters
+- no subtitles
+- no watermark
+- no logo
+
+
+CHARACTER CONSISTENCY RULES
+===========================
+
+Thamarai must always remain:
+
+- 8 years old
+- warm medium-brown skin
+- round friendly child face
+- large dark-brown eyes
+- straight black hair
+- exactly two short braids
+- one red ribbon bow on each braid
+- yellow short-sleeve shirt
+- blue knee-length skirt
+- small brown sandals
+- small child body proportions
+
+The puppy must always remain:
+
+- small
+- white and brown
+- same brown patch pattern
+- floppy ears
+- round black eyes
+- small black nose
+- red collar
+
+Only these things may change:
+- pose
+- action
+- facial expression
+- location
+- camera position
+- environment
+- lighting conditions appropriate to the scene
+
+Do NOT redesign the characters.
+
 
 IMPORTANT:
 Return ONLY valid JSON.
@@ -131,34 +282,18 @@ Use exactly this JSON structure:
     {
       "scene": 1,
       "narration": "Tamil narration",
-      "visual_prompt": "Detailed English visual prompt"
+      "visual_prompt": "Detailed English visual prompt containing the complete character identity details required above"
     }
   ]
 }
 
 There must be exactly 10 scene objects.
 
-VISUAL STYLE:
-- 3D children's animated movie style
-- Cute expressive characters
-- Bright colorful environment
-- Soft cinematic lighting
-- Consistent character appearance across all scenes
-- Family friendly
-- No text or letters inside generated images
-IMPORTANT VISUAL RULES FOR LIP SYNC:
-- For scenes containing dialogue or narration by a character, show the speaking character in a medium close-up or close-up shot.
-- The character's face must be large, clearly visible, and facing the camera or slightly turned toward the camera.
-- Keep both eyes, nose, and mouth clearly visible.
-- Do not show the speaking character very far away.
-- Keep the character's appearance consistent in every scene.
-- Use a clean, uncluttered background around the face.
-
 IMPORTANT OUTPUT RULES:
 - Every JSON string must be complete.
 - Never stop in the middle of a sentence.
 - Keep narration concise.
-- Keep visual_prompt concise but detailed.
+- Keep visual_prompt detailed but reasonably concise.
 - Make the complete JSON fit within the response limit.
 """
     prompt = prompt.replace(
