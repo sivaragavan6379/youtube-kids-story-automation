@@ -1,0 +1,37 @@
+{
+  "universe": {
+    "id": "UNIVERSE-001",
+    "name": "Tamil Animated Universe",
+    "description": "A connected Tamil animated story universe.",
+    "current_phase": 1,
+    "current_series": null,
+    "current_arc": null,
+    "current_episode": null
+  },
+
+  "characters": {},
+
+  "series": {},
+
+  "story_arcs": {},
+
+  "episodes": {},
+
+  "locations": {},
+
+  "villains": {},
+
+  "artifacts": {},
+
+  "mysteries": {},
+
+  "relationships": {},
+
+  "timeline": [],
+
+  "unresolved_threads": [],
+
+  "foreshadowing": [],
+
+  "major_events": []
+}
