@@ -7,51 +7,75 @@ from google.genai import types
 
 
 # ============================================================
-# GEMINI STORY DIRECTOR
+# CONFIGURATION
 # ============================================================
 
 MODEL_NAME = "gemini-2.5-flash"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEMORY_FILE = BASE_DIR / "universe" / "universe_memory.json"
 
+MEMORY_FILE = (
+    BASE_DIR
+    / "universe"
+    / "universe_memory.json"
+)
+
+OUTPUT_DIR = BASE_DIR / "output"
+
+EPISODE_OUTPUT_FILE = (
+    OUTPUT_DIR / "generated_episode.json"
+)
+
+
+# ============================================================
+# STORY DIRECTOR
+# ============================================================
 
 class StoryDirector:
 
     def __init__(self):
+
         api_key = os.getenv("GEMINI_API_KEY")
 
         if not api_key:
             raise RuntimeError(
-                "GEMINI_API_KEY is not available."
+                "GEMINI_API_KEY environment variable was not found."
             )
 
         self.client = genai.Client(
             api_key=api_key
         )
 
-    # --------------------------------------------------------
-    # LOAD UNIVERSE
-    # --------------------------------------------------------
+    # ========================================================
+    # LOAD UNIVERSE MEMORY
+    # ========================================================
 
     def load_universe(self):
 
         if not MEMORY_FILE.exists():
             raise FileNotFoundError(
-                f"Universe memory not found: {MEMORY_FILE}"
+                f"Universe memory file not found:\n{MEMORY_FILE}"
             )
 
-        with open(
-            MEMORY_FILE,
-            "r",
-            encoding="utf-8"
-        ) as file:
+        try:
 
-            return json.load(file)
+            with open(
+                MEMORY_FILE,
+                "r",
+                encoding="utf-8"
+            ) as file:
 
-    # --------------------------------------------------------
+                return json.load(file)
+
+        except json.JSONDecodeError as error:
+
+            raise RuntimeError(
+                f"Universe memory contains invalid JSON: {error}"
+            )
+
+    # ========================================================
     # BUILD STORY PROMPT
-    # --------------------------------------------------------
+    # ========================================================
 
     def build_prompt(self, universe):
 
@@ -61,96 +85,231 @@ class StoryDirector:
             indent=2
         )
 
-        prompt = f"""
-You are the Story Director of a long-running
-Tamil animated shared universe.
+        return f"""
+You are the STORY DIRECTOR of a long-running Tamil
+animated shared universe.
 
 This is NOT a collection of unrelated stories.
 
-Every episode belongs to a connected universe.
+Every episode belongs to the same evolving universe.
 
-Your responsibilities:
+Your job is to create the NEXT EPISODE while maintaining
+continuity with everything that already happened.
 
-1. Create entertaining Tamil children's stories.
-2. Maintain continuity with previous episodes.
-3. Reuse existing characters when appropriate.
-4. Create new characters only when the story needs them.
-5. Never randomly change an established character.
-6. Connect new stories to previous events when appropriate.
-7. Maintain character relationships.
-8. Maintain the timeline.
-9. Continue unresolved mysteries when appropriate.
-10. Plant meaningful clues that may become important later.
-11. Allow completely new story arcs and series.
-12. Allow previous characters to return naturally.
-13. Make returning characters relevant to the story.
-14. Develop characters over time.
-15. Create emotional, funny, adventurous and mysterious moments.
-16. Keep the content appropriate for children.
-17. Write dialogue in natural Tamil.
-18. Write visual directions in English so the animation system
-    can understand them.
+============================================================
+CORE STORY PRINCIPLES
+============================================================
 
-IMPORTANT CONTINUITY RULE:
+1. Create an entertaining children's animated adventure.
 
-Before creating a new character, inspect the existing characters.
+2. The story must be understandable as an individual episode.
 
-If an existing character can naturally fulfill the role,
-reuse that character.
+3. At the same time, the episode should contribute to a
+   larger long-term universe.
 
-Only create a new character when necessary.
+4. Existing characters may return when there is a logical
+   story reason.
 
-IMPORTANT CHARACTER RULE:
+5. Do NOT bring back a character merely for a cameo.
 
-Once a character is established, preserve their core:
+6. New characters may be created whenever the story genuinely
+   needs them.
 
+7. Do NOT create unnecessary characters.
+
+8. Before creating a new character, inspect the existing
+   character list.
+
+9. If an existing character can naturally perform the role,
+   reuse that character.
+
+10. Never accidentally create a duplicate version of an
+    existing character.
+
+============================================================
+CHARACTER CONTINUITY
+============================================================
+
+For every returning character, preserve:
+
+- identity
 - appearance
 - age
 - species
 - personality
 - important relationships
 - abilities
-- identity
+- established history
 
-Changes are allowed only when the story explains them.
+A character may change over time, but meaningful changes
+must happen because of story events.
 
-IMPORTANT SHARED UNIVERSE RULE:
+Characters should have character development.
 
-A returning character must have a logical reason to return.
+============================================================
+LONG-TERM UNIVERSE
+============================================================
 
-Do not insert old characters merely for a cameo.
+The universe may contain:
 
-IMPORTANT MYSTERY RULE:
+- multiple series
+- multiple story arcs
+- many episodes
+- heroes
+- friends
+- villains
+- locations
+- artifacts
+- mysteries
+- relationships
+- legends
+- secrets
+- unresolved events
 
-Some mysteries may remain unresolved for many episodes.
+New story arcs may introduce completely new characters.
 
-Do not resolve every mystery immediately.
+Old characters may return later.
 
-IMPORTANT FORESHADOWING RULE:
+Different series can share the same universe.
 
-You may introduce small clues that become meaningful
-many episodes later.
+============================================================
+CONTINUITY AND CONSEQUENCES
+============================================================
 
-The audience should be able to understand the current episode
-even when deeper universe mysteries are unresolved.
+Previous events should matter.
 
-CURRENT UNIVERSE MEMORY:
+If an earlier episode introduced:
+
+- a mystery
+- an artifact
+- a location
+- a promise
+- a friendship
+- an enemy
+- a secret
+- an unexplained event
+
+then future episodes may build upon it.
+
+Do not randomly rewrite established history.
+
+============================================================
+MYSTERIES
+============================================================
+
+Not every mystery should be solved immediately.
+
+Some mysteries can remain unresolved for many episodes.
+
+A mystery can become important much later.
+
+============================================================
+FORESHADOWING
+============================================================
+
+You may plant small clues for future stories.
+
+Examples:
+
+- strange symbol
+- unexplained object
+- mysterious person
+- unusual event
+- forgotten legend
+- secret location
+- strange message
+
+The clue should feel natural inside the current story.
+
+============================================================
+STORY QUALITY
+============================================================
+
+The story should contain appropriate combinations of:
+
+- adventure
+- curiosity
+- humor
+- friendship
+- emotion
+- mystery
+- discovery
+- danger appropriate for children
+- meaningful character moments
+
+Avoid making every episode follow exactly the same formula.
+
+============================================================
+LANGUAGE
+============================================================
+
+Dialogue:
+
+Natural Tamil.
+
+Visual directions:
+
+English.
+
+Character dialogue must belong to the character,
+not to a narrator.
+
+============================================================
+ANIMATION PREPARATION
+============================================================
+
+Every scene must contain:
+
+- characters
+- location
+- action
+- Tamil dialogue
+- visual prompt
+- sound effects
+- music mood
+
+The visual prompt should describe:
+
+- character actions
+- facial expressions
+- body movement
+- camera movement
+- environment movement
+- lighting
+- cinematic composition
+- character consistency
+
+Do NOT include subtitles or on-screen text unless the story
+specifically requires it.
+
+============================================================
+CURRENT UNIVERSE MEMORY
+============================================================
 
 {universe_json}
 
-Create the next episode for this universe.
+============================================================
+TASK
+============================================================
 
-The episode should feel like part of a much larger animated
-universe rather than a standalone story.
+Create the NEXT EPISODE for this universe.
+
+Because this is the beginning of the universe, you may
+establish the first important characters and locations.
+
+However, create only characters that are actually needed.
+
+The story should leave room for future connected stories.
+
+Return ONLY the requested JSON structure.
 """
 
-        return prompt
 
-    # --------------------------------------------------------
-    # RESPONSE SCHEMA
-    # --------------------------------------------------------
+    # ========================================================
+    # JSON SCHEMA
+    # ========================================================
 
-    def get_response_schema(self):
+    def get_schema(self):
 
         return {
             "type": "OBJECT",
@@ -170,12 +329,16 @@ universe rather than a standalone story.
                             "type": "STRING"
                         },
 
-                        "series_id": {
+                        "series_name": {
                             "type": "STRING"
                         },
 
-                        "arc_id": {
+                        "arc_name": {
                             "type": "STRING"
+                        },
+
+                        "episode_number": {
+                            "type": "INTEGER"
                         },
 
                         "characters_used": {
@@ -233,11 +396,7 @@ universe rather than a standalone story.
                                                     "type": "STRING"
                                                 },
 
-                                                "language": {
-                                                    "type": "STRING"
-                                                },
-
-                                                "text": {
+                                                "text_tamil": {
                                                     "type": "STRING"
                                                 }
 
@@ -245,8 +404,7 @@ universe rather than a standalone story.
 
                                             "required": [
                                                 "character",
-                                                "language",
-                                                "text"
+                                                "text_tamil"
                                             ]
                                         }
                                     },
@@ -286,8 +444,9 @@ universe rather than a standalone story.
                     "required": [
                         "title",
                         "summary",
-                        "series_id",
-                        "arc_id",
+                        "series_name",
+                        "arc_name",
+                        "episode_number",
                         "characters_used",
                         "locations_used",
                         "scenes"
@@ -349,6 +508,7 @@ universe rather than a standalone story.
 
                             "personality": {
                                 "type": "ARRAY",
+
                                 "items": {
                                     "type": "STRING"
                                 }
@@ -377,6 +537,7 @@ universe rather than a standalone story.
 
                             "abilities": {
                                 "type": "ARRAY",
+
                                 "items": {
                                     "type": "STRING"
                                 }
@@ -396,6 +557,37 @@ universe rather than a standalone story.
                             "voice",
                             "abilities",
                             "story_role"
+                        ]
+                    }
+                },
+
+                "new_locations": {
+                    "type": "ARRAY",
+
+                    "items": {
+
+                        "type": "OBJECT",
+
+                        "properties": {
+
+                            "name": {
+                                "type": "STRING"
+                            },
+
+                            "description": {
+                                "type": "STRING"
+                            },
+
+                            "visual_identity": {
+                                "type": "STRING"
+                            }
+
+                        },
+
+                        "required": [
+                            "name",
+                            "description",
+                            "visual_identity"
                         ]
                     }
                 },
@@ -432,37 +624,6 @@ universe rather than a standalone story.
                             "description",
                             "importance",
                             "status"
-                        ]
-                    }
-                },
-
-                "new_locations": {
-                    "type": "ARRAY",
-
-                    "items": {
-
-                        "type": "OBJECT",
-
-                        "properties": {
-
-                            "name": {
-                                "type": "STRING"
-                            },
-
-                            "description": {
-                                "type": "STRING"
-                            },
-
-                            "visual_identity": {
-                                "type": "STRING"
-                            }
-
-                        },
-
-                        "required": [
-                            "name",
-                            "description",
-                            "visual_identity"
                         ]
                     }
                 },
@@ -524,16 +685,17 @@ universe rather than a standalone story.
             "required": [
                 "episode",
                 "new_characters",
-                "new_mysteries",
                 "new_locations",
+                "new_mysteries",
                 "new_threads",
                 "foreshadowing"
             ]
         }
 
-    # --------------------------------------------------------
+
+    # ========================================================
     # GENERATE EPISODE
-    # --------------------------------------------------------
+    # ========================================================
 
     def generate_episode(self):
 
@@ -543,25 +705,45 @@ universe rather than a standalone story.
             universe
         )
 
-        schema = self.get_response_schema()
+        schema = self.get_schema()
 
-        print("🧠 Asking Gemini to create the next episode...")
+        print()
+        print("🧠 Gemini Story Director")
+        print("----------------------------------------")
+        print(f"Model: {MODEL_NAME}")
+        print(f"Memory: {MEMORY_FILE}")
+        print()
+        print("Generating next episode...")
+        print()
 
-        response = self.client.models.generate_content(
+        try:
 
-            model=MODEL_NAME,
+            response = self.client.models.generate_content(
 
-            contents=prompt,
+                model=MODEL_NAME,
 
-            config=types.GenerateContentConfig(
+                contents=prompt,
 
-                response_mime_type="application/json",
+                config=types.GenerateContentConfig(
 
-                response_schema=schema
+                    response_mime_type="application/json",
+
+                    response_schema=schema,
+
+                    temperature=1.0,
+
+                    max_output_tokens=12000
+                )
             )
-        )
+
+        except Exception as error:
+
+            raise RuntimeError(
+                f"Gemini API request failed:\n{error}"
+            )
 
         if not response.text:
+
             raise RuntimeError(
                 "Gemini returned an empty response."
             )
@@ -575,40 +757,170 @@ universe rather than a standalone story.
         except json.JSONDecodeError as error:
 
             raise RuntimeError(
-                f"Gemini returned invalid JSON: {error}"
+                f"Gemini returned invalid JSON:\n{error}"
             )
 
-        print("✅ Gemini generated the episode.")
+        self.validate_result(result)
 
         return result
 
 
+    # ========================================================
+    # BASIC APPLICATION VALIDATION
+    # ========================================================
+
+    def validate_result(self, result):
+
+        required_top_level = [
+            "episode",
+            "new_characters",
+            "new_locations",
+            "new_mysteries",
+            "new_threads",
+            "foreshadowing"
+        ]
+
+        for field in required_top_level:
+
+            if field not in result:
+
+                raise RuntimeError(
+                    f"Missing required field: {field}"
+                )
+
+        episode = result["episode"]
+
+        required_episode_fields = [
+            "title",
+            "summary",
+            "series_name",
+            "arc_name",
+            "episode_number",
+            "characters_used",
+            "locations_used",
+            "scenes"
+        ]
+
+        for field in required_episode_fields:
+
+            if field not in episode:
+
+                raise RuntimeError(
+                    f"Missing episode field: {field}"
+                )
+
+        if not episode["scenes"]:
+
+            raise RuntimeError(
+                "Gemini generated zero scenes."
+            )
+
+        for scene in episode["scenes"]:
+
+            if not scene.get("dialogue"):
+
+                raise RuntimeError(
+                    f"Scene {scene.get('scene_number')} "
+                    "has no dialogue."
+                )
+
+        print("✅ Application validation passed.")
+
+
+    # ========================================================
+    # SAVE GENERATED EPISODE
+    # ========================================================
+
+    def save_episode(self, result):
+
+        OUTPUT_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        with open(
+            EPISODE_OUTPUT_FILE,
+            "w",
+            encoding="utf-8"
+        ) as file:
+
+            json.dump(
+                result,
+                file,
+                ensure_ascii=False,
+                indent=2
+            )
+
+        print(
+            f"💾 Episode saved to:\n"
+            f"{EPISODE_OUTPUT_FILE}"
+        )
+
+
 # ============================================================
-# TEST
+# MAIN TEST
 # ============================================================
 
-if __name__ == "__main__":
+def main():
 
     print()
-    print("========================================")
-    print("🧠 GEMINI STORY DIRECTOR TEST")
-    print("========================================")
-    print()
+    print("============================================")
+    print("🌌 TAMIL ANIMATED UNIVERSE")
+    print("🧠 GEMINI STORY DIRECTOR")
+    print("============================================")
 
     director = StoryDirector()
 
     result = director.generate_episode()
 
+    director.save_episode(
+        result
+    )
+
+    episode = result["episode"]
+
     print()
-    print("========================================")
-    print("📖 GENERATED EPISODE")
-    print("========================================")
+    print("============================================")
+    print("✅ EPISODE GENERATED")
+    print("============================================")
     print()
 
     print(
-        json.dumps(
-            result,
-            ensure_ascii=False,
-            indent=2
-        )
+        f"Title: {episode['title']}"
     )
+
+    print(
+        f"Series: {episode['series_name']}"
+    )
+
+    print(
+        f"Arc: {episode['arc_name']}"
+    )
+
+    print(
+        f"Scenes: {len(episode['scenes'])}"
+    )
+
+    print(
+        f"New characters: "
+        f"{len(result['new_characters'])}"
+    )
+
+    print(
+        f"New locations: "
+        f"{len(result['new_locations'])}"
+    )
+
+    print(
+        f"New mysteries: "
+        f"{len(result['new_mysteries'])}"
+    )
+
+    print()
+    print("============================================")
+    print("🎉 GEMINI TEST COMPLETE")
+    print("============================================")
+
+
+if __name__ == "__main__":
+    main()
