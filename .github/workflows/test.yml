@@ -32,8 +32,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         
-      - name: Run Kids Story Automation
-        run: python main.py 
+      - name: Test Gemini Story Director
+        run: python ai/story_director.py
       - name: Upload generated test files
         uses: actions/upload-artifact@v4
         with:
