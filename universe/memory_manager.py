@@ -9,83 +9,50 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEMORY_FILE = (
-    BASE_DIR
-    / "universe"
-    / "universe_memory.json"
-)
+MEMORY_FILE = BASE_DIR / "universe" / "universe_memory.json"
+ARC_FILE = BASE_DIR / "output" / "generated_arc.json"
 
-ARC_FILE = (
-    BASE_DIR
-    / "output"
-    / "generated_arc.json"
-)
-
-
-# ============================================================
-# UNIVERSE MEMORY MANAGER
-# ============================================================
 
 class UniverseMemoryManager:
 
+    # ========================================================
+    # INIT
+    # ========================================================
+
     def __init__(self):
+        self.memory = self.load_json(MEMORY_FILE)
+        self.arc_data = self.load_json(ARC_FILE)
+        self.arc = self.arc_data.get("arc", {})
 
-        self.memory = self.load_json(
-            MEMORY_FILE
-        )
-
-        self.arc_data = self.load_json(
-            ARC_FILE
-        )
-
-        self.arc = self.arc_data.get(
-            "arc",
-            {}
-        )
+        if not isinstance(self.arc, dict):
+            self.arc = {}
 
         self.prepare_memory_structure()
-
 
     # ========================================================
     # LOAD JSON
     # ========================================================
 
-    def load_json(
-        self,
-        file_path
-    ):
-
+    def load_json(self, file_path):
         if not file_path.exists():
-
             raise FileNotFoundError(
                 f"File not found:\n{file_path}"
             )
 
         try:
-
-            with open(
-                file_path,
-                "r",
-                encoding="utf-8"
-            ) as file:
-
+            with open(file_path, "r", encoding="utf-8") as file:
                 return json.load(file)
 
         except json.JSONDecodeError as error:
-
             raise RuntimeError(
-                f"Invalid JSON file:\n"
-                f"{file_path}\n\n"
-                f"{error}"
-            )
-
+                f"Invalid JSON file:\n{file_path}\n\n{error}"
+            ) from error
 
     # ========================================================
     # SAVE JSON
     # ========================================================
 
     def save_memory(self):
-
         MEMORY_FILE.parent.mkdir(
             parents=True,
             exist_ok=True
@@ -96,7 +63,6 @@ class UniverseMemoryManager:
             "w",
             encoding="utf-8"
         ) as file:
-
             json.dump(
                 self.memory,
                 file,
@@ -105,13 +71,8 @@ class UniverseMemoryManager:
             )
 
         print()
-        print(
-            "💾 Universe memory saved:"
-        )
-        print(
-            MEMORY_FILE
-        )
-
+        print("💾 Universe memory saved:")
+        print(MEMORY_FILE)
 
     # ========================================================
     # PREPARE MEMORY STRUCTURE
@@ -119,61 +80,23 @@ class UniverseMemoryManager:
 
     def prepare_memory_structure(self):
 
-        # ----------------------------------------------------
-        # Universe
-        # ----------------------------------------------------
-
-        if not isinstance(
-            self.memory.get("universe"),
-            dict
-        ):
-
+        if not isinstance(self.memory.get("universe"), dict):
             self.memory["universe"] = {}
 
         universe = self.memory["universe"]
 
-        universe.setdefault(
-            "id",
-            "UNIVERSE-001"
-        )
-
-        universe.setdefault(
-            "name",
-            "Tamil Animated Universe"
-        )
-
+        universe.setdefault("id", "UNIVERSE-001")
+        universe.setdefault("name", "Tamil Animated Universe")
         universe.setdefault(
             "description",
             "A connected Tamil animated story universe."
         )
-
-        universe.setdefault(
-            "current_phase",
-            1
-        )
-
-        universe.setdefault(
-            "current_series",
-            None
-        )
-
-        universe.setdefault(
-            "current_arc",
-            None
-        )
-
-        universe.setdefault(
-            "current_episode",
-            None
-        )
-
-
-        # ----------------------------------------------------
-        # Dictionary collections
-        # ----------------------------------------------------
+        universe.setdefault("current_phase", 1)
+        universe.setdefault("current_series", None)
+        universe.setdefault("current_arc", None)
+        universe.setdefault("current_episode", None)
 
         dictionary_collections = [
-
             "characters",
             "series",
             "story_arcs",
@@ -183,84 +106,45 @@ class UniverseMemoryManager:
             "artifacts",
             "mysteries",
             "relationships"
-
         ]
 
         for collection in dictionary_collections:
-
-            value = self.memory.get(
-                collection
-            )
+            value = self.memory.get(collection)
 
             if value is None:
+                self.memory[collection] = {}
 
-                self.memory[
-                    collection
-                ] = {}
-
-            elif not isinstance(
-                value,
-                dict
-            ):
-
+            elif not isinstance(value, dict):
                 print(
-                    f"⚠️ Converting "
-                    f"{collection} "
-                    f"to dictionary."
+                    f"⚠️ Converting {collection} to dictionary."
                 )
-
-                self.memory[
-                    collection
-                ] = {}
-
-
-        # ----------------------------------------------------
-        # List collections
-        # ----------------------------------------------------
+                self.memory[collection] = {}
 
         list_collections = [
-
             "timeline",
             "unresolved_threads",
             "foreshadowing",
             "major_events"
-
         ]
 
         for collection in list_collections:
-
-            value = self.memory.get(
-                collection
-            )
+            value = self.memory.get(collection)
 
             if value is None:
+                self.memory[collection] = []
 
-                self.memory[
-                    collection
-                ] = []
-
-            elif not isinstance(
-                value,
-                list
-            ):
-
-                self.memory[
-                    collection
-                ] = []
-
+            elif not isinstance(value, list):
+                print(
+                    f"⚠️ Converting {collection} to list."
+                )
+                self.memory[collection] = []
 
     # ========================================================
-    # CREATE SAFE ID
+    # SAFE ID
     # ========================================================
 
-    def make_id(
-        self,
-        text
-    ):
-
-        text = str(
-            text or ""
-        ).strip().lower()
+    def make_id(self, text):
+        text = str(text or "").strip().lower()
 
         text = re.sub(
             r"[^a-z0-9]+",
@@ -274,107 +158,64 @@ class UniverseMemoryManager:
             text
         )
 
-        text = text.strip(
-            "_"
-        )
+        text = text.strip("_")
 
-        if not text:
-
-            text = "unknown"
-
-        return text
-
+        return text or "unknown"
 
     # ========================================================
     # UNIQUE ID
     # ========================================================
 
-    def unique_id(
-        self,
-        collection,
-        base_id
-    ):
-
+    def unique_id(self, collection, base_id):
         collection_data = self.memory.get(
             collection,
             {}
         )
 
         if base_id not in collection_data:
-
             return base_id
 
         counter = 2
 
         while True:
-
-            candidate = (
-                f"{base_id}_{counter}"
-            )
+            candidate = f"{base_id}_{counter}"
 
             if candidate not in collection_data:
-
                 return candidate
 
             counter += 1
-
 
     # ========================================================
     # FIND BY NAME
     # ========================================================
 
-    def find_by_name(
-        self,
-        collection,
-        name
-    ):
-
-        target = self.make_id(
-            name
-        )
+    def find_by_name(self, collection, name):
+        target = self.make_id(name)
 
         data = self.memory.get(
             collection,
             {}
         )
 
-        if not isinstance(
-            data,
-            dict
-        ):
-
+        if not isinstance(data, dict):
             return None
 
-        # Direct key match
-
         if target in data:
-
             return data[target]
-
-        # Search stored names
 
         for item in data.values():
 
-            if not isinstance(
-                item,
-                dict
-            ):
-
+            if not isinstance(item, dict):
                 continue
 
             stored_name = self.make_id(
-                item.get(
-                    "name",
-                    ""
-                )
+                item.get("name", "")
             )
 
             if stored_name == target:
-
                 return item
 
         return None
-
 
     # ========================================================
     # ADD DICTIONARY ITEM
@@ -386,20 +227,12 @@ class UniverseMemoryManager:
         item,
         preferred_id=None
     ):
-
-        if not isinstance(
-            item,
-            dict
-        ):
-
+        if not isinstance(item, dict):
             return None
 
-        name = item.get(
-            "name"
-        )
+        name = item.get("name")
 
         if not name:
-
             return None
 
         existing = self.find_by_name(
@@ -408,31 +241,20 @@ class UniverseMemoryManager:
         )
 
         if existing:
-
             print(
-                f"🔁 Existing "
-                f"{collection[:-1]} preserved: "
+                f"🔁 Existing {collection[:-1]} preserved: "
                 f"{name}"
             )
 
-            # Add only missing information.
-            # Existing established information
-            # is never randomly overwritten.
-
             for key, value in item.items():
-
                 if key not in existing:
-
                     existing[key] = value
 
             return existing
 
-
         base_id = (
             preferred_id
-            or self.make_id(
-                name
-            )
+            or self.make_id(name)
         )
 
         item_id = self.unique_id(
@@ -440,65 +262,41 @@ class UniverseMemoryManager:
             base_id
         )
 
-        item_copy = dict(
-            item
-        )
+        item_copy = dict(item)
+        item_copy.setdefault("id", item_id)
 
-        item_copy.setdefault(
-            "id",
-            item_id
-        )
-
-        self.memory[
-            collection
-        ][
-            item_id
-        ] = item_copy
+        self.memory[collection][item_id] = item_copy
 
         print(
-            f"🆕 Added {collection[:-1]}: "
-            f"{name}"
+            f"🆕 Added {collection[:-1]}: {name}"
         )
 
         return item_copy
-
 
     # ========================================================
     # ADD CHARACTER
     # ========================================================
 
-    def add_character(
-        self,
-        character
-    ):
+    def add_character(self, character):
+        if not isinstance(character, dict):
+            return None
 
-        if not isinstance(
-            character,
-            dict
-        ):
-            return
-
-        name = character.get(
-            "name"
-        )
+        name = character.get("name")
 
         if not name:
-            return
+            return None
 
         existing = self.find_by_name(
             "characters",
             name
         )
 
-        current_arc = self.arc.get(
-            "title"
-        )
+        current_arc = self.arc.get("title")
 
         if existing:
 
             print(
-                f"🔁 Returning character detected: "
-                f"{name}"
+                f"🔁 Returning character detected: {name}"
             )
 
             history = existing.setdefault(
@@ -506,95 +304,47 @@ class UniverseMemoryManager:
                 []
             )
 
-            if (
-                current_arc
-                and current_arc not in history
-            ):
-                history.append(
-                    current_arc
-                )
+            if current_arc and current_arc not in history:
+                history.append(current_arc)
 
-            existing[
-                "appearance_type"
-            ] = "returning"
+            existing["appearance_type"] = "returning"
+            existing["status"] = "active"
+            existing["last_arc"] = current_arc
 
-            existing[
-                "status"
-            ] = "active"
-
-            existing[
-                "last_arc"
-            ] = current_arc
-
-            # Preserve established information.
-            # Only fill fields that do not already exist.
             for key, value in character.items():
                 if key not in existing:
                     existing[key] = value
 
             return existing
 
-        character_copy = dict(
-            character
-        )
-
-        character_id = self.make_id(
-            name
-        )
+        character_copy = dict(character)
 
         character_id = self.unique_id(
             "characters",
-            character_id
+            self.make_id(name)
         )
 
-        character_copy[
-            "id"
-        ] = character_id
+        character_copy["id"] = character_id
+        character_copy.setdefault("status", "active")
+        character_copy["appearance_type"] = "new"
+        character_copy["first_arc"] = current_arc
+        character_copy["last_arc"] = current_arc
 
-        character_copy.setdefault(
-            "status",
-            "active"
-        )
-
-        character_copy[
-            "appearance_type"
-        ] = "new"
-
-        character_copy[
-            "first_arc"
-        ] = current_arc
-
-        character_copy[
-            "last_arc"
-        ] = current_arc
-
-        character_copy.setdefault(
+        history = character_copy.setdefault(
             "arc_history",
             []
         )
 
-        if current_arc and current_arc not in character_copy[
-            "arc_history"
-        ]:
-            character_copy[
-                "arc_history"
-            ].append(
-                current_arc
-            )
+        if current_arc and current_arc not in history:
+            history.append(current_arc)
 
-        self.memory[
-            "characters"
-        ][
-            character_id
-        ] = character_copy
+        self.memory["characters"][character_id] = character_copy
 
         print(
-            f"🆕 New character added: "
-            f"{name}"
+            f"🆕 New character added: {name}"
         )
 
         return character_copy
-
 
     # ========================================================
     # PROCESS CHARACTERS
@@ -602,48 +352,29 @@ class UniverseMemoryManager:
 
     def process_characters(self):
 
-        # ----------------------------------------------------
-        # New characters
-        # ----------------------------------------------------
-
         new_characters = self.arc.get(
             "new_characters",
             []
         )
 
-        if isinstance(
-            new_characters,
-            list
-        ):
-
+        if isinstance(new_characters, list):
             for character in new_characters:
+                self.add_character(character)
 
-                self.add_character(
-                    character
-                )
+        current_arc = self.arc.get("title")
 
+        for field, label in [
+            ("main_characters", "Returning character"),
+            ("supporting_characters", "Supporting character")
+        ]:
+            names = self.arc.get(field, [])
 
-        # ----------------------------------------------------
-        # Main characters
-        # ----------------------------------------------------
+            if not isinstance(names, list):
+                continue
 
-        main_characters = self.arc.get(
-            "main_characters",
-            []
-        )
+            for name in names:
 
-        if isinstance(
-            main_characters,
-            list
-        ):
-
-            for name in main_characters:
-
-                if not isinstance(
-                    name,
-                    str
-                ):
-
+                if not isinstance(name, str):
                     continue
 
                 existing = self.find_by_name(
@@ -651,109 +382,28 @@ class UniverseMemoryManager:
                     name
                 )
 
-                if existing:
-
-                    history = existing.setdefault(
-                        "arc_history",
-                        []
-                    )
-
-                    current_arc = self.arc.get(
-                        "title"
-                    )
-
-                    if (
-                        current_arc
-                        and current_arc not in history
-                    ):
-
-                        history.append(
-                            current_arc
-                        )
-
-                    existing[
-                        "appearance_type"
-                    ] = "returning"
-
-                    existing[
-                        "status"
-                    ] = "active"
-
-                    existing[
-                        "last_arc"
-                    ] = current_arc
-
+                if not existing:
                     print(
-                        f"↩️ Returning character: "
-                        f"{name}"
+                        f"⚠️ {label} '{name}' "
+                        f"does not yet exist in memory."
                     )
-
-
-        # ----------------------------------------------------
-        # Supporting characters
-        # ----------------------------------------------------
-
-        supporting_characters = self.arc.get(
-            "supporting_characters",
-            []
-        )
-
-        if isinstance(
-            supporting_characters,
-            list
-        ):
-
-            for name in supporting_characters:
-
-                if not isinstance(
-                    name,
-                    str
-                ):
-
                     continue
 
-                existing = self.find_by_name(
-                    "characters",
-                    name
+                history = existing.setdefault(
+                    "arc_history",
+                    []
                 )
 
-                if existing:
+                if current_arc and current_arc not in history:
+                    history.append(current_arc)
 
-                    history = existing.setdefault(
-                        "arc_history",
-                        []
-                    )
+                existing["appearance_type"] = "returning"
+                existing["status"] = "active"
+                existing["last_arc"] = current_arc
 
-                    current_arc = self.arc.get(
-                        "title"
-                    )
-
-                    if (
-                        current_arc
-                        and current_arc not in history
-                    ):
-
-                        history.append(
-                            current_arc
-                        )
-
-                    existing[
-                        "appearance_type"
-                    ] = "returning"
-
-                    existing[
-                        "status"
-                    ] = "active"
-
-                    existing[
-                        "last_arc"
-                    ] = current_arc
-
-                    print(
-                        f"↩️ Supporting character: "
-                        f"{name}"
-                    )
-
+                print(
+                    f"↩️ {label}: {name}"
+                )
 
     # ========================================================
     # ADD STORY ARC
@@ -761,15 +411,11 @@ class UniverseMemoryManager:
 
     def add_story_arc(self):
 
-        title = self.arc.get(
-            "title"
-        )
+        title = self.arc.get("title")
 
         if not title:
-
             raise RuntimeError(
-                "Generated ARC does not contain "
-                "a title."
+                "Generated ARC does not contain a title."
             )
 
         existing = self.find_by_name(
@@ -780,111 +426,65 @@ class UniverseMemoryManager:
         if existing:
 
             print(
-                f"🔁 Story arc already exists: "
-                f"{title}"
+                f"🔁 Story arc already exists: {title}"
             )
 
-            self.memory[
-                "universe"
-            ][
-                "current_arc"
-            ] = existing.get(
-                "id"
+            self.memory["universe"]["current_arc"] = (
+                existing.get("id")
             )
 
             return existing
 
-
         arc_number = (
-            len(
-                self.memory[
-                    "story_arcs"
-                ]
-            )
-            + 1
+            len(self.memory["story_arcs"]) + 1
         )
 
-        arc_id = (
-            f"arc_{arc_number:03d}"
-        )
+        arc_id = f"arc_{arc_number:03d}"
 
-        arc_copy = dict(
-            self.arc
-        )
+        arc_copy = dict(self.arc)
+        arc_copy["id"] = arc_id
+        arc_copy["arc_number"] = arc_number
 
-        arc_copy[
-            "id"
-        ] = arc_id
+        self.memory["story_arcs"][arc_id] = arc_copy
 
-        arc_copy[
-            "arc_number"
-        ] = arc_number
-
-        self.memory[
-            "story_arcs"
-        ][
-            arc_id
-        ] = arc_copy
-
-        self.memory[
-            "universe"
-        ][
-            "current_arc"
-        ] = arc_id
+        self.memory["universe"]["current_arc"] = arc_id
 
         print()
         print(
             f"📚 Story Arc {arc_number} added:"
         )
-        print(
-            f"   {title}"
-        )
+        print(title)
 
         return arc_copy
-
 
     # ========================================================
     # ADD EPISODES
     # ========================================================
 
-    def add_episodes(
-        self,
-        arc_record
-    ):
+    def add_episodes(self, arc_record):
 
-        episodes = self.arc.get(
-            "episodes",
-            []
-        )
+        episodes = self.arc.get("episodes", [])
 
-        if not isinstance(
-            episodes,
-            list
-        ):
-
+        if not isinstance(episodes, list):
             return
 
+        arc_id = arc_record.get("id")
+        arc_number = arc_record.get("arc_number", 1)
 
-        arc_id = arc_record.get(
-            "id"
-        )
-
-        arc_number = arc_record.get(
-            "arc_number",
-            1
-        )
-
+        allowed_statuses = {
+            "planned",
+            "scripted",
+            "generated",
+            "completed",
+            "published"
+        }
 
         for index, episode in enumerate(
             episodes,
             start=1
         ):
 
-            if not isinstance(
-                episode,
-                dict
-            ):
-
+            if not isinstance(episode, dict):
                 continue
 
             episode_number = episode.get(
@@ -892,47 +492,22 @@ class UniverseMemoryManager:
                 index
             )
 
+            try:
+                episode_number = int(episode_number)
+            except (TypeError, ValueError):
+                episode_number = index
+
             title = episode.get(
                 "title",
                 f"Episode {episode_number}"
             )
 
             episode_id = (
-                f"{arc_id}_ep_"
-                f"{int(episode_number):02d}"
+                f"{arc_id}_ep_{episode_number:02d}"
             )
-
-            episode_copy = dict(
-                episode
-            )
-
-            episode_copy[
-                "id"
-            ] = episode_id
-
-            episode_copy[
-                "arc_id"
-            ] = arc_id
-
-            episode_copy[
-                "arc_number"
-            ] = arc_number
-
-            episode_copy.setdefault(
-                "status",
-                "planned"
-            )
-
-            allowed_statuses = {
-                "planned",
-                "scripted",
-                "generated",
-                "completed",
-                "published"
-            }
 
             status = str(
-                episode_copy.get(
+                episode.get(
                     "status",
                     "planned"
                 )
@@ -941,37 +516,69 @@ class UniverseMemoryManager:
             if status not in allowed_statuses:
                 status = "planned"
 
-            episode_copy[
-                "status"
-            ] = status
+            episode_copy = dict(episode)
 
-            existing = self.memory[
-                "episodes"
-            ].get(
+            episode_copy["id"] = episode_id
+            episode_copy["arc_id"] = arc_id
+            episode_copy["arc_number"] = arc_number
+            episode_copy["episode_number"] = episode_number
+            episode_copy["status"] = status
+
+            existing = self.memory["episodes"].get(
                 episode_id
             )
 
             if existing:
 
+                # Preserve existing generated/published state.
+                old_status = existing.get(
+                    "status",
+                    "planned"
+                )
+
+                priority = {
+                    "planned": 0,
+                    "scripted": 1,
+                    "generated": 2,
+                    "completed": 3,
+                    "published": 4
+                }
+
+                if priority.get(
+                    old_status,
+                    0
+                ) > priority.get(
+                    status,
+                    0
+                ):
+                    status = old_status
+
+                existing.update({
+                    "title": title,
+                    "arc_id": arc_id,
+                    "arc_number": arc_number,
+                    "episode_number": episode_number,
+                    "status": status
+                })
+
+                for key, value in episode_copy.items():
+                    if key not in existing:
+                        existing[key] = value
+
                 print(
-                    f"🔁 Episode already exists: "
-                    f"{episode_id}"
+                    f"🔄 Episode updated: "
+                    f"{episode_id} → {status}"
                 )
 
                 continue
 
-            self.memory[
-                "episodes"
-            ][
-                episode_id
-            ] = episode_copy
+            self.memory["episodes"][episode_id] = episode_copy
 
             print(
                 f"🎬 Episode added: "
-                f"EP {episode_number} - "
-                f"{title}"
+                f"EP {episode_number} - {title} "
+                f"[{status}]"
             )
-
 
     # ========================================================
     # PROCESS LOCATIONS
@@ -984,20 +591,14 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            locations,
-            list
-        ):
-
+        if not isinstance(locations, list):
             return
 
         for location in locations:
-
             self.add_dictionary_item(
                 "locations",
                 location
             )
-
 
     # ========================================================
     # PROCESS ARTIFACTS
@@ -1010,20 +611,14 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            artifacts,
-            list
-        ):
-
+        if not isinstance(artifacts, list):
             return
 
         for artifact in artifacts:
-
             self.add_dictionary_item(
                 "artifacts",
                 artifact
             )
-
 
     # ========================================================
     # PROCESS VILLAINS
@@ -1036,20 +631,105 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            villains,
-            list
-        ):
-
+        if not isinstance(villains, list):
             return
 
         for villain in villains:
-
             self.add_dictionary_item(
                 "villains",
                 villain
             )
 
+    # ========================================================
+    # NORMALIZE MYSTERY STATUS
+    # ========================================================
+
+    def normalize_mystery_status(self, status):
+
+        if not status:
+            return "active"
+
+        status_text = str(
+            status
+        ).strip().lower()
+
+        # Check partial before generic words such as "resolved".
+        if any(
+            phrase in status_text
+            for phrase in [
+                "partially solved",
+                "partially revealed",
+                "partially understood",
+                "mostly revealed",
+                "partially resolved"
+            ]
+        ):
+            return "partially_revealed"
+
+        if any(
+            word in status_text
+            for word in [
+                "resolved",
+                "solved",
+                "complete",
+                "completed",
+                "ended",
+                "vanquished"
+            ]
+        ):
+            return "resolved"
+
+        if any(
+            word in status_text
+            for word in [
+                "ongoing",
+                "active",
+                "unsolved",
+                "unresolved",
+                "unknown",
+                "introduced"
+            ]
+        ):
+            return "active"
+
+        return "active"
+
+    # ========================================================
+    # REMOVE UNRESOLVED THREAD
+    # ========================================================
+
+    def remove_unresolved_thread(self, mystery_name):
+
+        normalized_name = self.make_id(
+            mystery_name
+        )
+
+        remaining_threads = []
+
+        for thread in self.memory[
+            "unresolved_threads"
+        ]:
+
+            if not isinstance(thread, dict):
+                remaining_threads.append(thread)
+                continue
+
+            thread_name = self.make_id(
+                thread.get("name", "")
+            )
+
+            if thread_name == normalized_name:
+                print(
+                    f"✅ Removed resolved thread: "
+                    f"{mystery_name}"
+                )
+                continue
+
+            remaining_threads.append(thread)
+
+        self.memory[
+            "unresolved_threads"
+        ] = remaining_threads
 
     # ========================================================
     # PROCESS MYSTERIES
@@ -1062,58 +742,161 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            mysteries,
-            list
-        ):
-
-            return
+        if not isinstance(mysteries, list):
+            mysteries = []
 
         for mystery in mysteries:
 
-            added = self.add_dictionary_item(
-                "mysteries",
-                mystery
+            if not isinstance(mystery, dict):
+                continue
+
+            name = mystery.get("name")
+
+            if not name:
+                continue
+
+            status = self.normalize_mystery_status(
+                mystery.get("status")
             )
 
-            if added:
+            existing = self.find_by_name(
+                "mysteries",
+                name
+            )
 
-                self.add_unresolved_thread(
-                    mystery
+            current_arc = self.arc.get(
+                "title"
+            )
+
+            if existing:
+
+                existing["status"] = status
+                existing["last_arc"] = current_arc
+
+                history = existing.setdefault(
+                    "arc_history",
+                    []
                 )
 
+                if (
+                    current_arc
+                    and current_arc not in history
+                ):
+                    history.append(current_arc)
 
-        # Central mysteries
+                for key, value in mystery.items():
+                    if key not in existing:
+                        existing[key] = value
+
+                print(
+                    f"🔄 Mystery updated: "
+                    f"{name} → {status}"
+                )
+
+            else:
+
+                mystery_copy = dict(mystery)
+
+                mystery_id = self.unique_id(
+                    "mysteries",
+                    self.make_id(name)
+                )
+
+                mystery_copy["id"] = mystery_id
+                mystery_copy["status"] = status
+                mystery_copy["first_arc"] = current_arc
+                mystery_copy["last_arc"] = current_arc
+                mystery_copy["arc_history"] = []
+
+                if current_arc:
+                    mystery_copy["arc_history"].append(
+                        current_arc
+                    )
+
+                self.memory[
+                    "mysteries"
+                ][mystery_id] = mystery_copy
+
+                print(
+                    f"🆕 Mystery added: "
+                    f"{name} → {status}"
+                )
+
+            if status == "resolved":
+
+                self.remove_unresolved_thread(
+                    name
+                )
+
+            else:
+
+                self.add_unresolved_thread(
+                    {
+                        "name": name,
+                        "description": mystery.get(
+                            "description",
+                            ""
+                        ),
+                        "type": "mystery",
+                        "status": status,
+                        "arc": current_arc
+                    }
+                )
+
+        # ----------------------------------------------------
+        # CENTRAL MYSTERIES
+        # ----------------------------------------------------
 
         central_mysteries = self.arc.get(
             "central_mysteries",
             []
         )
 
-        if isinstance(
+        if not isinstance(
             central_mysteries,
             list
         ):
+            return
 
-            for mystery in central_mysteries:
+        for mystery in central_mysteries:
+
+            if isinstance(mystery, dict):
+
+                name = mystery.get("name")
+
+                status = self.normalize_mystery_status(
+                    mystery.get(
+                        "status",
+                        "active"
+                    )
+                )
+
+            else:
+
+                name = str(mystery)
+                status = "active"
+
+            if not name:
+                continue
+
+            if status == "resolved":
+
+                self.remove_unresolved_thread(
+                    name
+                )
+
+            else:
 
                 self.add_unresolved_thread(
                     {
-                        "name": mystery,
-
-                        "type":
-                            "central_mystery",
-
-                        "arc":
-                            self.arc.get(
-                                "title"
-                            ),
-
-                        "status":
-                            "active"
+                        "name": name,
+                        "type": "central_mystery",
+                        "arc": self.arc.get(
+                            "title"
+                        ),
+                        "status": status
                     }
                 )
-
 
     # ========================================================
     # PROCESS RELATIONSHIPS
@@ -1130,7 +913,6 @@ class UniverseMemoryManager:
             relationships,
             list
         ):
-
             return
 
         for relationship in relationships:
@@ -1139,7 +921,6 @@ class UniverseMemoryManager:
                 relationship,
                 dict
             ):
-
                 continue
 
             source = relationship.get(
@@ -1161,12 +942,8 @@ class UniverseMemoryManager:
                 f"{source}_{relation}_{target}"
             )
 
-            relationship_id = self.unique_id(
-                "relationships",
-                relationship_id
-            )
-
-            # Check if same relationship already exists
+            # Reuse an existing relationship instead
+            # of creating a new duplicate every run.
 
             already_exists = False
 
@@ -1178,71 +955,56 @@ class UniverseMemoryManager:
                     existing,
                     dict
                 ):
-
                     continue
 
                 if (
                     self.make_id(
-                        existing.get(
-                            "source"
-                        )
+                        existing.get("source")
                     )
-                    ==
-                    self.make_id(
-                        source
-                    )
+                    == self.make_id(source)
                     and
                     self.make_id(
-                        existing.get(
-                            "target"
-                        )
+                        existing.get("target")
                     )
-                    ==
-                    self.make_id(
-                        target
-                    )
+                    == self.make_id(target)
                     and
                     self.make_id(
-                        existing.get(
-                            "relationship"
-                        )
+                        existing.get("relationship")
                     )
-                    ==
-                    self.make_id(
-                        relation
-                    )
+                    == self.make_id(relation)
                 ):
-
                     already_exists = True
-
                     break
 
             if already_exists:
-
                 continue
+
+            relationship_id = self.unique_id(
+                "relationships",
+                relationship_id
+            )
 
             relationship_copy = dict(
                 relationship
             )
 
-            relationship_copy[
-                "id"
-            ] = relationship_id
+            relationship_copy["id"] = (
+                relationship_id
+            )
 
             self.memory[
                 "relationships"
-            ][
-                relationship_id
-            ] = relationship_copy
+            ][relationship_id] = (
+                relationship_copy
+            )
 
             print(
                 f"🔗 Relationship added: "
                 f"{source} → {target}"
             )
 
-
     # ========================================================
-    # ADD UNRESOLVED THREAD
+    # ADD / UPDATE UNRESOLVED THREAD
     # ========================================================
 
     def add_unresolved_thread(
@@ -1250,34 +1012,36 @@ class UniverseMemoryManager:
         thread
     ):
 
-        if isinstance(
-            thread,
-            dict
-        ):
+        if isinstance(thread, dict):
 
             name = thread.get(
                 "name",
                 "Unknown Thread"
             )
 
-            thread_copy = dict(
-                thread
-            )
+            thread_copy = dict(thread)
 
         else:
 
-            name = str(
-                thread
-            )
+            name = str(thread)
 
             thread_copy = {
                 "name": name
             }
 
-
         normalized_name = self.make_id(
             name
         )
+
+        status = self.normalize_mystery_status(
+            thread_copy.get("status")
+        )
+
+        thread_copy["status"] = status
+
+        # ----------------------------------------------------
+        # Existing thread
+        # ----------------------------------------------------
 
         for existing in self.memory[
             "unresolved_threads"
@@ -1287,7 +1051,6 @@ class UniverseMemoryManager:
                 existing,
                 dict
             ):
-
                 continue
 
             existing_name = self.make_id(
@@ -1297,37 +1060,45 @@ class UniverseMemoryManager:
                 )
             )
 
-            if (
-                existing_name
-                == normalized_name
-            ):
+            if existing_name != normalized_name:
+                continue
 
-                return
+            existing["status"] = status
+            existing["last_arc"] = self.arc.get(
+                "title"
+            )
 
+            if thread_copy.get("description"):
+                existing["description"] = (
+                    thread_copy["description"]
+                )
 
-        thread_copy.setdefault(
-            "status",
-            "active"
-        )
+            if status == "resolved":
+                self.remove_unresolved_thread(
+                    name
+                )
+
+            return
+
+        # Resolved mysteries do not belong in
+        # unresolved_threads.
+
+        if status == "resolved":
+            return
 
         thread_copy.setdefault(
             "arc",
-            self.arc.get(
-                "title"
-            )
+            self.arc.get("title")
         )
 
         self.memory[
             "unresolved_threads"
-        ].append(
-            thread_copy
-        )
+        ].append(thread_copy)
 
         print(
             f"❓ Unresolved thread added: "
-            f"{name}"
+            f"{name} → {status}"
         )
-
 
     # ========================================================
     # PROCESS FORESHADOWING
@@ -1340,42 +1111,26 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            clues,
-            list
-        ):
-
+        if not isinstance(clues, list):
             return
 
         for clue in clues:
 
-            if not isinstance(
-                clue,
-                dict
-            ):
-
+            if not isinstance(clue, dict):
                 continue
 
-            event = dict(
-                clue
-            )
-
-            event[
-                "arc"
-            ] = self.arc.get(
+            event = dict(clue)
+            event["arc"] = self.arc.get(
                 "title"
             )
 
             self.memory[
                 "foreshadowing"
-            ].append(
-                event
-            )
+            ].append(event)
 
             print(
                 "🔮 Foreshadowing saved."
             )
-
 
     # ========================================================
     # PROCESS MAJOR EVENTS
@@ -1388,54 +1143,33 @@ class UniverseMemoryManager:
             []
         )
 
-        if not isinstance(
-            events,
-            list
-        ):
-
+        if not isinstance(events, list):
             return
 
         for event in events:
 
             event_record = {
-
-                "arc":
-                    self.arc.get(
-                        "title"
-                    ),
-
-                "event":
-                    event
+                "arc": self.arc.get("title"),
+                "event": event
             }
 
             self.memory[
                 "major_events"
-            ].append(
-                event_record
-            )
+            ].append(event_record)
 
             self.memory[
                 "timeline"
             ].append(
                 {
-                    "type":
-                        "major_event",
-
-                    "arc":
-                        self.arc.get(
-                            "title"
-                        ),
-
-                    "event":
-                        event
+                    "type": "major_event",
+                    "arc": self.arc.get("title"),
+                    "event": event
                 }
             )
 
             print(
-                f"📜 Major event saved: "
-                f"{event}"
+                f"📜 Major event saved: {event}"
             )
-
 
     # ========================================================
     # PROCESS ARC CONSEQUENCES
@@ -1452,7 +1186,6 @@ class UniverseMemoryManager:
             consequences,
             list
         ):
-
             return
 
         for consequence in consequences:
@@ -1461,22 +1194,14 @@ class UniverseMemoryManager:
                 "timeline"
             ].append(
                 {
-                    "type":
-                        "arc_consequence",
-
-                    "arc":
-                        self.arc.get(
-                            "title"
-                        ),
-
-                    "event":
-                        consequence
+                    "type": "arc_consequence",
+                    "arc": self.arc.get("title"),
+                    "event": consequence
                 }
             )
 
-
     # ========================================================
-    # PROCESS FUTURE HOOK
+    # PROCESS FUTURE ARC HOOK
     # ========================================================
 
     def process_future_hook(self):
@@ -1486,30 +1211,27 @@ class UniverseMemoryManager:
         )
 
         if not future_hook:
-
             return
 
         self.add_unresolved_thread(
             {
-                "name":
-                    "Future Arc Hook",
-
-                "description":
-                    future_hook,
-
-                "type":
-                    "future_arc_hook",
-
-                "status":
-                    "active",
-
-                "arc":
-                    self.arc.get(
-                        "title"
-                    )
+                "name": "Future Arc Hook",
+                "description": future_hook,
+                "type": "future_arc_hook",
+                "status": "active",
+                "arc": self.arc.get("title")
             }
         )
 
+        self.memory[
+            "foreshadowing"
+        ].append(
+            {
+                "type": "future_arc_hook",
+                "arc": self.arc.get("title"),
+                "description": future_hook
+            }
+        )
 
     # ========================================================
     # UPDATE UNIVERSE STATE
@@ -1520,14 +1242,17 @@ class UniverseMemoryManager:
         arc_record
     ):
 
-        universe = self.memory[
-            "universe"
-        ]
+        universe = self.memory["universe"]
 
-        universe[
-            "current_arc"
-        ] = arc_record.get(
-            "id"
+        universe["current_arc"] = (
+            arc_record.get("id")
+        )
+
+        universe["current_series"] = (
+            self.arc.get(
+                "series",
+                universe.get("current_series")
+            )
         )
 
         episodes = self.arc.get(
@@ -1543,37 +1268,49 @@ class UniverseMemoryManager:
 
         completed_episodes = []
 
-        if isinstance(episodes, list):
+        if isinstance(
+            episodes,
+            list
+        ):
+
             for episode in episodes:
-                if not isinstance(episode, dict):
+
+                if not isinstance(
+                    episode,
+                    dict
+                ):
                     continue
 
                 status = str(
-                    episode.get("status", "planned")
+                    episode.get(
+                        "status",
+                        "planned"
+                    )
                 ).strip().lower()
 
                 if status in completed_statuses:
-                    completed_episodes.append(episode)
+                    completed_episodes.append(
+                        episode
+                    )
 
         if completed_episodes:
-            last_episode = completed_episodes[-1]
-            universe[
-                "current_episode"
-            ] = last_episode.get(
-                "episode_number"
-            )
-        else:
-            universe[
-                "current_episode"
-            ] = None
 
-        universe[
-            "current_phase"
-        ] = universe.get(
+            last_episode = completed_episodes[-1]
+
+            universe["current_episode"] = (
+                last_episode.get(
+                    "episode_number"
+                )
+            )
+
+        else:
+
+            universe["current_episode"] = None
+
+        universe["current_phase"] = universe.get(
             "current_phase",
             1
         )
-
 
     # ========================================================
     # PROCESS COMPLETE ARC
@@ -1582,149 +1319,73 @@ class UniverseMemoryManager:
     def process_arc(self):
 
         if not self.arc:
-
             raise RuntimeError(
                 "generated_arc.json contains "
                 "no 'arc' object."
             )
 
         title = self.arc.get(
-            "title"
+            "title",
+            "Untitled Arc"
         )
 
         print()
-        print(
-            "============================================"
-        )
-        print(
-            "🧠 MEMORY MANAGER"
-        )
-        print(
-            "============================================"
-        )
+        print("=" * 44)
+        print("🧠 MEMORY MANAGER")
+        print("=" * 44)
         print()
 
-        print(
-            f"📖 Processing ARC:"
-        )
-
-        print(
-            f"   {title}"
-        )
-
+        print("📖 Processing ARC:")
+        print(f"   {title}")
         print()
 
-
-        # ----------------------------------------------------
         # 1. Story Arc
-        # ----------------------------------------------------
-
         arc_record = self.add_story_arc()
 
-
-        # ----------------------------------------------------
         # 2. Characters
-        # ----------------------------------------------------
-
         self.process_characters()
 
-
-        # ----------------------------------------------------
         # 3. Locations
-        # ----------------------------------------------------
-
         self.process_locations()
 
-
-        # ----------------------------------------------------
         # 4. Artifacts
-        # ----------------------------------------------------
-
         self.process_artifacts()
 
-
-        # ----------------------------------------------------
         # 5. Villains
-        # ----------------------------------------------------
-
         self.process_villains()
 
-
-        # ----------------------------------------------------
         # 6. Mysteries
-        # ----------------------------------------------------
-
         self.process_mysteries()
 
-
-        # ----------------------------------------------------
         # 7. Relationships
-        # ----------------------------------------------------
-
         self.process_relationships()
 
-
-        # ----------------------------------------------------
         # 8. Episodes
-        # ----------------------------------------------------
-
         self.add_episodes(
             arc_record
         )
 
-
-        # ----------------------------------------------------
         # 9. Foreshadowing
-        # ----------------------------------------------------
-
         self.process_foreshadowing()
 
-
-        # ----------------------------------------------------
-        # 10. Major Events
-        # ----------------------------------------------------
-
+        # 10. Major events
         self.process_major_events()
 
-
-        # ----------------------------------------------------
         # 11. Consequences
-        # ----------------------------------------------------
-
         self.process_consequences()
 
-
-        # ----------------------------------------------------
-        # 12. Future Hook
-        # ----------------------------------------------------
-
+        # 12. Future hook
         self.process_future_hook()
 
-
-        # ----------------------------------------------------
-        # 13. Universe State
-        # ----------------------------------------------------
-
+        # 13. Universe state
         self.update_universe_state(
             arc_record
         )
 
-
         print()
-        print(
-            "============================================"
-        )
-
-        print(
-            "✅ ARC MEMORY UPDATE COMPLETE"
-        )
-
-        print(
-            "============================================"
-
-
-        )
-
+        print("=" * 44)
+        print("✅ ARC MEMORY UPDATE COMPLETE")
+        print("=" * 44)
 
     # ========================================================
     # SUMMARY
@@ -1733,18 +1394,9 @@ class UniverseMemoryManager:
     def print_summary(self):
 
         print()
-        print(
-            "============================================"
-        )
-
-        print(
-            "📊 UNIVERSE MEMORY SUMMARY"
-        )
-
-        print(
-            "============================================"
-        )
-
+        print("=" * 44)
+        print("📊 UNIVERSE MEMORY SUMMARY")
+        print("=" * 44)
         print()
 
         print(
@@ -1808,10 +1460,7 @@ class UniverseMemoryManager:
         )
 
         print()
-
-        print(
-            "============================================"
-        )
+        print("=" * 44)
 
 
 # ============================================================
@@ -1834,5 +1483,4 @@ def main():
 # ============================================================
 
 if __name__ == "__main__":
-
     main()
