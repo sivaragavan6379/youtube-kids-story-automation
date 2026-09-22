@@ -543,15 +543,40 @@ Return ONLY the requested JSON.
 
                         "mysteries": {
 
-                            "type": "ARRAY",
+    "type": "ARRAY",
 
-                            "items": {
+    "items": {
 
-                                "OBJECT": {
-                                    "type": "OBJECT"
-                                }
-                            }
-                        },
+        "type": "OBJECT",
+
+        "properties": {
+
+            "name": {
+                "type": "STRING"
+            },
+
+            "description": {
+                "type": "STRING"
+            },
+
+            "importance": {
+                "type": "STRING"
+            },
+
+            "status": {
+                "type": "STRING"
+            }
+
+        },
+
+        "required": [
+            "name",
+            "description",
+            "importance",
+            "status"
+        ]
+    }
+},
 
                         "episodes": {
 
