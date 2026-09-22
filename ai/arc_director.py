@@ -156,6 +156,7 @@ The arc should contain:
 - arc goal
 - main characters
 - supporting characters
+- returning characters when relevant
 - new characters when genuinely necessary
 - locations
 - artifacts
@@ -298,6 +299,58 @@ For example, specify:
 
 Do not unnecessarily change their appearance
 between future stories.
+
+============================================================
+RETURNING CHARACTER SYSTEM
+============================================================
+
+Before creating a new character, inspect the existing
+characters in the AUTHORITATIVE UNIVERSE MEMORY.
+
+Reuse an existing character whenever that character can
+naturally participate in the new arc.
+
+Every returning character MUST be listed in
+"returning_characters".
+
+For every returning character provide:
+
+- name
+- reason_for_return
+- role_in_arc
+- continuity_connection
+
+The reason_for_return must explain why the character is
+involved in the current arc.
+
+The continuity_connection must identify the previous event,
+relationship, mystery, artifact, location, or other
+established story element that connects the character
+to this arc.
+
+IMPORTANT RULES:
+
+1. A returning character MUST already exist in the
+   AUTHORITATIVE UNIVERSE MEMORY.
+
+2. Do NOT invent a returning character.
+
+3. Do NOT list a new character as returning.
+
+4. Do NOT include returning characters only for fan service.
+
+5. If no existing character naturally needs to return,
+   return an empty "returning_characters" array.
+
+6. New characters belong in "new_characters".
+
+7. Existing characters who return belong in
+   "returning_characters".
+
+8. Keep the established identity, appearance, history,
+   relationships, and important facts of returning
+   characters unchanged unless the story explicitly
+   and naturally develops them.
 
 ============================================================
 CHARACTER DEVELOPMENT
@@ -1030,6 +1083,7 @@ Return ONLY JSON matching the provided schema.
                         "main_characters",
                         "supporting_characters",
                         "new_characters",
+                        "returning_characters",
                         "locations",
                         "artifacts",
                         "mysteries",
@@ -1642,6 +1696,115 @@ Return ONLY JSON matching the provided schema.
                         f"is missing field: "
                         f"{field}"
                     )
+
+        # ----------------------------------------------------
+        # Returning character validation
+        # ----------------------------------------------------
+
+        returning_characters = (
+            arc["returning_characters"]
+        )
+
+        if not isinstance(
+            returning_characters,
+            list
+        ):
+
+            raise RuntimeError(
+                "returning_characters must be an array."
+            )
+
+        # Load the authoritative character registry.
+        # A returning character must already exist there.
+        universe = self.load_universe()
+
+        stored_characters = universe.get(
+            "characters",
+            {}
+        )
+
+        if not isinstance(
+            stored_characters,
+            dict
+        ):
+
+            stored_characters = {}
+
+        known_character_names = set()
+
+        for character_id, character_data in stored_characters.items():
+
+            if not isinstance(
+                character_data,
+                dict
+            ):
+
+                continue
+
+            known_character_names.add(
+                str(character_id).strip().lower()
+            )
+
+            character_name = character_data.get(
+                "name"
+            )
+
+            if character_name:
+
+                known_character_names.add(
+                    str(character_name).strip().lower()
+                )
+
+        for character in returning_characters:
+
+            if not isinstance(
+                character,
+                dict
+            ):
+
+                raise RuntimeError(
+                    "Every returning character must "
+                    "be an object."
+                )
+
+            required_returning_fields = [
+                "name",
+                "reason_for_return",
+                "role_in_arc",
+                "continuity_connection"
+            ]
+
+            for field in required_returning_fields:
+
+                if field not in character:
+
+                    raise RuntimeError(
+                        "Returning character "
+                        f"'{character.get('name', 'unknown')}' "
+                        f"is missing field: {field}"
+                    )
+
+                if not str(
+                    character[field]
+                ).strip():
+
+                    raise RuntimeError(
+                        "Returning character "
+                        f"'{character.get('name', 'unknown')}' "
+                        f"has an empty field: {field}"
+                    )
+
+            returning_name = str(
+                character["name"]
+            ).strip().lower()
+
+            if returning_name not in known_character_names:
+
+                raise RuntimeError(
+                    "Returning character "
+                    f"'{character['name']}' does not exist "
+                    "in the authoritative universe memory."
+                )
 
         # ----------------------------------------------------
         # Basic arc text validation
