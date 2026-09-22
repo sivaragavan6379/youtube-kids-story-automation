@@ -278,32 +278,20 @@ class UniverseMemoryManager:
     # ========================================================
 
     def add_character(self, character):
+        """Add a new character without overwriting established continuity."""
         if not isinstance(character, dict):
             return None
 
-        name = character.get("name")
-
+        name = str(character.get("name", "")).strip()
         if not name:
             return None
 
-        existing = self.find_by_name(
-            "characters",
-            name
-        )
-
+        existing = self.find_by_name("characters", name)
         current_arc = self.arc.get("title")
 
         if existing:
-
-            print(
-                f"🔁 Returning character detected: {name}"
-            )
-
-            history = existing.setdefault(
-                "arc_history",
-                []
-            )
-
+            print(f"🔁 Returning character detected: {name}")
+            history = existing.setdefault("arc_history", [])
             if current_arc and current_arc not in history:
                 history.append(current_arc)
 
@@ -312,98 +300,173 @@ class UniverseMemoryManager:
             existing["last_arc"] = current_arc
 
             for key, value in character.items():
+                if key in {"id", "first_arc", "last_arc", "arc_history", "appearance_type"}:
+                    continue
                 if key not in existing:
                     existing[key] = value
 
+            existing.setdefault("return_history", [])
+            existing.setdefault("appearance_history", [])
             return existing
 
         character_copy = dict(character)
-
-        character_id = self.unique_id(
-            "characters",
-            self.make_id(name)
-        )
-
+        character_id = self.unique_id("characters", self.make_id(name))
         character_copy["id"] = character_id
         character_copy.setdefault("status", "active")
         character_copy["appearance_type"] = "new"
         character_copy["first_arc"] = current_arc
         character_copy["last_arc"] = current_arc
+        history = character_copy.setdefault("arc_history", [])
+        if current_arc and current_arc not in history:
+            history.append(current_arc)
+        character_copy.setdefault("return_history", [])
+        character_copy.setdefault("appearance_history", [])
 
-        history = character_copy.setdefault(
-            "arc_history",
-            []
-        )
+        self.memory["characters"][character_id] = character_copy
+        print(f"🆕 New character added: {name}")
+        return character_copy
 
+    # ========================================================
+    # RECORD RETURNING CHARACTER
+    # ========================================================
+
+    def record_returning_character(self, returning_character):
+        """Persist why and how an existing character returns in this arc."""
+        if not isinstance(returning_character, dict):
+            return None
+
+        name = str(returning_character.get("name", "")).strip()
+        if not name:
+            return None
+
+        existing = self.find_by_name("characters", name)
+        current_arc = self.arc.get("title")
+
+        if not existing:
+            print(
+                f"⚠️ Returning character '{name}' does not exist in universe memory."
+            )
+            return None
+
+        history = existing.setdefault("arc_history", [])
         if current_arc and current_arc not in history:
             history.append(current_arc)
 
-        self.memory["characters"][character_id] = character_copy
+        existing["appearance_type"] = "returning"
+        existing["status"] = "active"
+        existing["last_arc"] = current_arc
+        existing.setdefault("return_history", [])
+        existing.setdefault("appearance_history", [])
 
-        print(
-            f"🆕 New character added: {name}"
+        record = {
+            "arc": current_arc,
+            "reason_for_return": str(returning_character.get("reason_for_return", "")).strip(),
+            "role_in_arc": str(returning_character.get("role_in_arc", "")).strip(),
+            "continuity_connection": str(returning_character.get("continuity_connection", "")).strip(),
+        }
+
+        duplicate = any(
+            isinstance(old, dict)
+            and old.get("arc") == record["arc"]
+            and old.get("reason_for_return") == record["reason_for_return"]
+            and old.get("role_in_arc") == record["role_in_arc"]
+            for old in existing["return_history"]
         )
+        if not duplicate:
+            existing["return_history"].append(record)
 
-        return character_copy
+        appearance = {
+            "arc": current_arc,
+            "type": "returning",
+            "role": record["role_in_arc"],
+        }
+        if appearance not in existing["appearance_history"]:
+            existing["appearance_history"].append(appearance)
+
+        print(f"↩️ Returning character recorded: {name}")
+        if record["reason_for_return"]:
+            print(f"   Reason: {record['reason_for_return']}")
+        if record["role_in_arc"]:
+            print(f"   Role: {record['role_in_arc']}")
+        return existing
 
     # ========================================================
     # PROCESS CHARACTERS
     # ========================================================
 
     def process_characters(self):
+        current_arc = self.arc.get("title")
 
-        new_characters = self.arc.get(
-            "new_characters",
-            []
-        )
-
+        # 1. New characters
+        new_characters = self.arc.get("new_characters", [])
         if isinstance(new_characters, list):
             for character in new_characters:
                 self.add_character(character)
 
-        current_arc = self.arc.get("title")
+        # 2. Explicit returning characters
+        returning_characters = self.arc.get("returning_characters", [])
+        if isinstance(returning_characters, list):
+            for character in returning_characters:
+                self.record_returning_character(character)
 
-        for field, label in [
-            ("main_characters", "Returning character"),
-            ("supporting_characters", "Supporting character")
-        ]:
-            names = self.arc.get(field, [])
-
-            if not isinstance(names, list):
-                continue
-
-            for name in names:
-
-                if not isinstance(name, str):
-                    continue
-
-                existing = self.find_by_name(
-                    "characters",
-                    name
+        # 3. Main characters
+        main_characters = self.arc.get("main_characters", [])
+        if isinstance(main_characters, list):
+            for name in main_characters:
+                self._record_simple_character_appearance(
+                    name, "main", "main_character", current_arc
                 )
 
-                if not existing:
-                    print(
-                        f"⚠️ {label} '{name}' "
-                        f"does not yet exist in memory."
-                    )
-                    continue
-
-                history = existing.setdefault(
-                    "arc_history",
-                    []
+        # 4. Supporting characters
+        supporting_characters = self.arc.get("supporting_characters", [])
+        if isinstance(supporting_characters, list):
+            for name in supporting_characters:
+                self._record_simple_character_appearance(
+                    name, "supporting", "supporting_character", current_arc
                 )
 
-                if current_arc and current_arc not in history:
-                    history.append(current_arc)
+    def _record_simple_character_appearance(
+        self,
+        name,
+        appearance_type,
+        role,
+        current_arc
+    ):
+        """Record main/supporting appearances without inventing missing characters."""
+        if not isinstance(name, str):
+            return None
 
-                existing["appearance_type"] = "returning"
-                existing["status"] = "active"
-                existing["last_arc"] = current_arc
+        name = name.strip()
+        if not name:
+            return None
 
-                print(
-                    f"↩️ {label}: {name}"
-                )
+        existing = self.find_by_name("characters", name)
+        if not existing:
+            print(
+                f"⚠️ Character '{name}' is listed as {appearance_type} "
+                f"but does not exist in memory."
+            )
+            return None
+
+        history = existing.setdefault("arc_history", [])
+        if current_arc and current_arc not in history:
+            history.append(current_arc)
+
+        existing["appearance_type"] = "returning"
+        existing["status"] = "active"
+        existing["last_arc"] = current_arc
+        existing.setdefault("appearance_history", [])
+
+        appearance = {
+            "arc": current_arc,
+            "type": appearance_type,
+            "role": role,
+        }
+        if appearance not in existing["appearance_history"]:
+            existing["appearance_history"].append(appearance)
+
+        print(f"↩️ {appearance_type.title()} character: {name}")
+        return existing
 
     # ========================================================
     # ADD STORY ARC
