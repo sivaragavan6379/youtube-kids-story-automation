@@ -476,7 +476,6 @@ class UniverseMemoryManager:
             character,
             dict
         ):
-
             return
 
         name = character.get(
@@ -484,7 +483,6 @@ class UniverseMemoryManager:
         )
 
         if not name:
-
             return
 
         existing = self.find_by_name(
@@ -492,10 +490,14 @@ class UniverseMemoryManager:
             name
         )
 
+        current_arc = self.arc.get(
+            "title"
+        )
+
         if existing:
 
             print(
-                f"🔁 Existing character preserved: "
+                f"🔁 Returning character detected: "
                 f"{name}"
             )
 
@@ -504,20 +506,33 @@ class UniverseMemoryManager:
                 []
             )
 
-            current_arc = self.arc.get(
-                "title"
-            )
-
             if (
                 current_arc
                 and current_arc not in history
             ):
-
                 history.append(
                     current_arc
                 )
 
-            return
+            existing[
+                "appearance_type"
+            ] = "returning"
+
+            existing[
+                "status"
+            ] = "active"
+
+            existing[
+                "last_arc"
+            ] = current_arc
+
+            # Preserve established information.
+            # Only fill fields that do not already exist.
+            for key, value in character.items():
+                if key not in existing:
+                    existing[key] = value
+
+            return existing
 
         character_copy = dict(
             character
@@ -541,17 +556,26 @@ class UniverseMemoryManager:
             "active"
         )
 
+        character_copy[
+            "appearance_type"
+        ] = "new"
+
+        character_copy[
+            "first_arc"
+        ] = current_arc
+
+        character_copy[
+            "last_arc"
+        ] = current_arc
+
         character_copy.setdefault(
             "arc_history",
             []
         )
 
-        current_arc = self.arc.get(
-            "title"
-        )
-
-        if current_arc:
-
+        if current_arc and current_arc not in character_copy[
+            "arc_history"
+        ]:
             character_copy[
                 "arc_history"
             ].append(
@@ -568,6 +592,8 @@ class UniverseMemoryManager:
             f"🆕 New character added: "
             f"{name}"
         )
+
+        return character_copy
 
 
     # ========================================================
@@ -645,6 +671,18 @@ class UniverseMemoryManager:
                             current_arc
                         )
 
+                    existing[
+                        "appearance_type"
+                    ] = "returning"
+
+                    existing[
+                        "status"
+                    ] = "active"
+
+                    existing[
+                        "last_arc"
+                    ] = current_arc
+
                     print(
                         f"↩️ Returning character: "
                         f"{name}"
@@ -698,6 +736,18 @@ class UniverseMemoryManager:
                         history.append(
                             current_arc
                         )
+
+                    existing[
+                        "appearance_type"
+                    ] = "returning"
+
+                    existing[
+                        "status"
+                    ] = "active"
+
+                    existing[
+                        "last_arc"
+                    ] = current_arc
 
                     print(
                         f"↩️ Supporting character: "
@@ -872,6 +922,28 @@ class UniverseMemoryManager:
                 "status",
                 "planned"
             )
+
+            allowed_statuses = {
+                "planned",
+                "scripted",
+                "generated",
+                "completed",
+                "published"
+            }
+
+            status = str(
+                episode_copy.get(
+                    "status",
+                    "planned"
+                )
+            ).strip().lower()
+
+            if status not in allowed_statuses:
+                status = "planned"
+
+            episode_copy[
+                "status"
+            ] = status
 
             existing = self.memory[
                 "episodes"
@@ -1463,15 +1535,37 @@ class UniverseMemoryManager:
             []
         )
 
-        if episodes:
+        completed_statuses = {
+            "generated",
+            "completed",
+            "published"
+        }
 
-            last_episode = episodes[-1]
+        completed_episodes = []
 
+        if isinstance(episodes, list):
+            for episode in episodes:
+                if not isinstance(episode, dict):
+                    continue
+
+                status = str(
+                    episode.get("status", "planned")
+                ).strip().lower()
+
+                if status in completed_statuses:
+                    completed_episodes.append(episode)
+
+        if completed_episodes:
+            last_episode = completed_episodes[-1]
             universe[
                 "current_episode"
             ] = last_episode.get(
                 "episode_number"
             )
+        else:
+            universe[
+                "current_episode"
+            ] = None
 
         universe[
             "current_phase"
