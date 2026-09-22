@@ -1,546 +1,1206 @@
 import json
 from pathlib import Path
-from datetime import datetime
 
 
 # ============================================================
 # UNIVERSE MEMORY MANAGER
 # ============================================================
 
-MEMORY_FILE = Path(__file__).parent / "universe_memory.json"
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+MEMORY_FILE = (
+    BASE_DIR
+    / "universe"
+    / "universe_memory.json"
+)
+
+ARC_FILE = (
+    BASE_DIR
+    / "output"
+    / "generated_arc.json"
+)
 
 
-class UniverseMemory:
-    """
-    Handles all reading, searching and updating of the
-    shared Tamil Animated Universe memory.
-    """
+class UniverseMemoryManager:
 
-    def __init__(self, memory_file=MEMORY_FILE):
-        self.memory_file = Path(memory_file)
-        self.data = self.load()
+    def __init__(self):
 
-    # --------------------------------------------------------
-    # LOAD MEMORY
-    # --------------------------------------------------------
+        self.memory = self.load_json(
+            MEMORY_FILE,
+            default=self.create_empty_memory()
+        )
 
-    def load(self):
-        """Load universe memory from JSON file."""
+        self.arc = self.load_json(
+            ARC_FILE,
+            default=None
+        )
 
-        if not self.memory_file.exists():
-            return self.create_empty_memory()
 
-        try:
-            with open(self.memory_file, "r", encoding="utf-8") as file:
-                data = json.load(file)
-
-            return data
-
-        except json.JSONDecodeError:
-            print("⚠️ Universe memory JSON is invalid.")
-            return self.create_empty_memory()
-
-    # --------------------------------------------------------
-    # CREATE EMPTY MEMORY
-    # --------------------------------------------------------
+    # ========================================================
+    # EMPTY UNIVERSE
+    # ========================================================
 
     def create_empty_memory(self):
-        """Create the basic universe memory structure."""
 
         return {
+
             "universe": {
-                "id": "UNIVERSE-001",
-                "name": "Tamil Animated Universe",
-                "description": "A connected Tamil animated story universe.",
+
+                "name": "Tamil Animated Shared Universe",
+
+                "description":
+                    "A continuously evolving Tamil animated "
+                    "children's adventure universe.",
+
                 "current_phase": 1,
-                "current_series": None,
-                "current_arc": None,
-                "current_episode": None
+
+                "current_arc": 0,
+
+                "current_episode": 0
             },
 
-            "characters": {},
-            "series": {},
-            "story_arcs": {},
-            "episodes": {},
-            "locations": {},
-            "villains": {},
-            "artifacts": {},
-            "mysteries": {},
-            "relationships": {},
+            "characters": [],
+
+            "locations": [],
+
+            "artifacts": [],
+
+            "villains": [],
+
+            "relationships": [],
+
+            "mysteries": [],
+
+            "story_arcs": [],
+
+            "episodes": [],
+
             "timeline": [],
-            "unresolved_threads": [],
-            "foreshadowing": [],
-            "major_events": []
+
+            "unresolved_threads": []
         }
 
-    # --------------------------------------------------------
-    # SAVE MEMORY
-    # --------------------------------------------------------
 
-    def save(self):
-        """Save current universe memory to JSON."""
+    # ========================================================
+    # LOAD JSON
+    # ========================================================
 
-        self.memory_file.parent.mkdir(parents=True, exist_ok=True)
+    def load_json(
+        self,
+        file_path,
+        default=None
+    ):
 
-        with open(self.memory_file, "w", encoding="utf-8") as file:
-            json.dump(
-                self.data,
-                file,
-                indent=2,
-                ensure_ascii=False
+        if not file_path.exists():
+
+            if default is not None:
+
+                return default
+
+            raise FileNotFoundError(
+                f"File not found:\n{file_path}"
             )
 
-        print("💾 Universe memory saved.")
+        try:
 
-    # --------------------------------------------------------
-    # GENERATE ID
-    # --------------------------------------------------------
+            with open(
+                file_path,
+                "r",
+                encoding="utf-8"
+            ) as file:
 
-    def generate_id(self, prefix, collection):
-        """Generate a simple unique ID."""
+                return json.load(file)
 
-        number = len(collection) + 1
+        except json.JSONDecodeError as error:
 
-        while f"{prefix}-{number:03d}" in collection:
-            number += 1
+            raise RuntimeError(
+                f"Invalid JSON file:\n"
+                f"{file_path}\n\n"
+                f"{error}"
+            )
 
-        return f"{prefix}-{number:03d}"
 
     # ========================================================
-    # CHARACTER MANAGEMENT
+    # SAVE MEMORY
     # ========================================================
 
-    def find_character(self, name):
-        """
-        Search for an existing character by name.
+    def save_memory(self):
 
-        Returns:
-            character dictionary or None
-        """
+        MEMORY_FILE.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
 
-        name = name.strip().lower()
+        with open(
+            MEMORY_FILE,
+            "w",
+            encoding="utf-8"
+        ) as file:
 
-        for character_id, character in self.data["characters"].items():
+            json.dump(
+                self.memory,
+                file,
+                ensure_ascii=False,
+                indent=2
+            )
 
-            character_name = character.get("name", "").strip().lower()
+        print()
+        print(
+            "💾 Universe memory saved:"
+        )
 
-            if character_name == name:
+        print(
+            MEMORY_FILE
+        )
+
+
+    # ========================================================
+    # NORMALIZE NAME
+    # ========================================================
+
+    def normalize_name(
+        self,
+        name
+    ):
+
+        return str(
+            name
+        ).strip().lower()
+
+
+    # ========================================================
+    # FIND CHARACTER
+    # ========================================================
+
+    def find_character(
+        self,
+        name
+    ):
+
+        target = (
+            self.normalize_name(
+                name
+            )
+        )
+
+        for character in self.memory[
+            "characters"
+        ]:
+
+            existing_name = (
+                character.get(
+                    "name",
+                    ""
+                )
+            )
+
+            if (
+                self.normalize_name(
+                    existing_name
+                )
+                == target
+            ):
+
                 return character
 
         return None
 
-    def get_character(self, character_id):
-        """Get character by ID."""
 
-        return self.data["characters"].get(character_id)
+    # ========================================================
+    # ADD OR UPDATE CHARACTER
+    # ========================================================
 
-    def create_character(self, character):
-        """
-        Create a new character automatically.
+    def add_character(
+        self,
+        character
+    ):
 
-        The AI can provide the character details.
-        """
+        name = character.get(
+            "name"
+        )
 
-        existing = self.find_character(character.get("name", ""))
+        if not name:
+
+            return
+
+        existing = (
+            self.find_character(
+                name
+            )
+        )
 
         if existing:
+
             print(
-                f"ℹ️ Character already exists: "
-                f"{existing.get('name')}"
+                f"🔁 Existing character preserved: "
+                f"{name}"
             )
 
-            return existing
+            # Only add information that does not
+            # already exist. Do not overwrite established
+            # identity accidentally.
 
-        character_id = self.generate_id(
-            "CHAR",
-            self.data["characters"]
+            for key, value in character.items():
+
+                if key == "name":
+
+                    continue
+
+                if key not in existing:
+
+                    existing[key] = value
+
+            return
+
+        character_copy = dict(
+            character
         )
 
-        character["id"] = character_id
+        character_copy.setdefault(
+            "status",
+            "active"
+        )
 
-        character.setdefault("status", "active")
-        character.setdefault("first_appearance", None)
-        character.setdefault("appearance", {})
-        character.setdefault("personality", [])
-        character.setdefault("voice", {})
-        character.setdefault("abilities", [])
-        character.setdefault("relationships", [])
-        character.setdefault("known_locations", [])
-        character.setdefault("story_history", [])
-        character.setdefault("important_events", [])
+        character_copy.setdefault(
+            "first_arc",
+            self.memory[
+                "universe"
+            ].get(
+                "current_arc",
+                0
+            ) + 1
+        )
 
-        self.data["characters"][character_id] = character
+        character_copy.setdefault(
+            "return_history",
+            []
+        )
+
+        self.memory[
+            "characters"
+        ].append(
+            character_copy
+        )
 
         print(
-            f"👤 New character created: "
-            f"{character.get('name')} ({character_id})"
+            f"🆕 New character added: "
+            f"{name}"
         )
 
-        return character
-
-    def update_character(self, character_id, updates):
-        """Update an existing character."""
-
-        if character_id not in self.data["characters"]:
-            print(f"⚠️ Character not found: {character_id}")
-            return None
-
-        self.data["characters"][character_id].update(updates)
-
-        print(f"🔄 Character updated: {character_id}")
-
-        return self.data["characters"][character_id]
 
     # ========================================================
-    # GENERIC ENTITY CREATION
+    # FIND GENERIC ITEM
     # ========================================================
 
-    def add_entity(self, collection_name, prefix, entity):
-        """
-        Add an entity such as:
+    def find_item(
+        self,
+        collection_name,
+        name
+    ):
 
-        series
-        story_arcs
-        episodes
-        locations
-        villains
-        artifacts
-        mysteries
-        """
+        target = (
+            self.normalize_name(
+                name
+            )
+        )
 
-        if collection_name not in self.data:
-            self.data[collection_name] = {}
+        collection = self.memory.get(
+            collection_name,
+            []
+        )
 
-        collection = self.data[collection_name]
+        for item in collection:
 
-        entity_id = self.generate_id(prefix, collection)
+            item_name = item.get(
+                "name",
+                ""
+            )
 
-        entity["id"] = entity_id
+            if (
+                self.normalize_name(
+                    item_name
+                )
+                == target
+            ):
 
-        collection[entity_id] = entity
+                return item
+
+        return None
+
+
+    # ========================================================
+    # ADD GENERIC ITEM
+    # ========================================================
+
+    def add_item(
+        self,
+        collection_name,
+        item
+    ):
+
+        if not isinstance(
+            item,
+            dict
+        ):
+
+            return
+
+        name = item.get(
+            "name"
+        )
+
+        if not name:
+
+            return
+
+        existing = (
+            self.find_item(
+                collection_name,
+                name
+            )
+        )
+
+        if existing:
+
+            print(
+                f"🔁 Existing "
+                f"{collection_name[:-1]} preserved: "
+                f"{name}"
+            )
+
+            for key, value in item.items():
+
+                if key == "name":
+
+                    continue
+
+                if key not in existing:
+
+                    existing[key] = value
+
+            return
+
+        self.memory[
+            collection_name
+        ].append(
+            dict(item)
+        )
 
         print(
-            f"➕ Added {collection_name}: "
-            f"{entity_id}"
+            f"🆕 Added to "
+            f"{collection_name}: "
+            f"{name}"
         )
 
-        return entity
 
     # ========================================================
-    # STORY ARC
+    # ADD RELATIONSHIP
     # ========================================================
 
-    def create_arc(self, arc):
-        """Create a new story arc."""
+    def add_relationship(
+        self,
+        relationship
+    ):
 
-        return self.add_entity(
-            "story_arcs",
-            "ARC",
+        if not isinstance(
+            relationship,
+            dict
+        ):
+
+            return
+
+        source = relationship.get(
+            "source"
+        )
+
+        target = relationship.get(
+            "target"
+        )
+
+        relation = relationship.get(
+            "relationship"
+        )
+
+        if not source or not target:
+
+            return
+
+        for existing in self.memory[
+            "relationships"
+        ]:
+
+            if (
+
+                self.normalize_name(
+                    existing.get(
+                        "source",
+                        ""
+                    )
+                )
+                == self.normalize_name(
+                    source
+                )
+
+                and
+
+                self.normalize_name(
+                    existing.get(
+                        "target",
+                        ""
+                    )
+                )
+                == self.normalize_name(
+                    target
+                )
+
+                and
+
+                self.normalize_name(
+                    existing.get(
+                        "relationship",
+                        ""
+                    )
+                )
+                == self.normalize_name(
+                    relation or ""
+                )
+            ):
+
+                return
+
+        self.memory[
+            "relationships"
+        ].append(
+            dict(relationship)
+        )
+
+
+    # ========================================================
+    # ADD ARC
+    # ========================================================
+
+    def add_arc(
+        self,
+        arc
+    ):
+
+        title = arc.get(
+            "title"
+        )
+
+        if not title:
+
+            return
+
+        existing_arc = None
+
+        for old_arc in self.memory[
+            "story_arcs"
+        ]:
+
+            if (
+                self.normalize_name(
+                    old_arc.get(
+                        "title",
+                        ""
+                    )
+                )
+                ==
+                self.normalize_name(
+                    title
+                )
+            ):
+
+                existing_arc = old_arc
+
+                break
+
+        if existing_arc:
+
+            print(
+                f"🔁 Arc already exists: "
+                f"{title}"
+            )
+
+            return
+
+        arc_number = (
+            len(
+                self.memory[
+                    "story_arcs"
+                ]
+            )
+            + 1
+        )
+
+        arc_copy = dict(
             arc
         )
 
-    # ========================================================
-    # SERIES
-    # ========================================================
+        arc_copy[
+            "arc_number"
+        ] = arc_number
 
-    def create_series(self, series):
-        """Create a new series."""
-
-        return self.add_entity(
-            "series",
-            "SERIES",
-            series
+        self.memory[
+            "story_arcs"
+        ].append(
+            arc_copy
         )
 
+        self.memory[
+            "universe"
+        ][
+            "current_arc"
+        ] = arc_number
+
+        print(
+            f"📚 Story Arc {arc_number} added: "
+            f"{title}"
+        )
+
+
     # ========================================================
-    # EPISODE
+    # ADD EPISODES
     # ========================================================
 
-    def create_episode(self, episode):
-        """Create a new episode."""
+    def add_episodes(
+        self,
+        arc
+    ):
 
-        return self.add_entity(
+        episodes = arc.get(
             "episodes",
-            "EP",
-            episode
+            []
         )
 
-    # ========================================================
-    # LOCATION
-    # ========================================================
-
-    def create_location(self, location):
-        """Create a new location."""
-
-        return self.add_entity(
-            "locations",
-            "LOC",
-            location
+        arc_number = (
+            self.memory[
+                "universe"
+            ].get(
+                "current_arc",
+                0
+            )
         )
 
+        for episode in episodes:
+
+            if not isinstance(
+                episode,
+                dict
+            ):
+
+                continue
+
+            episode_number = episode.get(
+                "episode_number"
+            )
+
+            title = episode.get(
+                "title"
+            )
+
+            already_exists = False
+
+            for existing in self.memory[
+                "episodes"
+            ]:
+
+                if (
+
+                    existing.get(
+                        "arc_number"
+                    )
+                    == arc_number
+
+                    and
+
+                    existing.get(
+                        "episode_number"
+                    )
+                    == episode_number
+                ):
+
+                    already_exists = True
+
+                    break
+
+            if already_exists:
+
+                continue
+
+            episode_copy = dict(
+                episode
+            )
+
+            episode_copy[
+                "arc_number"
+            ] = arc_number
+
+            episode_copy[
+                "status"
+            ] = "planned"
+
+            self.memory[
+                "episodes"
+            ].append(
+                episode_copy
+            )
+
+            print(
+                f"🎬 Episode added: "
+                f"EP {episode_number} - "
+                f"{title}"
+            )
+
+            self.memory[
+                "universe"
+            ][
+                "current_episode"
+            ] = max(
+
+                self.memory[
+                    "universe"
+                ].get(
+                    "current_episode",
+                    0
+                ),
+
+                int(
+                    episode_number
+                    or 0
+                )
+            )
+
+
     # ========================================================
-    # VILLAIN
+    # ADD TIMELINE EVENT
     # ========================================================
 
-    def create_villain(self, villain):
-        """Create a new villain."""
+    def add_timeline_event(
+        self,
+        event
+    ):
 
-        return self.add_entity(
-            "villains",
-            "VILLAIN",
-            villain
+        if not event:
+
+            return
+
+        if event in self.memory[
+            "timeline"
+        ]:
+
+            return
+
+        self.memory[
+            "timeline"
+        ].append(
+            event
         )
 
+
     # ========================================================
-    # ARTIFACT
+    # ADD UNRESOLVED THREAD
     # ========================================================
 
-    def create_artifact(self, artifact):
-        """Create a new artifact."""
+    def add_unresolved_thread(
+        self,
+        thread
+    ):
 
-        return self.add_entity(
-            "artifacts",
-            "ARTIFACT",
-            artifact
+        if not thread:
+
+            return
+
+        normalized = (
+            self.normalize_name(
+                thread
+            )
         )
 
+        for existing in self.memory[
+            "unresolved_threads"
+        ]:
+
+            if (
+                self.normalize_name(
+                    existing.get(
+                        "name",
+                        existing
+                    )
+                )
+                == normalized
+            ):
+
+                return
+
+        if isinstance(
+            thread,
+            dict
+        ):
+
+            self.memory[
+                "unresolved_threads"
+            ].append(
+                dict(thread)
+            )
+
+        else:
+
+            self.memory[
+                "unresolved_threads"
+            ].append(
+                {
+                    "name": str(
+                        thread
+                    ),
+
+                    "status": "active"
+                }
+            )
+
+
     # ========================================================
-    # MYSTERY
+    # PROCESS CHARACTERS
     # ========================================================
 
-    def create_mystery(self, mystery):
-        """Create a new mystery."""
+    def process_characters(
+        self,
+        arc
+    ):
 
-        return self.add_entity(
-            "mysteries",
-            "MYSTERY",
-            mystery
+        existing_names = {
+            self.normalize_name(
+                c.get(
+                    "name",
+                    ""
+                )
+            )
+
+            for c in self.memory[
+                "characters"
+            ]
+        }
+
+        # ----------------------------------------------------
+        # NEW CHARACTERS
+        # ----------------------------------------------------
+
+        for character in arc.get(
+            "new_characters",
+            []
+        ):
+
+            name = character.get(
+                "name"
+            )
+
+            if not name:
+
+                continue
+
+            normalized = (
+                self.normalize_name(
+                    name
+                )
+            )
+
+            if normalized in existing_names:
+
+                print(
+                    f"⚠️ Character "
+                    f"'{name}' was marked as new "
+                    f"but already exists."
+                )
+
+                continue
+
+            self.add_character(
+                character
+            )
+
+            existing_names.add(
+                normalized
+            )
+
+
+        # ----------------------------------------------------
+        # MAIN / SUPPORTING CHARACTERS
+        # ----------------------------------------------------
+
+        participating_names = []
+
+        participating_names.extend(
+            arc.get(
+                "main_characters",
+                []
+            )
         )
 
-    # ========================================================
-    # RELATIONSHIP
-    # ========================================================
-
-    def create_relationship(self, relationship):
-        """Create relationship between characters."""
-
-        relationship_id = self.generate_id(
-            "REL",
-            self.data["relationships"]
+        participating_names.extend(
+            arc.get(
+                "supporting_characters",
+                []
+            )
         )
 
-        relationship["id"] = relationship_id
+        for name in participating_names:
 
-        self.data["relationships"][relationship_id] = relationship
+            if not isinstance(
+                name,
+                str
+            ):
 
-        print(
-            f"❤️ Relationship created: {relationship_id}"
-        )
+                continue
 
-        return relationship
+            character = (
+                self.find_character(
+                    name
+                )
+            )
 
-    # ========================================================
-    # UNRESOLVED STORY THREAD
-    # ========================================================
+            if character:
 
-    def add_unresolved_thread(self, thread):
-        """
-        Store something that may become important
-        in a future episode.
-        """
+                history = character.setdefault(
+                    "return_history",
+                    []
+                )
 
-        thread_id = self.generate_id(
-            "THREAD",
-            {
-                item["id"]: item
-                for item in self.data["unresolved_threads"]
-                if "id" in item
-            }
-        )
+                arc_number = (
+                    self.memory[
+                        "universe"
+                    ].get(
+                        "current_arc",
+                        0
+                    )
+                )
 
-        thread["id"] = thread_id
-        thread.setdefault("status", "unresolved")
+                if arc_number not in history:
 
-        self.data["unresolved_threads"].append(thread)
+                    history.append(
+                        arc_number
+                    )
 
-        print(
-            f"🧩 Unresolved thread added: {thread_id}"
-        )
+                    print(
+                        f"↩️ Returning character: "
+                        f"{name}"
+                    )
 
-        return thread
-
-    # ========================================================
-    # FORESHADOWING
-    # ========================================================
-
-    def add_foreshadowing(self, item):
-        """
-        Store clues that may become important later.
-        """
-
-        item_id = self.generate_id(
-            "FORESHADOW",
-            {
-                entry["id"]: entry
-                for entry in self.data["foreshadowing"]
-                if "id" in entry
-            }
-        )
-
-        item["id"] = item_id
-        item.setdefault("status", "active")
-
-        self.data["foreshadowing"].append(item)
-
-        print(
-            f"🔮 Foreshadowing added: {item_id}"
-        )
-
-        return item
 
     # ========================================================
-    # TIMELINE
+    # PROCESS ARC
     # ========================================================
 
-    def add_timeline_event(self, event):
-        """Add an event to the universe timeline."""
+    def process_arc(
+        self
+    ):
 
-        event["recorded_at"] = datetime.utcnow().isoformat()
+        if not self.arc:
 
-        self.data["timeline"].append(event)
+            raise FileNotFoundError(
+                "generated_arc.json was not found."
+            )
 
-        print("🕒 Timeline event added.")
+        if "arc" not in self.arc:
 
-        return event
+            raise RuntimeError(
+                "generated_arc.json does not "
+                "contain an 'arc' object."
+            )
 
-    # ========================================================
-    # MAJOR EVENT
-    # ========================================================
-
-    def add_major_event(self, event):
-        """Add a major universe event."""
-
-        event["recorded_at"] = datetime.utcnow().isoformat()
-
-        self.data["major_events"].append(event)
-
-        print("🌟 Major universe event added.")
-
-        return event
-
-    # ========================================================
-    # SEARCH
-    # ========================================================
-
-    def search_characters(self, keyword):
-        """Search characters using a keyword."""
-
-        keyword = keyword.lower()
-
-        results = []
-
-        for character in self.data["characters"].values():
-
-            name = character.get("name", "").lower()
-
-            personality = " ".join(
-                character.get("personality", [])
-            ).lower()
-
-            if keyword in name or keyword in personality:
-                results.append(character)
-
-        return results
-
-    # ========================================================
-    # UNRESOLVED THREADS
-    # ========================================================
-
-    def get_unresolved_threads(self):
-        """Return all unresolved story threads."""
-
-        return [
-            thread
-            for thread in self.data["unresolved_threads"]
-            if thread.get("status") == "unresolved"
+        arc = self.arc[
+            "arc"
         ]
 
+        print()
+        print(
+            "============================================"
+        )
+
+        print(
+            "🧠 MEMORY MANAGER"
+        )
+
+        print(
+            "============================================"
+        )
+
+        print()
+
+        # ----------------------------------------------------
+        # ARC
+        # ----------------------------------------------------
+
+        self.add_arc(
+            arc
+        )
+
+        # ----------------------------------------------------
+        # CHARACTERS
+        # ----------------------------------------------------
+
+        self.process_characters(
+            arc
+        )
+
+        # ----------------------------------------------------
+        # LOCATIONS
+        # ----------------------------------------------------
+
+        for location in arc.get(
+            "locations",
+            []
+        ):
+
+            self.add_item(
+                "locations",
+                location
+            )
+
+        # ----------------------------------------------------
+        # ARTIFACTS
+        # ----------------------------------------------------
+
+        for artifact in arc.get(
+            "artifacts",
+            []
+        ):
+
+            self.add_item(
+                "artifacts",
+                artifact
+            )
+
+        # ----------------------------------------------------
+        # MYSTERIES
+        # ----------------------------------------------------
+
+        for mystery in arc.get(
+            "mysteries",
+            []
+        ):
+
+            self.add_item(
+                "mysteries",
+                mystery
+            )
+
+            self.add_unresolved_thread(
+                mystery
+            )
+
+        # ----------------------------------------------------
+        # EPISODES
+        # ----------------------------------------------------
+
+        self.add_episodes(
+            arc
+        )
+
+        # ----------------------------------------------------
+        # CENTRAL MYSTERIES
+        # ----------------------------------------------------
+
+        for mystery_name in arc.get(
+            "central_mysteries",
+            []
+        ):
+
+            self.add_unresolved_thread(
+                mystery_name
+            )
+
+        # ----------------------------------------------------
+        # FORESHADOWING
+        # ----------------------------------------------------
+
+        for clue in arc.get(
+            "foreshadowing",
+            []
+        ):
+
+            self.add_timeline_event(
+                {
+                    "type": "foreshadowing",
+
+                    "arc": self.memory[
+                        "universe"
+                    ].get(
+                        "current_arc",
+                        0
+                    ),
+
+                    "data": clue
+                }
+            )
+
+        # ----------------------------------------------------
+        # MAJOR EVENTS
+        # ----------------------------------------------------
+
+        for event in arc.get(
+            "major_events",
+            []
+        ):
+
+            self.add_timeline_event(
+                {
+                    "type": "major_event",
+
+                    "arc": self.memory[
+                        "universe"
+                    ].get(
+                        "current_arc",
+                        0
+                    ),
+
+                    "event": event
+                }
+            )
+
+        # ----------------------------------------------------
+        # FUTURE ARC HOOK
+        # ----------------------------------------------------
+
+        future_hook = arc.get(
+            "future_arc_hook"
+        )
+
+        if future_hook:
+
+            self.add_unresolved_thread(
+                {
+                    "name":
+                        "Future Arc Hook",
+
+                    "description":
+                        future_hook,
+
+                    "status":
+                        "active"
+                }
+            )
+
+        # ----------------------------------------------------
+        # ARC CONSEQUENCES
+        # ----------------------------------------------------
+
+        for consequence in arc.get(
+            "arc_consequences",
+            []
+        ):
+
+            self.add_timeline_event(
+                {
+                    "type": "arc_consequence",
+
+                    "arc": self.memory[
+                        "universe"
+                    ].get(
+                        "current_arc",
+                        0
+                    ),
+
+                    "event": consequence
+                }
+            )
+
+        print()
+
+        print(
+            "✅ ARC MEMORY UPDATE COMPLETE"
+        )
+
+
     # ========================================================
-    # UNIVERSE SUMMARY
+    # SUMMARY
     # ========================================================
 
-    def get_summary(self):
-        """
-        Return a compact summary for Gemini.
-        """
+    def print_summary(
+        self
+    ):
 
-        return {
-            "universe": self.data["universe"],
+        print()
 
-            "character_count": len(
-                self.data["characters"]
-            ),
+        print(
+            "============================================"
+        )
 
-            "series_count": len(
-                self.data["series"]
-            ),
+        print(
+            "📊 UNIVERSE MEMORY SUMMARY"
+        )
 
-            "arc_count": len(
-                self.data["story_arcs"]
-            ),
+        print(
+            "============================================"
+        )
 
-            "episode_count": len(
-                self.data["episodes"]
-            ),
+        print()
 
-            "location_count": len(
-                self.data["locations"]
-            ),
+        print(
+            f"Characters: "
+            f"{len(self.memory['characters'])}"
+        )
 
-            "villain_count": len(
-                self.data["villains"]
-            ),
+        print(
+            f"Locations: "
+            f"{len(self.memory['locations'])}"
+        )
 
-            "mystery_count": len(
-                self.data["mysteries"]
-            ),
+        print(
+            f"Artifacts: "
+            f"{len(self.memory['artifacts'])}"
+        )
 
-            "unresolved_threads": self.get_unresolved_threads()
-        }
+        print(
+            f"Mysteries: "
+            f"{len(self.memory['mysteries'])}"
+        )
+
+        print(
+            f"Story Arcs: "
+            f"{len(self.memory['story_arcs'])}"
+        )
+
+        print(
+            f"Episodes: "
+            f"{len(self.memory['episodes'])}"
+        )
+
+        print(
+            f"Timeline Events: "
+            f"{len(self.memory['timeline'])}"
+        )
+
+        print(
+            f"Unresolved Threads: "
+            f"{len(self.memory['unresolved_threads'])}"
+        )
+
+        print()
+
+        print(
+            "============================================"
+        )
 
 
 # ============================================================
-# TEST
+# MAIN
+# ============================================================
+
+def main():
+
+    manager = UniverseMemoryManager()
+
+    manager.process_arc()
+
+    manager.save_memory()
+
+    manager.print_summary()
+
+
+# ============================================================
+# ENTRY POINT
 # ============================================================
 
 if __name__ == "__main__":
 
-    print("\n===================================")
-    print("🌌 UNIVERSE MEMORY TEST")
-    print("===================================\n")
-
-    memory = UniverseMemory()
-
-    print("Universe:")
-    print(
-        memory.data["universe"]["name"]
-    )
-
-    print("\nCharacters:")
-    print(
-        len(memory.data["characters"])
-    )
-
-    print("\nEpisodes:")
-    print(
-        len(memory.data["episodes"])
-    )
-
-    print("\nUnresolved Threads:")
-    print(
-        len(memory.get_unresolved_threads())
-    )
-
-    print("\n===================================")
-    print("✅ MEMORY MANAGER WORKING")
-    print("===================================\n")
+    main()
