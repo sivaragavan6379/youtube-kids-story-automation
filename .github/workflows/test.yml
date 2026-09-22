@@ -25,9 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Test Gemini Story Director
+      - name: Test Gemini Arc Director
         run: |
-          python ai/story_director.py
+          python ai/arc_director.py
 
       - name: Upload generated arc
         uses: actions/upload-artifact@v4
