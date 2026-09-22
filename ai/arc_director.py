@@ -753,6 +753,41 @@ Return ONLY JSON matching the provided schema.
                                 ]
                             }
                         },
+                        "returning_characters": {
+
+    "type": "ARRAY",
+
+    "items": {
+
+        "type": "OBJECT",
+
+        "properties": {
+
+            "name": {
+                "type": "STRING"
+            },
+
+            "reason_for_return": {
+                "type": "STRING"
+            },
+
+            "role_in_arc": {
+                "type": "STRING"
+            },
+
+            "continuity_connection": {
+                "type": "STRING"
+            }
+        },
+
+        "required": [
+            "name",
+            "reason_for_return",
+            "role_in_arc",
+            "continuity_connection"
+        ]
+    }
+},
 
                         "locations": {
 
