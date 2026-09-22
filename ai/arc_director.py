@@ -721,6 +721,7 @@ Return ONLY the requested JSON.
                         "new_characters",
                         "locations",
                         "artifacts",
+                        "mysteries",
                         "episodes",
                         "central_mysteries",
                         "foreshadowing",
