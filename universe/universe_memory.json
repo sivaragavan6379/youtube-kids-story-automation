@@ -5,8 +5,8 @@
     "description": "A connected Tamil animated story universe.",
     "current_phase": 1,
     "current_series": null,
-    "current_arc": "arc_001",
-    "current_episode": 8
+    "current_arc": "arc_002",
+    "current_episode": null
   },
   "characters": {
     "meera": {
@@ -51,8 +51,11 @@
       "id": "meera",
       "status": "active",
       "arc_history": [
-        "The Whispering Stone of Valampuri"
-      ]
+        "The Whispering Stone of Valampuri",
+        "The Fading Lotus of Kanthar Nagar"
+      ],
+      "appearance_type": "returning",
+      "last_arc": "The Fading Lotus of Kanthar Nagar"
     },
     "karthik": {
       "name": "Karthik",
@@ -94,8 +97,11 @@
       "id": "karthik",
       "status": "active",
       "arc_history": [
-        "The Whispering Stone of Valampuri"
-      ]
+        "The Whispering Stone of Valampuri",
+        "The Fading Lotus of Kanthar Nagar"
+      ],
+      "appearance_type": "returning",
+      "last_arc": "The Fading Lotus of Kanthar Nagar"
     },
     "aachi": {
       "name": "Aachi",
@@ -135,8 +141,11 @@
       "id": "aachi",
       "status": "active",
       "arc_history": [
-        "The Whispering Stone of Valampuri"
-      ]
+        "The Whispering Stone of Valampuri",
+        "The Fading Lotus of Kanthar Nagar"
+      ],
+      "appearance_type": "returning",
+      "last_arc": "The Fading Lotus of Kanthar Nagar"
     },
     "thatha": {
       "name": "Thatha",
@@ -179,7 +188,105 @@
       "id": "thatha",
       "status": "active",
       "arc_history": [
-        "The Whispering Stone of Valampuri"
+        "The Whispering Stone of Valampuri",
+        "The Fading Lotus of Kanthar Nagar"
+      ],
+      "appearance_type": "returning",
+      "last_arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    "anya": {
+      "name": "Anya",
+      "type": "Local guide, marsh guardian",
+      "appearance": "Approximately 10-11 years old. Medium brown skin, sharp, observant features, and bright, intelligent eyes. Her long, dark hair is often tied in a practical braid adorned with wildflowers and marsh reeds. Wears durable, practical clothing in muted greens and browns, designed for navigating the marsh, and is almost always barefoot. Slender but strong, moves with the grace of a marsh bird. Distinctive feature: A small, woven reed bracelet on her right wrist, passed down through her family.",
+      "personality": [
+        "Independent",
+        "Knowledgeable about marsh flora and fauna",
+        "Resourceful",
+        "Wary of outsiders initially",
+        "Loyal",
+        "Practical",
+        "Brave"
+      ],
+      "goal": "To protect Kanthar Nagar's Luminous Lotus and the surrounding marsh, continuing her family's ancient guardianship.",
+      "motivation": "A deep, inherited connection to her ancestral land and its unique ecosystem, a strong sense of duty, and a desire to prove herself worthy of her heritage.",
+      "strengths": [
+        "Expert in marsh botany and wildlife",
+        "Skilled at navigation through difficult terrain (water, dense reeds)",
+        "Resourceful in using natural materials",
+        "Sharp observational skills"
+      ],
+      "weaknesses": [
+        "Can be stubborn and slow to trust",
+        "Sometimes overly cautious",
+        "Limited experience outside of Kanthar Nagar"
+      ],
+      "abilities": [
+        "Extensive knowledge of medicinal and practical marsh plants",
+        "Proficient tracker in watery environments",
+        "Understands the subtle 'language' of the marsh (animal calls, plant movements)"
+      ],
+      "relationships": [
+        "Respects her unseen ancestors",
+        "Initially wary of Meera and Karthik but develops a strong bond of friendship and shared purpose."
+      ],
+      "voice_style": "Calm, assured, with a slightly earthy tone, speaks concisely and thoughtfully.",
+      "story_role": "Introduces Meera and Karthik to Kanthar Nagar's unique challenges and sacred sites. Acts as their local guide and eventual ally, sharing crucial ecological and ancestral knowledge specific to the marsh.",
+      "id": "anya",
+      "status": "active",
+      "appearance_type": "returning",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "kaalan": {
+      "name": "Kaalan",
+      "type": "Antagonist, agent of The Umbral Weavers",
+      "appearance": "A tall, unnervingly slender figure, perpetually shrouded in dark, loosely woven fabrics that seem to absorb ambient light. His face is entirely concealed by an intricately carved mask made of petrified wood and dark fungal filaments, with only two malevolent, glowing red eyes visible through narrow slits. His movements are fluid, almost silent, and often unsettlingly precise, like a predator. Distinctive feature: A subtle, dark symbol (the 'Umbral Weaver' sigil) is etched into his mask and sometimes faintly visible on his cloaked garments.",
+      "personality": [
+        "Ruthless",
+        "Single-minded",
+        "Insidious",
+        "Methodical",
+        "Silent",
+        "Fanatical",
+        "Calculating"
+      ],
+      "goal": "To extract the spiritual energy from sacred sites across the land, including the Luminous Lotus, for 'The Umbral Weavers' master.",
+      "motivation": "Absolute, unwavering loyalty and devotion to the unknown leader of 'The Umbral Weavers' and their grand, obscured agenda, believing their actions serve a 'greater balance' (as twisted as it may be).",
+      "strengths": [
+        "Stealth and evasion",
+        "Ability to summon and manipulate the blight entity (fungal tendrils, shadowy illusions)",
+        "Surprisingly strong and agile",
+        "Highly intelligent in strategic planning of blight infestations",
+        "Resilient to conventional attacks"
+      ],
+      "weaknesses": [
+        "Overly reliant on the blight's power",
+        "Vulnerable to concentrated natural energy or pure spiritual light",
+        "Lacks true creativity, following established protocols",
+        "Can be momentarily disoriented by strong, unexpected emotional displays or bright, pure light bursts."
+      ],
+      "abilities": [
+        "Telepathic control over blight organisms",
+        "Creation of localized shadowy illusions and fear-inducing effects",
+        "Draining life force from plants and, indirectly, creatures",
+        "Can merge with shadows for swift, silent movement."
+      ],
+      "relationships": [
+        "Servant/agent of 'The Umbral Weavers' leader.",
+        "Primary antagonist to Meera, Karthik, and Anya."
+      ],
+      "voice_style": "A low, rasping whisper, seldom used. More often communicates through menacing gestures, amplified blight sounds, or subtle environmental manipulations.",
+      "story_role": "The immediate, physical manifestation of the wider, organized threat posed by 'The Umbral Weavers'. He acts as the antagonist who tests Meera and Karthik's evolving abilities and forces them to confront the systemic nature of the blight. His symbol will link directly to the overarching villain.",
+      "id": "kaalan",
+      "status": "active",
+      "appearance_type": "new",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
       ]
     }
   },
@@ -584,6 +691,326 @@
       "future_arc_hook": "The blight in Poomalai was just a symptom of a larger, systemic threat affecting other sacred sites. The Whispering Stone's final vision of a vast network of trees and a shadowy observer suggests a more organized, intelligent force is at play across the land, and Meera and Karthik might be called upon again to protect more than just their village.",
       "id": "arc_001",
       "arc_number": 1
+    },
+    "arc_002": {
+      "title": "The Fading Lotus of Kanthar Nagar",
+      "summary": "Following the events in Poomalai, Meera's Whispering Stone now guides her and Karthik beyond their village to Kanthar Nagar, a vibrant marshland community. Here, a sacred Luminous Lotus, vital to the village's life force, is slowly succumbing to a mysterious blight reminiscent of Poomalai's, but with unique manifestations. As they seek to understand and heal the lotus, they encounter Anya, a local guardian, and confront Kaalan, an enigmatic agent of the shadowy organization 'The Umbral Weavers', whose symbol Meera glimpsed in her previous vision. This arc deepens the children's understanding of the interconnected network of sacred sites and the far-reaching threat against them, forcing them to adapt their unique skills to a new environment.",
+      "theme": "The interconnectedness of nature's sacred sites, trusting intuition and innovation in unfamiliar lands, and confronting a pervasive, organized threat.",
+      "central_conflict": "Meera and Karthik must travel to Kanthar Nagar to prevent the complete spiritual decay of the sacred Luminous Lotus from a sophisticated blight orchestrated by Kaalan, an agent of the mysterious 'Umbral Weavers', while understanding the wider scope of this threat.",
+      "arc_goal": "To successfully heal the Luminous Lotus, understand the nature of the blight in a new ecosystem, gain a new ally in Anya, and gain crucial information about 'The Umbral Weavers' and their motives.",
+      "planned_episode_count": 7,
+      "main_characters": [
+        "Meera",
+        "Karthik"
+      ],
+      "supporting_characters": [
+        "Aachi",
+        "Thatha",
+        "Anya"
+      ],
+      "new_characters": [
+        {
+          "name": "Anya",
+          "type": "Local guide, marsh guardian",
+          "appearance": "Approximately 10-11 years old. Medium brown skin, sharp, observant features, and bright, intelligent eyes. Her long, dark hair is often tied in a practical braid adorned with wildflowers and marsh reeds. Wears durable, practical clothing in muted greens and browns, designed for navigating the marsh, and is almost always barefoot. Slender but strong, moves with the grace of a marsh bird. Distinctive feature: A small, woven reed bracelet on her right wrist, passed down through her family.",
+          "personality": [
+            "Independent",
+            "Knowledgeable about marsh flora and fauna",
+            "Resourceful",
+            "Wary of outsiders initially",
+            "Loyal",
+            "Practical",
+            "Brave"
+          ],
+          "goal": "To protect Kanthar Nagar's Luminous Lotus and the surrounding marsh, continuing her family's ancient guardianship.",
+          "motivation": "A deep, inherited connection to her ancestral land and its unique ecosystem, a strong sense of duty, and a desire to prove herself worthy of her heritage.",
+          "strengths": [
+            "Expert in marsh botany and wildlife",
+            "Skilled at navigation through difficult terrain (water, dense reeds)",
+            "Resourceful in using natural materials",
+            "Sharp observational skills"
+          ],
+          "weaknesses": [
+            "Can be stubborn and slow to trust",
+            "Sometimes overly cautious",
+            "Limited experience outside of Kanthar Nagar"
+          ],
+          "abilities": [
+            "Extensive knowledge of medicinal and practical marsh plants",
+            "Proficient tracker in watery environments",
+            "Understands the subtle 'language' of the marsh (animal calls, plant movements)"
+          ],
+          "relationships": [
+            "Respects her unseen ancestors",
+            "Initially wary of Meera and Karthik but develops a strong bond of friendship and shared purpose."
+          ],
+          "voice_style": "Calm, assured, with a slightly earthy tone, speaks concisely and thoughtfully.",
+          "story_role": "Introduces Meera and Karthik to Kanthar Nagar's unique challenges and sacred sites. Acts as their local guide and eventual ally, sharing crucial ecological and ancestral knowledge specific to the marsh."
+        },
+        {
+          "name": "Kaalan",
+          "type": "Antagonist, agent of The Umbral Weavers",
+          "appearance": "A tall, unnervingly slender figure, perpetually shrouded in dark, loosely woven fabrics that seem to absorb ambient light. His face is entirely concealed by an intricately carved mask made of petrified wood and dark fungal filaments, with only two malevolent, glowing red eyes visible through narrow slits. His movements are fluid, almost silent, and often unsettlingly precise, like a predator. Distinctive feature: A subtle, dark symbol (the 'Umbral Weaver' sigil) is etched into his mask and sometimes faintly visible on his cloaked garments.",
+          "personality": [
+            "Ruthless",
+            "Single-minded",
+            "Insidious",
+            "Methodical",
+            "Silent",
+            "Fanatical",
+            "Calculating"
+          ],
+          "goal": "To extract the spiritual energy from sacred sites across the land, including the Luminous Lotus, for 'The Umbral Weavers' master.",
+          "motivation": "Absolute, unwavering loyalty and devotion to the unknown leader of 'The Umbral Weavers' and their grand, obscured agenda, believing their actions serve a 'greater balance' (as twisted as it may be).",
+          "strengths": [
+            "Stealth and evasion",
+            "Ability to summon and manipulate the blight entity (fungal tendrils, shadowy illusions)",
+            "Surprisingly strong and agile",
+            "Highly intelligent in strategic planning of blight infestations",
+            "Resilient to conventional attacks"
+          ],
+          "weaknesses": [
+            "Overly reliant on the blight's power",
+            "Vulnerable to concentrated natural energy or pure spiritual light",
+            "Lacks true creativity, following established protocols",
+            "Can be momentarily disoriented by strong, unexpected emotional displays or bright, pure light bursts."
+          ],
+          "abilities": [
+            "Telepathic control over blight organisms",
+            "Creation of localized shadowy illusions and fear-inducing effects",
+            "Draining life force from plants and, indirectly, creatures",
+            "Can merge with shadows for swift, silent movement."
+          ],
+          "relationships": [
+            "Servant/agent of 'The Umbral Weavers' leader.",
+            "Primary antagonist to Meera, Karthik, and Anya."
+          ],
+          "voice_style": "A low, rasping whisper, seldom used. More often communicates through menacing gestures, amplified blight sounds, or subtle environmental manipulations.",
+          "story_role": "The immediate, physical manifestation of the wider, organized threat posed by 'The Umbral Weavers'. He acts as the antagonist who tests Meera and Karthik's evolving abilities and forces them to confront the systemic nature of the blight. His symbol will link directly to the overarching villain."
+        }
+      ],
+      "locations": [
+        {
+          "name": "Poomalai Village",
+          "description": "Meera and Karthik's home village, nestled among hills and paddy fields, recovering from the blight. It serves as the starting point and a place for initial consultation with Aachi.",
+          "visual_identity": "Warm earthy tones, traditional tiled-roof houses, verdant green fields. The Karpaga Vriksham stands healed but with visible scars. Gentle morning light."
+        },
+        {
+          "name": "Aachi's Hut",
+          "description": "Aachi's small hut, a repository of ancient scrolls and wisdom. It's where Meera and Karthik seek initial guidance and where Aachi helps interpret the Whispering Stone's expanded visions.",
+          "visual_identity": "Rustic, cozy, filled with warm lamplight, clay pots, and dried herbs. A sense of accumulated knowledge and spiritual calm."
+        },
+        {
+          "name": "Kanthar Nagar Village",
+          "description": "An ancient and vibrant village uniquely adapted to its vast marshland environment. Houses are built on stilts or elevated platforms, connected by intricate wooden walkways and canals traversed by small boats. Life here is intimately connected to the water and the rich, diverse marsh flora and fauna. The air is humid and alive with the sounds of countless creatures.",
+          "visual_identity": "Lush greens of marsh plants, shimmering blues of water, dark, rich browns of wood and soil. Elaborate wooden architecture with carved details. Mists often hang low in the mornings, giving way to brilliant, watery sunsets. Sounds of frogs, crickets, diverse bird calls, and the gentle lapping of water."
+        },
+        {
+          "name": "The Luminous Lotus Marsh (Heart of Kanthar Nagar)",
+          "description": "The sacred, central heart of Kanthar Nagar's marshland. Here resides the colossal Luminous Lotus, revered as the village's spiritual and ecological anchor. This area is characterized by remarkably clear waters and rare, bioluminescent plant life that glows softly in the dim light. The Luminous Lotus traditionally blooms with an ethereal, warm light once a year, providing vitality to the entire region. When blighted, its light flickers and dims, and its vibrant colors dull.",
+          "visual_identity": "Crystal-clear water reflecting the sky, giant, vibrant green lotus pads, and other glowing aquatic flora. The Luminous Lotus itself, when healthy, pulsates with a soft, inviting golden light. A sense of ancient tranquility and profound natural beauty. Under blight, the colors desaturate, the light becomes erratic and sickly, and dark tendrils emerge from the water and plant life."
+        },
+        {
+          "name": "The Silent Temple Ruins",
+          "description": "Deep within the less-traversed parts of the Kanthar Nagar marsh lie the partially submerged and heavily overgrown ruins of an ancient stone temple. Legend says this was once a powerful nexus, and a sanctuary for the original Lotus Weavers—guardians of the Luminous Lotus. It holds forgotten lore and possibly ancient defensive mechanisms against threats to the marsh. The ruins are eerily quiet, save for the sounds of the marsh.",
+          "visual_identity": "Dark, moss-covered stone structures, partially submerged in murky water. Vines and strangler figs entwine the ancient pillars and walls. Intricate but heavily eroded carvings depict lotus motifs and ancient rituals. Patches of the glowing moss (seen in Arc 001) are present here, reacting subtly to energy fluctuations. The atmosphere is solemn and mysterious."
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "The Whispering Stone of Valampuri",
+          "description": "The palm-sized, pristine white conch shell that Meera discovered. Now, its connection to Meera is stronger, allowing her to not only see past memories but also to sense distant ecological distress and, at times, project a focused burst of purifying energy.",
+          "importance": "Remains Meera's primary tool for sensing the blight's presence, understanding its history, and channeling natural energy. Its capabilities expand to sense a wider network of sacred sites.",
+          "origin": "A gift from the guardian spirits of the forest to Poomalai's first settlers, a keeper of memory and protector against imbalance. Now understood to be part of a larger system of ancient spiritual 'sensors'."
+        },
+        {
+          "name": "The Lotus Weaver's Loom",
+          "description": "A small, exquisitely carved, petrified wooden loom, no larger than a child's hand. Its intricate frame contains faint, almost iridescent threads that seem woven from pure light, depicting stylized lotus patterns and ancient symbols. When held, it feels cool to the touch and emanates a subtle, rhythmic hum, reminiscent of a heartbeat. It resonates with pure natural energy.",
+          "importance": "An ancient relic of Kanthar Nagar's original guardians, the Lotus Weavers. It holds the 'blueprint' for the Luminous Lotus's energy flow and can amplify or redirect its vitality. Crucial for understanding the unique blight of the marsh and, ultimately, for healing the Luminous Lotus.",
+          "origin": "Crafted by the first 'Lotus Weavers', an ancient lineage of marsh guardians who understood how to channel and weave the Luminous Lotus's vital energy for protection and healing."
+        }
+      ],
+      "mysteries": [
+        {
+          "name": "The Whispering Stone's Wider Connection",
+          "description": "How is the Whispering Stone connected to other sacred sites like the Luminous Lotus? Does it communicate with other similar artifacts? What is the full extent of its 'network' sensing abilities?",
+          "importance": "Understanding this connection is vital for comprehending the global scope of the blight and finding allies.",
+          "status": "Ongoing (Meera's abilities are expanding, hinting at a larger purpose)."
+        },
+        {
+          "name": "The Umbral Weavers and Their Leader",
+          "description": "Who are 'The Umbral Weavers'? What is their true goal for draining the sacred sites? Who is the shadowy figure leading them, and what is their motivation?",
+          "importance": "The central overarching mystery. Solving it means understanding the true antagonist of the universe.",
+          "status": "New mystery (Kaalan's actions and symbol hint at this organized group; leader's identity remains unknown)."
+        },
+        {
+          "name": "The Nature of Kaalan and His Blight",
+          "description": "Is Kaalan an individual, or a being created by the Umbral Weavers? How does his blight differ from the one in Poomalai, and why is it more sophisticated? What is the significance of the Umbral Weaver symbol?",
+          "importance": "Understanding the immediate antagonist and his methods is crucial for defeating him in this arc and preparing for future encounters.",
+          "status": "New mystery (Kaalan is revealed as an agent, but his full nature and organization's goals are unknown)."
+        },
+        {
+          "name": "The Lotus Weavers' Forgotten Knowledge",
+          "description": "Who were the Lotus Weavers? What ancient knowledge did they possess to protect the Luminous Lotus? What happened to them, and are there any descendants or hidden records left?",
+          "importance": "Their history and artifacts (like the Loom) are essential for understanding and restoring the Luminous Lotus.",
+          "status": "New mystery (revealed through Anya's lineage and the Silent Temple Ruins)."
+        },
+        {
+          "name": "The Persistent Glowing Moss",
+          "description": "The glowing moss seen in Poomalai now appears in Kanthar Nagar's Silent Temple Ruins. What is its true nature, and why does it react to blight activity or ancient energy?",
+          "importance": "It acts as a consistent environmental indicator of magical/blight energy, potentially revealing hidden pathways or vulnerabilities.",
+          "status": "Continuing (its connection to blight and ancient energy deepens, but its full purpose is still unclear)."
+        }
+      ],
+      "episodes": [
+        {
+          "episode_number": 1,
+          "title": "A Whisper From Afar",
+          "main_objective": "Re-establish Meera and Karthik's everyday life in Poomalai, introduce the new problem through the Whispering Stone's expanded abilities, and receive Aachi's guidance for their next journey.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Meera's Whispering Stone begins to hum with an unfamiliar urgency, showing her fragmented visions of a fading, glowing lotus in a watery landscape far from Poomalai. Aachi interprets this as a call from another sacred site in distress, hinting at a wider network and the persistent threat.",
+          "character_development": "Meera grapples with the expanded responsibility and the unsettling nature of the new vision; Karthik begins to research ancient maps and methods of long-distance travel, feeling the pull of a larger mystery.",
+          "mystery_progression": "The Whispering Stone's ability to sense distant threats and connections is revealed, establishing the 'network of sacred trees' as a central concept. The symbol of the shadowy figure from Arc 001 is hinted at in the lotus vision.",
+          "ending_hook": "The Whispering Stone projects a clearer but brief vision of the fading lotus, now intertwined with dark, unnatural tendrils that bear a faint, familiar symbol. Aachi gravely tells them, 'The shadow finds new roots. You must follow the whisper, children.'"
+        },
+        {
+          "episode_number": 2,
+          "title": "Across the Shimmering Waters",
+          "main_objective": "Meera and Karthik embark on their journey to Kanthar Nagar, facing initial challenges and getting their first glimpses of the unique marshland environment.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Thatha"
+          ],
+          "key_event": "After some preparation (Karthik invents a waterproof pouch/compass, Thatha provides practical travel advice), Meera and Karthik journey towards Kanthar Nagar. They encounter their first unique marsh creatures and navigate unfamiliar watery paths, feeling the environment subtly shifting around them.",
+          "character_development": "Meera relies more on her intuition to navigate; Karthik adapts his inventions for aquatic travel. They both experience the challenges of being away from their familiar Poomalai.",
+          "mystery_progression": "The scale of the world expands; the different nature of the Kanthar Nagar environment hints at diverse challenges for the blight. The children wonder how the blight could thrive in water.",
+          "ending_hook": "As they finally reach the edge of Kanthar Nagar, they see the village built on stilts and a vast expanse of marshland, but a chill runs through them as they notice a faint, sickly glow in the distance, emanating from the heart of the marsh."
+        },
+        {
+          "episode_number": 3,
+          "title": "The Marsh's Fading Bloom",
+          "main_objective": "Introduce Kanthar Nagar, the Luminous Lotus, and Anya. Reveal the unique characteristics of the marsh blight and have the first confrontation with Kaalan.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya"
+          ],
+          "key_event": "Meera and Karthik explore Kanthar Nagar, seeing the beautiful but troubled marsh. They find the Luminous Lotus, its glow weak and flickering, blighted by strange, aquatic fungal growths. They encounter Anya, who initially distrusts them, believing them to be outsiders causing trouble. Their disagreement is interrupted by the arrival of Kaalan, who silently demonstrates his control over the blight, making the glowing tendrils surge around the lotus.",
+          "character_development": "Meera tries to bridge the gap with Anya, relying on empathy. Karthik tries to analyze the new blight. Anya's protective nature and distrust are established.",
+          "mystery_progression": "The unique, aquatic nature of the new blight is revealed. Kaalan, the physical antagonist, is introduced, and the symbol on his mask confirms him as the agent of the shadowy figure from Meera's previous vision.",
+          "ending_hook": "Kaalan, after silently intensifying the blight, vanishes into the marsh shadows, leaving Meera, Karthik, and a now shaken Anya to face the worsening condition of the Luminous Lotus. Anya grudgingly realizes Meera and Karthik might be their only hope."
+        },
+        {
+          "episode_number": 4,
+          "title": "Echoes in the Reeds",
+          "main_objective": "Meera, Karthik, and Anya venture into the Silent Temple Ruins, discover the Lotus Weaver's Loom, and learn about the ancient guardians of Kanthar Nagar.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya"
+          ],
+          "key_event": "Anya, having accepted their help, leads Meera and Karthik to the Silent Temple Ruins, a place of ancient power. Guided by Meera's Whispering Stone, which reacts to the unique energy of the glowing moss in the ruins, they discover a hidden chamber containing the Lotus Weaver's Loom. Meera touches the Loom, and the Whispering Stone reveals fragmented visions of the Lotus Weavers performing rituals and repelling an ancient blight, surprisingly similar to the current one.",
+          "character_development": "Anya begins to trust Meera and Karthik, opening up about her family's guardianship. Meera's connection to the past deepens through the Loom, expanding her understanding of ancient protectors. Karthik studies the Loom's intricate design.",
+          "mystery_progression": "The Lotus Weaver's Loom is discovered as a key artifact. The history of Kanthar Nagar's past blight is revealed, hinting at a cyclical nature of the threat. The glowing moss's role as an energy indicator is confirmed.",
+          "ending_hook": "As they leave the ruins with the Loom, the glowing moss around them pulsates frantically, indicating Kaalan's renewed activity. A distant, eerie hum rises from the marsh – the blight is intensifying its attack on the Luminous Lotus."
+        },
+        {
+          "episode_number": 5,
+          "title": "The Weaver's Resolve",
+          "main_objective": "The children learn to understand and activate the Lotus Weaver's Loom, solidifying Anya's role as a guardian, and prepare for a direct confrontation with Kaalan.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya"
+          ],
+          "key_event": "Back in Kanthar Nagar, Aachi sends a message through a returning merchant, providing a cryptic clue about 'weaving pure light'. Anya, recalling fragments of her family's lore, realizes the Loom isn't just a tool, but a conduit for the Luminous Lotus's energy. Karthik designs a temporary 'energy stabilizer' to connect the Loom to the lotus. Meera uses the Whispering Stone to help Anya channel her ancestral connection through the Loom, and they witness its threads briefly glow with intense light.",
+          "character_development": "Anya embraces her heritage and her role as a direct guardian. Karthik combines ancient wisdom with his inventive skills. Meera guides Anya, strengthening their bond of friendship and shared purpose.",
+          "mystery_progression": "The purpose and activation method of the Lotus Weaver's Loom are understood. The 'Umbral Weaver' symbol seen on Kaalan's mask is subtly explored, hinting at a twisted interpretation of 'weaving'.",
+          "ending_hook": "As the Loom hums with newly awakened power, Kaalan appears, his eyes glowing intensely, now directly challenging them with a focused blight surge. The battle for the Luminous Lotus is about to begin."
+        },
+        {
+          "episode_number": 6,
+          "title": "Shadows Over the Heart",
+          "main_objective": "Meera, Karthik, and Anya confront Kaalan as he attempts to fully drain the Luminous Lotus, employing their combined strengths to defend the sacred site.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya"
+          ],
+          "key_event": "Kaalan launches a full-scale assault on the Luminous Lotus, manifesting powerful shadowy tendrils that seek to engulf and drain its remaining light. Meera uses the Whispering Stone to sense weaknesses in the blight and purify corrupted areas. Karthik's energy stabilizer helps maintain a connection to the Loom, while Anya, using the Lotus Weaver's Loom, actively 'weaves' and projects pulses of purifying light derived from the lotus's core. The children work in desperate synchronicity against Kaalan's relentless attack.",
+          "character_development": "Meera demonstrates advanced control over the Whispering Stone. Karthik's quick thinking and engineering skills are pushed to their limits. Anya displays immense courage and mastery over her ancestral artifact, overcoming her initial cautiousness.",
+          "mystery_progression": "The full extent of Kaalan's power and the blight's adaptability is revealed. The symbol on Kaalan's mask glows, hinting at a deeper power source or instruction from his master. The nature of the blight as an 'energy drainer' becomes clear.",
+          "ending_hook": "Despite their efforts, Kaalan manages to overwhelm them momentarily, draining a significant portion of the lotus's remaining light. He prepares a final, devastating strike, and the children realize they need a more powerful, unified attack to drive him back."
+        },
+        {
+          "episode_number": 7,
+          "title": "The Unified Bloom",
+          "main_objective": "Meera, Karthik, and Anya combine their powers to defeat Kaalan and restore the Luminous Lotus, revealing more about The Umbral Weavers and setting up the next arc.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya"
+          ],
+          "key_event": "In a climactic effort, Meera uses the Whispering Stone to focus her purifying energy through the Lotus Weaver's Loom, which Anya wields. Karthik's re-calibrated stabilizer provides the crucial burst of sustained energy. Together, their combined attack creates a brilliant, pure wave of light and sound that repels Kaalan, forcing him to retreat, his mask cracking and revealing glimpses of a dark, swirling energy beneath. As he vanishes, he leaves behind a small, solid piece of his mask with the clear, ominous 'Umbral Weaver' symbol etched into it. The Luminous Lotus, though scarred, begins to glow with renewed vitality.",
+          "character_development": "Meera fully embraces her role as a conduit and protector, maturing her control over the Whispering Stone. Karthik's ingenuity achieves a breakthrough. Anya becomes a confident guardian, now connected to Poomalai. Their friendship is forged in fire.",
+          "mystery_progression": "Kaalan is defeated (temporarily), and his connection to the 'Umbral Weavers' is explicitly confirmed by the symbol. The symbol itself becomes a central clue for future arcs. The true identity of the Umbral Weavers' leader remains a mystery, but their existence as an organized threat is undeniable.",
+          "ending_hook": "As the Luminous Lotus regains its full radiance, Meera's Whispering Stone glows intensely, projecting a more stable vision: a vast, shimmering network of sacred sites across the land, and a single, dominant, dark symbol pulsating at the center. She realizes the 'Umbral Weavers' are a much larger, global threat, and Kanthar Nagar was just one battle in a much wider war. The future of this network, and possibly the world, depends on finding the source of the Umbral Weavers."
+        }
+      ],
+      "central_mysteries": [
+        "The Umbral Weavers and Their Leader: Who are they and what is their goal?",
+        "The Whispering Stone's Wider Connection: How does it sense and connect to the network of sacred sites?",
+        "The Nature of Kaalan and his Blight: What is his true power and how does it manifest differently in various ecosystems?"
+      ],
+      "foreshadowing": [
+        {
+          "clue": "The glowing moss is present in the Silent Temple Ruins and reacts to the blight and the Loom's energy.",
+          "introduced_episode": 4,
+          "possible_future_connection": "This moss could be an ancient, widespread energy-sensing organism or a byproduct of early magical energies, and may become a crucial element in future strategies to detect or combat the blight."
+        },
+        {
+          "clue": "Kaalan's mask cracks in the climax, revealing glimpses of dark, swirling energy beneath, rather than a human face.",
+          "introduced_episode": 7,
+          "possible_future_connection": "Hints that Kaalan might not be entirely human, or is heavily corrupted/transformed by 'The Umbral Weavers' power, raising questions about his true nature and the power of his masters."
+        },
+        {
+          "clue": "Kaalan explicitly leaves behind a piece of his mask with the 'Umbral Weaver' symbol.",
+          "introduced_episode": 7,
+          "possible_future_connection": "This symbol will become the primary identifier for the antagonist organization, allowing Meera and Karthik to recognize their presence in future arcs, and eventually leading them to the leader."
+        },
+        {
+          "clue": "The Whispering Stone's final vision shows a vast network of sacred sites, and a dominant, pulsating dark symbol at its center.",
+          "introduced_episode": 7,
+          "possible_future_connection": "This vision points directly to the global scale of the threat and the location or influence of the Umbral Weavers' main base or most powerful nexus, setting up the scope for future arcs."
+        }
+      ],
+      "major_events": [
+        "Meera's Whispering Stone shows visions of the fading Luminous Lotus (Episode 1).",
+        "Meera and Karthik journey to Kanthar Nagar (Episode 2).",
+        "First encounter with Anya and the unique marsh blight; first confrontation with Kaalan (Episode 3).",
+        "Discovery of the Silent Temple Ruins and the Lotus Weaver's Loom (Episode 4).",
+        "Anya embraces her role as a guardian; the Loom is understood and activated (Episode 5).",
+        "Kaalan launches a full-scale assault on the Luminous Lotus (Episode 6).",
+        "Climax: Meera, Karthik, and Anya combine powers to repel Kaalan and restore the Luminous Lotus (Episode 7)."
+      ],
+      "arc_climax": "Meera, leveraging the heightened connection with her Whispering Stone, channels a powerful surge of purifying energy. This energy flows through the Lotus Weaver's Loom, now expertly wielded by Anya, who amplifies its ancient protective magic. Simultaneously, Karthik's ingenuity with his 'energy stabilizer' provides a crucial burst of sustained power. Their combined, synchronized assault unleashes a brilliant wave of pure light and life force that directly clashes with Kaalan's blight. Kaalan is overwhelmed, his mask cracks, revealing glimpses of the dark, swirling energy that powers him. He is forced to retreat, leaving behind a fragment of his mask bearing the ominous 'Umbral Weaver' symbol, as the Luminous Lotus is cleansed and begins to glow with renewed, though scarred, vitality.",
+      "arc_consequences": [
+        "The Luminous Lotus is healed and Kanthar Nagar is saved, strengthening the belief in the interconnectedness of sacred sites.",
+        "Meera's abilities with the Whispering Stone mature significantly, allowing her to sense wider ecological distress and project focused purifying energy.",
+        "Karthik's inventive skills adapt to new challenges, proving his worth in diverse environments and inspiring new technological applications for natural energy.",
+        "Anya becomes a crucial new ally and guardian, forming a strong bond of friendship with Meera and Karthik, connecting Poomalai and Kanthar Nagar.",
+        "The existence and clear symbol of 'The Umbral Weavers', an organized antagonistic force, are explicitly revealed, confirming a larger, systemic threat.",
+        "The children realize the blight is adaptable and the fight to protect the sacred network is far from over."
+      ],
+      "future_arc_hook": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect.",
+      "id": "arc_002",
+      "arc_number": 2
     }
   },
   "episodes": {
@@ -735,6 +1162,133 @@
       "arc_id": "arc_001",
       "arc_number": 1,
       "status": "planned"
+    },
+    "arc_002_ep_01": {
+      "episode_number": 1,
+      "title": "A Whisper From Afar",
+      "main_objective": "Re-establish Meera and Karthik's everyday life in Poomalai, introduce the new problem through the Whispering Stone's expanded abilities, and receive Aachi's guidance for their next journey.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Meera's Whispering Stone begins to hum with an unfamiliar urgency, showing her fragmented visions of a fading, glowing lotus in a watery landscape far from Poomalai. Aachi interprets this as a call from another sacred site in distress, hinting at a wider network and the persistent threat.",
+      "character_development": "Meera grapples with the expanded responsibility and the unsettling nature of the new vision; Karthik begins to research ancient maps and methods of long-distance travel, feeling the pull of a larger mystery.",
+      "mystery_progression": "The Whispering Stone's ability to sense distant threats and connections is revealed, establishing the 'network of sacred trees' as a central concept. The symbol of the shadowy figure from Arc 001 is hinted at in the lotus vision.",
+      "ending_hook": "The Whispering Stone projects a clearer but brief vision of the fading lotus, now intertwined with dark, unnatural tendrils that bear a faint, familiar symbol. Aachi gravely tells them, 'The shadow finds new roots. You must follow the whisper, children.'",
+      "id": "arc_002_ep_01",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_02": {
+      "episode_number": 2,
+      "title": "Across the Shimmering Waters",
+      "main_objective": "Meera and Karthik embark on their journey to Kanthar Nagar, facing initial challenges and getting their first glimpses of the unique marshland environment.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Thatha"
+      ],
+      "key_event": "After some preparation (Karthik invents a waterproof pouch/compass, Thatha provides practical travel advice), Meera and Karthik journey towards Kanthar Nagar. They encounter their first unique marsh creatures and navigate unfamiliar watery paths, feeling the environment subtly shifting around them.",
+      "character_development": "Meera relies more on her intuition to navigate; Karthik adapts his inventions for aquatic travel. They both experience the challenges of being away from their familiar Poomalai.",
+      "mystery_progression": "The scale of the world expands; the different nature of the Kanthar Nagar environment hints at diverse challenges for the blight. The children wonder how the blight could thrive in water.",
+      "ending_hook": "As they finally reach the edge of Kanthar Nagar, they see the village built on stilts and a vast expanse of marshland, but a chill runs through them as they notice a faint, sickly glow in the distance, emanating from the heart of the marsh.",
+      "id": "arc_002_ep_02",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_03": {
+      "episode_number": 3,
+      "title": "The Marsh's Fading Bloom",
+      "main_objective": "Introduce Kanthar Nagar, the Luminous Lotus, and Anya. Reveal the unique characteristics of the marsh blight and have the first confrontation with Kaalan.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "key_event": "Meera and Karthik explore Kanthar Nagar, seeing the beautiful but troubled marsh. They find the Luminous Lotus, its glow weak and flickering, blighted by strange, aquatic fungal growths. They encounter Anya, who initially distrusts them, believing them to be outsiders causing trouble. Their disagreement is interrupted by the arrival of Kaalan, who silently demonstrates his control over the blight, making the glowing tendrils surge around the lotus.",
+      "character_development": "Meera tries to bridge the gap with Anya, relying on empathy. Karthik tries to analyze the new blight. Anya's protective nature and distrust are established.",
+      "mystery_progression": "The unique, aquatic nature of the new blight is revealed. Kaalan, the physical antagonist, is introduced, and the symbol on his mask confirms him as the agent of the shadowy figure from Meera's previous vision.",
+      "ending_hook": "Kaalan, after silently intensifying the blight, vanishes into the marsh shadows, leaving Meera, Karthik, and a now shaken Anya to face the worsening condition of the Luminous Lotus. Anya grudgingly realizes Meera and Karthik might be their only hope.",
+      "id": "arc_002_ep_03",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_04": {
+      "episode_number": 4,
+      "title": "Echoes in the Reeds",
+      "main_objective": "Meera, Karthik, and Anya venture into the Silent Temple Ruins, discover the Lotus Weaver's Loom, and learn about the ancient guardians of Kanthar Nagar.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "key_event": "Anya, having accepted their help, leads Meera and Karthik to the Silent Temple Ruins, a place of ancient power. Guided by Meera's Whispering Stone, which reacts to the unique energy of the glowing moss in the ruins, they discover a hidden chamber containing the Lotus Weaver's Loom. Meera touches the Loom, and the Whispering Stone reveals fragmented visions of the Lotus Weavers performing rituals and repelling an ancient blight, surprisingly similar to the current one.",
+      "character_development": "Anya begins to trust Meera and Karthik, opening up about her family's guardianship. Meera's connection to the past deepens through the Loom, expanding her understanding of ancient protectors. Karthik studies the Loom's intricate design.",
+      "mystery_progression": "The Lotus Weaver's Loom is discovered as a key artifact. The history of Kanthar Nagar's past blight is revealed, hinting at a cyclical nature of the threat. The glowing moss's role as an energy indicator is confirmed.",
+      "ending_hook": "As they leave the ruins with the Loom, the glowing moss around them pulsates frantically, indicating Kaalan's renewed activity. A distant, eerie hum rises from the marsh – the blight is intensifying its attack on the Luminous Lotus.",
+      "id": "arc_002_ep_04",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_05": {
+      "episode_number": 5,
+      "title": "The Weaver's Resolve",
+      "main_objective": "The children learn to understand and activate the Lotus Weaver's Loom, solidifying Anya's role as a guardian, and prepare for a direct confrontation with Kaalan.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "key_event": "Back in Kanthar Nagar, Aachi sends a message through a returning merchant, providing a cryptic clue about 'weaving pure light'. Anya, recalling fragments of her family's lore, realizes the Loom isn't just a tool, but a conduit for the Luminous Lotus's energy. Karthik designs a temporary 'energy stabilizer' to connect the Loom to the lotus. Meera uses the Whispering Stone to help Anya channel her ancestral connection through the Loom, and they witness its threads briefly glow with intense light.",
+      "character_development": "Anya embraces her heritage and her role as a direct guardian. Karthik combines ancient wisdom with his inventive skills. Meera guides Anya, strengthening their bond of friendship and shared purpose.",
+      "mystery_progression": "The purpose and activation method of the Lotus Weaver's Loom are understood. The 'Umbral Weaver' symbol seen on Kaalan's mask is subtly explored, hinting at a twisted interpretation of 'weaving'.",
+      "ending_hook": "As the Loom hums with newly awakened power, Kaalan appears, his eyes glowing intensely, now directly challenging them with a focused blight surge. The battle for the Luminous Lotus is about to begin.",
+      "id": "arc_002_ep_05",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_06": {
+      "episode_number": 6,
+      "title": "Shadows Over the Heart",
+      "main_objective": "Meera, Karthik, and Anya confront Kaalan as he attempts to fully drain the Luminous Lotus, employing their combined strengths to defend the sacred site.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "key_event": "Kaalan launches a full-scale assault on the Luminous Lotus, manifesting powerful shadowy tendrils that seek to engulf and drain its remaining light. Meera uses the Whispering Stone to sense weaknesses in the blight and purify corrupted areas. Karthik's energy stabilizer helps maintain a connection to the Loom, while Anya, using the Lotus Weaver's Loom, actively 'weaves' and projects pulses of purifying light derived from the lotus's core. The children work in desperate synchronicity against Kaalan's relentless attack.",
+      "character_development": "Meera demonstrates advanced control over the Whispering Stone. Karthik's quick thinking and engineering skills are pushed to their limits. Anya displays immense courage and mastery over her ancestral artifact, overcoming her initial cautiousness.",
+      "mystery_progression": "The full extent of Kaalan's power and the blight's adaptability is revealed. The symbol on Kaalan's mask glows, hinting at a deeper power source or instruction from his master. The nature of the blight as an 'energy drainer' becomes clear.",
+      "ending_hook": "Despite their efforts, Kaalan manages to overwhelm them momentarily, draining a significant portion of the lotus's remaining light. He prepares a final, devastating strike, and the children realize they need a more powerful, unified attack to drive him back.",
+      "id": "arc_002_ep_06",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
+    },
+    "arc_002_ep_07": {
+      "episode_number": 7,
+      "title": "The Unified Bloom",
+      "main_objective": "Meera, Karthik, and Anya combine their powers to defeat Kaalan and restore the Luminous Lotus, revealing more about The Umbral Weavers and setting up the next arc.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "key_event": "In a climactic effort, Meera uses the Whispering Stone to focus her purifying energy through the Lotus Weaver's Loom, which Anya wields. Karthik's re-calibrated stabilizer provides the crucial burst of sustained energy. Together, their combined attack creates a brilliant, pure wave of light and sound that repels Kaalan, forcing him to retreat, his mask cracking and revealing glimpses of a dark, swirling energy beneath. As he vanishes, he leaves behind a small, solid piece of his mask with the clear, ominous 'Umbral Weaver' symbol etched into it. The Luminous Lotus, though scarred, begins to glow with renewed vitality.",
+      "character_development": "Meera fully embraces her role as a conduit and protector, maturing her control over the Whispering Stone. Karthik's ingenuity achieves a breakthrough. Anya becomes a confident guardian, now connected to Poomalai. Their friendship is forged in fire.",
+      "mystery_progression": "Kaalan is defeated (temporarily), and his connection to the 'Umbral Weavers' is explicitly confirmed by the symbol. The symbol itself becomes a central clue for future arcs. The true identity of the Umbral Weavers' leader remains a mystery, but their existence as an organized threat is undeniable.",
+      "ending_hook": "As the Luminous Lotus regains its full radiance, Meera's Whispering Stone glows intensely, projecting a more stable vision: a vast, shimmering network of sacred sites across the land, and a single, dominant, dark symbol pulsating at the center. She realizes the 'Umbral Weavers' are a much larger, global threat, and Kanthar Nagar was just one battle in a much wider war. The future of this network, and possibly the world, depends on finding the source of the Umbral Weavers.",
+      "id": "arc_002_ep_07",
+      "arc_id": "arc_002",
+      "arc_number": 2,
+      "status": "planned"
     }
   },
   "locations": {
@@ -761,6 +1315,24 @@
       "description": "A small, unassuming hut on the edge of the village, overflowing with stacks of ancient scrolls, medicinal herbs drying from the rafters, and various intriguing artifacts. It serves as Aachi's home and the village's unofficial library and wisdom center.",
       "visual_identity": "Rustic, cozy, filled with warm, flickering lamplight. Clay pots and woven baskets. Dominant colors are earthy browns and the vibrant greens and yellows of dried herbs. A sense of antiquity and accumulated knowledge.",
       "id": "aachi_s_hut"
+    },
+    "kanthar_nagar_village": {
+      "name": "Kanthar Nagar Village",
+      "description": "An ancient and vibrant village uniquely adapted to its vast marshland environment. Houses are built on stilts or elevated platforms, connected by intricate wooden walkways and canals traversed by small boats. Life here is intimately connected to the water and the rich, diverse marsh flora and fauna. The air is humid and alive with the sounds of countless creatures.",
+      "visual_identity": "Lush greens of marsh plants, shimmering blues of water, dark, rich browns of wood and soil. Elaborate wooden architecture with carved details. Mists often hang low in the mornings, giving way to brilliant, watery sunsets. Sounds of frogs, crickets, diverse bird calls, and the gentle lapping of water.",
+      "id": "kanthar_nagar_village"
+    },
+    "the_luminous_lotus_marsh_heart_of_kanthar_nagar": {
+      "name": "The Luminous Lotus Marsh (Heart of Kanthar Nagar)",
+      "description": "The sacred, central heart of Kanthar Nagar's marshland. Here resides the colossal Luminous Lotus, revered as the village's spiritual and ecological anchor. This area is characterized by remarkably clear waters and rare, bioluminescent plant life that glows softly in the dim light. The Luminous Lotus traditionally blooms with an ethereal, warm light once a year, providing vitality to the entire region. When blighted, its light flickers and dims, and its vibrant colors dull.",
+      "visual_identity": "Crystal-clear water reflecting the sky, giant, vibrant green lotus pads, and other glowing aquatic flora. The Luminous Lotus itself, when healthy, pulsates with a soft, inviting golden light. A sense of ancient tranquility and profound natural beauty. Under blight, the colors desaturate, the light becomes erratic and sickly, and dark tendrils emerge from the water and plant life.",
+      "id": "the_luminous_lotus_marsh_heart_of_kanthar_nagar"
+    },
+    "the_silent_temple_ruins": {
+      "name": "The Silent Temple Ruins",
+      "description": "Deep within the less-traversed parts of the Kanthar Nagar marsh lie the partially submerged and heavily overgrown ruins of an ancient stone temple. Legend says this was once a powerful nexus, and a sanctuary for the original Lotus Weavers—guardians of the Luminous Lotus. It holds forgotten lore and possibly ancient defensive mechanisms against threats to the marsh. The ruins are eerily quiet, save for the sounds of the marsh.",
+      "visual_identity": "Dark, moss-covered stone structures, partially submerged in murky water. Vines and strangler figs entwine the ancient pillars and walls. Intricate but heavily eroded carvings depict lotus motifs and ancient rituals. Patches of the glowing moss (seen in Arc 001) are present here, reacting subtly to energy fluctuations. The atmosphere is solemn and mysterious.",
+      "id": "the_silent_temple_ruins"
     }
   },
   "villains": {},
@@ -778,6 +1350,13 @@
       "importance": "Believed to be the original seed from which the Karpaga Vriksham grew. It holds the concentrated life force and healing properties of the sacred tree. Crucial for healing the tree.",
       "origin": "Lore states it was planted by the first ancestor of Poomalai, imbued with the essence of pure forest life.",
       "id": "the_seed_of_life_karpaga_beejam"
+    },
+    "the_lotus_weaver_s_loom": {
+      "name": "The Lotus Weaver's Loom",
+      "description": "A small, exquisitely carved, petrified wooden loom, no larger than a child's hand. Its intricate frame contains faint, almost iridescent threads that seem woven from pure light, depicting stylized lotus patterns and ancient symbols. When held, it feels cool to the touch and emanates a subtle, rhythmic hum, reminiscent of a heartbeat. It resonates with pure natural energy.",
+      "importance": "An ancient relic of Kanthar Nagar's original guardians, the Lotus Weavers. It holds the 'blueprint' for the Luminous Lotus's energy flow and can amplify or redirect its vitality. Crucial for understanding the unique blight of the marsh and, ultimately, for healing the Luminous Lotus.",
+      "origin": "Crafted by the first 'Lotus Weavers', an ancient lineage of marsh guardians who understood how to channel and weave the Luminous Lotus's vital energy for protection and healing.",
+      "id": "the_lotus_weaver_s_loom"
     }
   },
   "mysteries": {
@@ -808,6 +1387,66 @@
       "importance": "Could be a source of assistance or a key to understanding the blight.",
       "status": "Unconfirmed legend, possibly an unknown character or creature.",
       "id": "the_true_guardian_of_the_falls"
+    },
+    "the_whispering_stone_s_wider_connection": {
+      "name": "The Whispering Stone's Wider Connection",
+      "description": "How is the Whispering Stone connected to other sacred sites like the Luminous Lotus? Does it communicate with other similar artifacts? What is the full extent of its 'network' sensing abilities?",
+      "importance": "Understanding this connection is vital for comprehending the global scope of the blight and finding allies.",
+      "status": "active",
+      "id": "the_whispering_stone_s_wider_connection",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "the_umbral_weavers_and_their_leader": {
+      "name": "The Umbral Weavers and Their Leader",
+      "description": "Who are 'The Umbral Weavers'? What is their true goal for draining the sacred sites? Who is the shadowy figure leading them, and what is their motivation?",
+      "importance": "The central overarching mystery. Solving it means understanding the true antagonist of the universe.",
+      "status": "active",
+      "id": "the_umbral_weavers_and_their_leader",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "the_nature_of_kaalan_and_his_blight": {
+      "name": "The Nature of Kaalan and His Blight",
+      "description": "Is Kaalan an individual, or a being created by the Umbral Weavers? How does his blight differ from the one in Poomalai, and why is it more sophisticated? What is the significance of the Umbral Weaver symbol?",
+      "importance": "Understanding the immediate antagonist and his methods is crucial for defeating him in this arc and preparing for future encounters.",
+      "status": "active",
+      "id": "the_nature_of_kaalan_and_his_blight",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "the_lotus_weavers_forgotten_knowledge": {
+      "name": "The Lotus Weavers' Forgotten Knowledge",
+      "description": "Who were the Lotus Weavers? What ancient knowledge did they possess to protect the Luminous Lotus? What happened to them, and are there any descendants or hidden records left?",
+      "importance": "Their history and artifacts (like the Loom) are essential for understanding and restoring the Luminous Lotus.",
+      "status": "active",
+      "id": "the_lotus_weavers_forgotten_knowledge",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "the_persistent_glowing_moss": {
+      "name": "The Persistent Glowing Moss",
+      "description": "The glowing moss seen in Poomalai now appears in Kanthar Nagar's Silent Temple Ruins. What is its true nature, and why does it react to blight activity or ancient energy?",
+      "importance": "It acts as a consistent environmental indicator of magical/blight energy, potentially revealing hidden pathways or vulnerabilities.",
+      "status": "active",
+      "id": "the_persistent_glowing_moss",
+      "first_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "arc_history": [
+        "The Fading Lotus of Kanthar Nagar"
+      ]
     }
   },
   "relationships": {},
@@ -876,6 +1515,71 @@
       "type": "arc_consequence",
       "arc": "The Whispering Stone of Valampuri",
       "event": "The knowledge of a wider, interconnected network of sacred trees and a lurking, persistent threat is unveiled, hinting at future dangers."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Meera's Whispering Stone shows visions of the fading Luminous Lotus (Episode 1)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Meera and Karthik journey to Kanthar Nagar (Episode 2)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "First encounter with Anya and the unique marsh blight; first confrontation with Kaalan (Episode 3)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Discovery of the Silent Temple Ruins and the Lotus Weaver's Loom (Episode 4)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Anya embraces her role as a guardian; the Loom is understood and activated (Episode 5)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Kaalan launches a full-scale assault on the Luminous Lotus (Episode 6)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Climax: Meera, Karthik, and Anya combine powers to repel Kaalan and restore the Luminous Lotus (Episode 7)."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "The Luminous Lotus is healed and Kanthar Nagar is saved, strengthening the belief in the interconnectedness of sacred sites."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Meera's abilities with the Whispering Stone mature significantly, allowing her to sense wider ecological distress and project focused purifying energy."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Karthik's inventive skills adapt to new challenges, proving his worth in diverse environments and inspiring new technological applications for natural energy."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Anya becomes a crucial new ally and guardian, forming a strong bond of friendship with Meera and Karthik, connecting Poomalai and Kanthar Nagar."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "The existence and clear symbol of 'The Umbral Weavers', an organized antagonistic force, are explicitly revealed, confirming a larger, systemic threat."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "The children realize the blight is adaptable and the fight to protect the sacred network is far from over."
     }
   ],
   "unresolved_threads": [
@@ -927,10 +1631,64 @@
     },
     {
       "name": "Future Arc Hook",
-      "description": "The blight in Poomalai was just a symptom of a larger, systemic threat affecting other sacred sites. The Whispering Stone's final vision of a vast network of trees and a shadowy observer suggests a more organized, intelligent force is at play across the land, and Meera and Karthik might be called upon again to protect more than just their village.",
+      "description": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect.",
       "type": "future_arc_hook",
       "status": "active",
-      "arc": "The Whispering Stone of Valampuri"
+      "arc": "The Whispering Stone of Valampuri",
+      "last_arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Whispering Stone's Wider Connection",
+      "description": "How is the Whispering Stone connected to other sacred sites like the Luminous Lotus? Does it communicate with other similar artifacts? What is the full extent of its 'network' sensing abilities?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Umbral Weavers and Their Leader",
+      "description": "Who are 'The Umbral Weavers'? What is their true goal for draining the sacred sites? Who is the shadowy figure leading them, and what is their motivation?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Nature of Kaalan and His Blight",
+      "description": "Is Kaalan an individual, or a being created by the Umbral Weavers? How does his blight differ from the one in Poomalai, and why is it more sophisticated? What is the significance of the Umbral Weaver symbol?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Lotus Weavers' Forgotten Knowledge",
+      "description": "Who were the Lotus Weavers? What ancient knowledge did they possess to protect the Luminous Lotus? What happened to them, and are there any descendants or hidden records left?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Persistent Glowing Moss",
+      "description": "The glowing moss seen in Poomalai now appears in Kanthar Nagar's Silent Temple Ruins. What is its true nature, and why does it react to blight activity or ancient energy?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "name": "The Umbral Weavers and Their Leader: Who are they and what is their goal?",
+      "type": "central_mystery",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "status": "active"
+    },
+    {
+      "name": "The Whispering Stone's Wider Connection: How does it sense and connect to the network of sacred sites?",
+      "type": "central_mystery",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "status": "active"
+    },
+    {
+      "name": "The Nature of Kaalan and his Blight: What is his true power and how does it manifest differently in various ecosystems?",
+      "type": "central_mystery",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "status": "active"
     }
   ],
   "foreshadowing": [
@@ -957,6 +1715,35 @@
       "introduced_episode": 7,
       "possible_future_connection": "A symbol of a new villain, a secret organization, or an ancient opposing force.",
       "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "clue": "The glowing moss is present in the Silent Temple Ruins and reacts to the blight and the Loom's energy.",
+      "introduced_episode": 4,
+      "possible_future_connection": "This moss could be an ancient, widespread energy-sensing organism or a byproduct of early magical energies, and may become a crucial element in future strategies to detect or combat the blight.",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "clue": "Kaalan's mask cracks in the climax, revealing glimpses of dark, swirling energy beneath, rather than a human face.",
+      "introduced_episode": 7,
+      "possible_future_connection": "Hints that Kaalan might not be entirely human, or is heavily corrupted/transformed by 'The Umbral Weavers' power, raising questions about his true nature and the power of his masters.",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "clue": "Kaalan explicitly leaves behind a piece of his mask with the 'Umbral Weaver' symbol.",
+      "introduced_episode": 7,
+      "possible_future_connection": "This symbol will become the primary identifier for the antagonist organization, allowing Meera and Karthik to recognize their presence in future arcs, and eventually leading them to the leader.",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "clue": "The Whispering Stone's final vision shows a vast network of sacred sites, and a dominant, pulsating dark symbol at its center.",
+      "introduced_episode": 7,
+      "possible_future_connection": "This vision points directly to the global scale of the threat and the location or influence of the Umbral Weavers' main base or most powerful nexus, setting up the scope for future arcs.",
+      "arc": "The Fading Lotus of Kanthar Nagar"
+    },
+    {
+      "type": "future_arc_hook",
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "description": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect."
     }
   ],
   "major_events": [
@@ -991,6 +1778,34 @@
     {
       "arc": "The Whispering Stone of Valampuri",
       "event": "Poomalai's recovery and the setup for a larger world (Episode 8)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Meera's Whispering Stone shows visions of the fading Luminous Lotus (Episode 1)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Meera and Karthik journey to Kanthar Nagar (Episode 2)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "First encounter with Anya and the unique marsh blight; first confrontation with Kaalan (Episode 3)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Discovery of the Silent Temple Ruins and the Lotus Weaver's Loom (Episode 4)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Anya embraces her role as a guardian; the Loom is understood and activated (Episode 5)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Kaalan launches a full-scale assault on the Luminous Lotus (Episode 6)."
+    },
+    {
+      "arc": "The Fading Lotus of Kanthar Nagar",
+      "event": "Climax: Meera, Karthik, and Anya combine powers to repel Kaalan and restore the Luminous Lotus (Episode 7)."
     }
   ]
 }
