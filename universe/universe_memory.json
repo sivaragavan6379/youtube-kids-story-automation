@@ -5,33 +5,992 @@
     "description": "A connected Tamil animated story universe.",
     "current_phase": 1,
     "current_series": null,
-    "current_arc": null,
-    "current_episode": null
+    "current_arc": "arc_001",
+    "current_episode": 8
   },
-
-  "characters": {},
-
+  "characters": {
+    "meera": {
+      "name": "Meera",
+      "type": "Protagonist, curious child",
+      "appearance": "Approximately 9 years old. Medium brown skin tone, heart-shaped face, large expressive dark brown eyes. Long, wavy black hair often tied in a half-up style with a jasmine flower. Wears a colorful half-saree (paavadai sattai) in vibrant pinks and blues, often barefoot or with simple sandals. Slender build, quick and agile. Distinctive feature: A small, intricate nose stud (mookuthi).",
+      "personality": [
+        "Inquisitive",
+        "Brave",
+        "Empathetic",
+        "Observant",
+        "Sometimes impulsive",
+        "Deeply connected to nature"
+      ],
+      "goal": "To protect her village and the Karpaga Vriksham, and understand the mysteries around her.",
+      "motivation": "A deep love for her home, family, and the natural world, coupled with an insatiable curiosity.",
+      "strengths": [
+        "Quick thinker",
+        "Compassionate",
+        "Resourceful",
+        "Strong sense of justice",
+        "Good listener"
+      ],
+      "weaknesses": [
+        "Can be stubborn",
+        "Sometimes takes risks without fully thinking them through",
+        "Easily burdened by others' troubles"
+      ],
+      "abilities": [
+        "Excellent at noticing small details",
+        "Good memory",
+        "Surprisingly strong intuition",
+        "Ability to hear and sometimes 'see' memories through the Whispering Stone"
+      ],
+      "relationships": [
+        "Close friends with Karthik",
+        "Reveres Aachi",
+        "Loves her family"
+      ],
+      "voice_style": "Bright, clear, earnest, with a hint of wonder and determination.",
+      "story_role": "The primary driver of the plot, the one who discovers the core mystery and leads the charge against the threat.",
+      "id": "meera",
+      "status": "active",
+      "arc_history": [
+        "The Whispering Stone of Valampuri"
+      ]
+    },
+    "karthik": {
+      "name": "Karthik",
+      "type": "Deuteragonist, inventor",
+      "appearance": "Approximately 10 years old. Tan skin tone, round face, bright, intelligent black eyes behind spectacles that often slip down his nose. Short, messy black hair that sticks up. Wears a simple cotton shirt (veshti) and half-sleeve shirt, often with pockets full of gadgets. Slightly plump build, always carrying a small bag of tools. Distinctive feature: His homemade, slightly oversized spectacles.",
+      "personality": [
+        "Brilliant",
+        "Logical",
+        "Analytical",
+        "Loyal",
+        "Sometimes a bit clumsy",
+        "Prone to over-thinking",
+        "Secretly courageous"
+      ],
+      "goal": "To use his inventions and knowledge to help Meera solve problems and protect Poomalai.",
+      "motivation": "A desire to understand how things work, a strong sense of friendship and duty, and a wish to prove his worth.",
+      "strengths": [
+        "Ingenious",
+        "Quick problem-solver",
+        "Knowledgeable about mechanics and local flora/fauna",
+        "Supportive"
+      ],
+      "weaknesses": [
+        "Can be overly reliant on logic",
+        "Struggles with physical challenges",
+        "Sometimes misses emotional cues"
+      ],
+      "abilities": [
+        "Proficient at inventing simple machines",
+        "Excellent observational skills",
+        "Good at research (local legends, plant identification)"
+      ],
+      "relationships": [
+        "Best friends with Meera",
+        "Respectful of Aachi and Thatha"
+      ],
+      "voice_style": "Enthusiastic, slightly fast-paced, with a clear, inquisitive tone, often pausing to explain something.",
+      "story_role": "Meera's intellectual foil and practical support, providing solutions and understanding the more technical or scientific aspects of the mystery.",
+      "id": "karthik",
+      "status": "active",
+      "arc_history": [
+        "The Whispering Stone of Valampuri"
+      ]
+    },
+    "aachi": {
+      "name": "Aachi",
+      "type": "Village elder, mentor",
+      "appearance": "Approximately 75 years old. Dark brown, wrinkled skin tone, kind, wise face with deep-set, sparkling dark eyes. Hair is mostly white, tied in a neat bun at the nape of her neck. Wears traditional light-colored cotton sarees (e.g., off-white, light blue) with a simple border. Frail but carries herself with dignity. Distinctive feature: Always has a small, intricately carved wooden rosary (rudraksha mala) in her hand.",
+      "personality": [
+        "Calm",
+        "Patient",
+        "Deeply wise",
+        "Observant",
+        "Speaks in parables",
+        "Has a gentle humor",
+        "Holds vast knowledge of village history and lore"
+      ],
+      "goal": "To guide the children in preserving Poomalai's balance and passing on ancestral wisdom.",
+      "motivation": "A profound love for her community and a commitment to protecting its heritage and future.",
+      "strengths": [
+        "Encyclopedic knowledge of local history and legends",
+        "Deep understanding of human nature",
+        "Calm under pressure",
+        "Offers cryptic but helpful advice"
+      ],
+      "weaknesses": [
+        "Physical limitations due to age",
+        "Sometimes speaks too cryptically for the children to understand immediately"
+      ],
+      "abilities": [
+        "Storytelling",
+        "Deep spiritual connection to the land and its history"
+      ],
+      "relationships": [
+        "Respected by everyone",
+        "A beloved mentor to Meera and Karthik"
+      ],
+      "voice_style": "Soft, melodious, slow and deliberate, with a warm, comforting tone.",
+      "story_role": "The source of ancient knowledge, provides crucial context and guidance, and represents the enduring spirit of the village.",
+      "id": "aachi",
+      "status": "active",
+      "arc_history": [
+        "The Whispering Stone of Valampuri"
+      ]
+    },
+    "thatha": {
+      "name": "Thatha",
+      "type": "Supporting character, nature expert",
+      "appearance": "Approximately 70 years old. Medium brown skin tone, weathered but friendly face, sparkling eyes that crinkle at the corners when he smiles. Short, grey hair and a neatly trimmed white mustache. Wears a simple white dhoti and an untucked checked shirt. Carries a wooden walking stick. Lean and spry for his age. Distinctive feature: A small pouch tied to his dhoti, containing various seeds and plant samples.",
+      "personality": [
+        "Cheerful",
+        "Practical",
+        "Grounded",
+        "Deeply knowledgeable about plants and animals",
+        "A good storyteller",
+        "Patient",
+        "A bit gruff but kind"
+      ],
+      "goal": "To assist Karthik and Meera with his knowledge of the local environment.",
+      "motivation": "A love for nature and a desire to help his grandson and his friends.",
+      "strengths": [
+        "Expert in local botany and wildlife",
+        "Skilled tracker",
+        "Good at practical solutions",
+        "Tells engaging stories"
+      ],
+      "weaknesses": [
+        "Can be distracted by interesting plants",
+        "Sometimes underestimates the children's abilities",
+        "A bit forgetful about small details"
+      ],
+      "abilities": [
+        "Deep understanding of medicinal plants",
+        "Animal behavior",
+        "Forest paths"
+      ],
+      "relationships": [
+        "Karthik's loving grandfather",
+        "Respects Aachi",
+        "Supportive of Meera"
+      ],
+      "voice_style": "Hearty, earthy, with a warm, slightly raspy quality, often chuckles.",
+      "story_role": "Provides practical knowledge about the forest and natural world, often offering solutions to physical obstacles or identifying natural phenomena.",
+      "id": "thatha",
+      "status": "active",
+      "arc_history": [
+        "The Whispering Stone of Valampuri"
+      ]
+    }
+  },
   "series": {},
-
-  "story_arcs": {},
-
-  "episodes": {},
-
-  "locations": {},
-
+  "story_arcs": {
+    "arc_001": {
+      "title": "The Whispering Stone of Valampuri",
+      "summary": "In the vibrant village of Poomalai, a young, curious girl named Meera discovers an ancient, whispering conch shell that grants her glimpses of forgotten history and warns of an impending threat to the village's sacred banyan tree, the 'Karpaga Vriksham'. With her inventive friend Karthik and the wise elder Aachi, Meera must uncover the mystery of the conch and the looming shadow to protect her home, discovering the interconnectedness of nature, history, and community.",
+      "theme": "The power of ancestral wisdom, environmental stewardship, and the courage of unity in the face of the unknown.",
+      "central_conflict": "Meera and her friends must decipher the secrets of the Whispering Stone and prevent a shadowy blight from consuming the sacred Karpaga Vriksham and the village's life force.",
+      "arc_goal": "To understand the source of the blight, heal the Karpaga Vriksham, and restore balance to Poomalai, while also learning the true nature of the Whispering Stone.",
+      "planned_episode_count": 8,
+      "main_characters": [
+        "Meera",
+        "Karthik"
+      ],
+      "supporting_characters": [
+        "Aachi",
+        "Thatha"
+      ],
+      "new_characters": [
+        {
+          "name": "Meera",
+          "type": "Protagonist, curious child",
+          "appearance": "Approximately 9 years old. Medium brown skin tone, heart-shaped face, large expressive dark brown eyes. Long, wavy black hair often tied in a half-up style with a jasmine flower. Wears a colorful half-saree (paavadai sattai) in vibrant pinks and blues, often barefoot or with simple sandals. Slender build, quick and agile. Distinctive feature: A small, intricate nose stud (mookuthi).",
+          "personality": [
+            "Inquisitive",
+            "Brave",
+            "Empathetic",
+            "Observant",
+            "Sometimes impulsive",
+            "Deeply connected to nature"
+          ],
+          "goal": "To protect her village and the Karpaga Vriksham, and understand the mysteries around her.",
+          "motivation": "A deep love for her home, family, and the natural world, coupled with an insatiable curiosity.",
+          "strengths": [
+            "Quick thinker",
+            "Compassionate",
+            "Resourceful",
+            "Strong sense of justice",
+            "Good listener"
+          ],
+          "weaknesses": [
+            "Can be stubborn",
+            "Sometimes takes risks without fully thinking them through",
+            "Easily burdened by others' troubles"
+          ],
+          "abilities": [
+            "Excellent at noticing small details",
+            "Good memory",
+            "Surprisingly strong intuition",
+            "Ability to hear and sometimes 'see' memories through the Whispering Stone"
+          ],
+          "relationships": [
+            "Close friends with Karthik",
+            "Reveres Aachi",
+            "Loves her family"
+          ],
+          "voice_style": "Bright, clear, earnest, with a hint of wonder and determination.",
+          "story_role": "The primary driver of the plot, the one who discovers the core mystery and leads the charge against the threat."
+        },
+        {
+          "name": "Karthik",
+          "type": "Deuteragonist, inventor",
+          "appearance": "Approximately 10 years old. Tan skin tone, round face, bright, intelligent black eyes behind spectacles that often slip down his nose. Short, messy black hair that sticks up. Wears a simple cotton shirt (veshti) and half-sleeve shirt, often with pockets full of gadgets. Slightly plump build, always carrying a small bag of tools. Distinctive feature: His homemade, slightly oversized spectacles.",
+          "personality": [
+            "Brilliant",
+            "Logical",
+            "Analytical",
+            "Loyal",
+            "Sometimes a bit clumsy",
+            "Prone to over-thinking",
+            "Secretly courageous"
+          ],
+          "goal": "To use his inventions and knowledge to help Meera solve problems and protect Poomalai.",
+          "motivation": "A desire to understand how things work, a strong sense of friendship and duty, and a wish to prove his worth.",
+          "strengths": [
+            "Ingenious",
+            "Quick problem-solver",
+            "Knowledgeable about mechanics and local flora/fauna",
+            "Supportive"
+          ],
+          "weaknesses": [
+            "Can be overly reliant on logic",
+            "Struggles with physical challenges",
+            "Sometimes misses emotional cues"
+          ],
+          "abilities": [
+            "Proficient at inventing simple machines",
+            "Excellent observational skills",
+            "Good at research (local legends, plant identification)"
+          ],
+          "relationships": [
+            "Best friends with Meera",
+            "Respectful of Aachi and Thatha"
+          ],
+          "voice_style": "Enthusiastic, slightly fast-paced, with a clear, inquisitive tone, often pausing to explain something.",
+          "story_role": "Meera's intellectual foil and practical support, providing solutions and understanding the more technical or scientific aspects of the mystery."
+        },
+        {
+          "name": "Aachi",
+          "type": "Village elder, mentor",
+          "appearance": "Approximately 75 years old. Dark brown, wrinkled skin tone, kind, wise face with deep-set, sparkling dark eyes. Hair is mostly white, tied in a neat bun at the nape of her neck. Wears traditional light-colored cotton sarees (e.g., off-white, light blue) with a simple border. Frail but carries herself with dignity. Distinctive feature: Always has a small, intricately carved wooden rosary (rudraksha mala) in her hand.",
+          "personality": [
+            "Calm",
+            "Patient",
+            "Deeply wise",
+            "Observant",
+            "Speaks in parables",
+            "Has a gentle humor",
+            "Holds vast knowledge of village history and lore"
+          ],
+          "goal": "To guide the children in preserving Poomalai's balance and passing on ancestral wisdom.",
+          "motivation": "A profound love for her community and a commitment to protecting its heritage and future.",
+          "strengths": [
+            "Encyclopedic knowledge of local history and legends",
+            "Deep understanding of human nature",
+            "Calm under pressure",
+            "Offers cryptic but helpful advice"
+          ],
+          "weaknesses": [
+            "Physical limitations due to age",
+            "Sometimes speaks too cryptically for the children to understand immediately"
+          ],
+          "abilities": [
+            "Storytelling",
+            "Deep spiritual connection to the land and its history"
+          ],
+          "relationships": [
+            "Respected by everyone",
+            "A beloved mentor to Meera and Karthik"
+          ],
+          "voice_style": "Soft, melodious, slow and deliberate, with a warm, comforting tone.",
+          "story_role": "The source of ancient knowledge, provides crucial context and guidance, and represents the enduring spirit of the village."
+        },
+        {
+          "name": "Thatha",
+          "type": "Supporting character, nature expert",
+          "appearance": "Approximately 70 years old. Medium brown skin tone, weathered but friendly face, sparkling eyes that crinkle at the corners when he smiles. Short, grey hair and a neatly trimmed white mustache. Wears a simple white dhoti and an untucked checked shirt. Carries a wooden walking stick. Lean and spry for his age. Distinctive feature: A small pouch tied to his dhoti, containing various seeds and plant samples.",
+          "personality": [
+            "Cheerful",
+            "Practical",
+            "Grounded",
+            "Deeply knowledgeable about plants and animals",
+            "A good storyteller",
+            "Patient",
+            "A bit gruff but kind"
+          ],
+          "goal": "To assist Karthik and Meera with his knowledge of the local environment.",
+          "motivation": "A love for nature and a desire to help his grandson and his friends.",
+          "strengths": [
+            "Expert in local botany and wildlife",
+            "Skilled tracker",
+            "Good at practical solutions",
+            "Tells engaging stories"
+          ],
+          "weaknesses": [
+            "Can be distracted by interesting plants",
+            "Sometimes underestimates the children's abilities",
+            "A bit forgetful about small details"
+          ],
+          "abilities": [
+            "Deep understanding of medicinal plants",
+            "Animal behavior",
+            "Forest paths"
+          ],
+          "relationships": [
+            "Karthik's loving grandfather",
+            "Respects Aachi",
+            "Supportive of Meera"
+          ],
+          "voice_style": "Hearty, earthy, with a warm, slightly raspy quality, often chuckles.",
+          "story_role": "Provides practical knowledge about the forest and natural world, often offering solutions to physical obstacles or identifying natural phenomena."
+        }
+      ],
+      "locations": [
+        {
+          "name": "Poomalai Village",
+          "description": "A quaint Tamil village nestled at the foot of gentle hills, surrounded by lush paddy fields and dense forests. Traditional tiled-roof houses line narrow dirt paths, shaded by ancient trees. A central well serves the community. The village square often buzzes with activity, children playing, women drawing water, men tending to crops.",
+          "visual_identity": "Warm earthy tones (terracotta roofs, mud walls), vibrant splashes of color from clothing and flowers (jasmine, hibiscus), verdant green fields contrasting with darker forest greens. Soft morning light, long afternoon shadows. Sound of birds, distant temple bells, children's laughter."
+        },
+        {
+          "name": "Karpaga Vriksham (Sacred Banyan Tree)",
+          "description": "A colossal, ancient banyan tree located at the heart of Poomalai, revered as the village's spiritual guardian. Its sprawling canopy provides shade for the entire village square, with roots hanging down like natural swings. A small, simple stone shrine dedicated to a local deity sits at its base.",
+          "visual_identity": "Enormous, thick, gnarled trunk with visible ancient carvings. Hundreds of aerial roots forming a natural curtain. Rich, dark green foliage, almost creating its own ecosystem. Always appears majestic and serene, even when threatened."
+        },
+        {
+          "name": "The Forgotten Falls",
+          "description": "A secluded waterfall deep within the forest bordering Poomalai, rumored to be a place of ancient power. Accessible only by a winding, overgrown path. The water cascades into a clear, rocky pool, surrounded by moss-covered stones and rare orchids.",
+          "visual_identity": "Lush, untouched greenery, sparkling clear water, smooth, dark stones. A sense of peace mixed with an air of mystery. Light filters through the dense canopy, creating dappled patterns. Sounds of rushing water and forest wildlife."
+        },
+        {
+          "name": "Aachi's Hut",
+          "description": "A small, unassuming hut on the edge of the village, overflowing with stacks of ancient scrolls, medicinal herbs drying from the rafters, and various intriguing artifacts. It serves as Aachi's home and the village's unofficial library and wisdom center.",
+          "visual_identity": "Rustic, cozy, filled with warm, flickering lamplight. Clay pots and woven baskets. Dominant colors are earthy browns and the vibrant greens and yellows of dried herbs. A sense of antiquity and accumulated knowledge."
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "The Whispering Stone of Valampuri",
+          "description": "A palm-sized, pristine white conch shell, exceptionally smooth and perfectly formed. It has a faint, iridescent sheen. When held to the ear, it emits a soft, almost imperceptible hum, and sometimes, with Meera's unique connection, ancient voices or images.",
+          "importance": "It is a sentient artifact that acts as a conduit to ancient memories and possibly a warning system. It will be crucial in revealing the history of the blight and its cure.",
+          "origin": "Said to be a gift from the guardian spirits of the forest to the first settlers of Poomalai, a keeper of memory and protector against imbalance."
+        },
+        {
+          "name": "The Seed of Life (Karpaga Beejam)",
+          "description": "A small, dark, petrified seed, no bigger than a thumbnail, intricately etched with swirling patterns that resemble roots and leaves. It feels unusually heavy and pulses with a faint, internal warmth when touched.",
+          "importance": "Believed to be the original seed from which the Karpaga Vriksham grew. It holds the concentrated life force and healing properties of the sacred tree. Crucial for healing the tree.",
+          "origin": "Lore states it was planted by the first ancestor of Poomalai, imbued with the essence of pure forest life."
+        }
+      ],
+      "mysteries": [
+        {
+          "name": "The Whispering Stone's Origins",
+          "description": "What is the true nature and origin of the Valampuri conch? How does it grant visions and voices? What are its full capabilities?",
+          "importance": "Understanding it is key to deciphering the ancient warnings and finding solutions.",
+          "status": "Ongoing (partially revealed through Meera's connection)."
+        },
+        {
+          "name": "The Blight of the Karpaga Vriksham",
+          "description": "A mysterious, shadowy corruption slowly draining the life from the Karpaga Vriksham and causing unease in the village. What is its source and how does it spread?",
+          "importance": "The central threat of the arc; its resolution is the arc's goal.",
+          "status": "Ongoing (source unknown, effects visible)."
+        },
+        {
+          "name": "The Forgotten History of Poomalai",
+          "description": "The Whispering Stone hints at a forgotten period in Poomalai's past, possibly related to a similar threat or a powerful ancient protector. What secrets does this history hold?",
+          "importance": "Provides crucial context and clues for solving the current blight.",
+          "status": "Ongoing (revealed through visions and Aachi's lore)."
+        },
+        {
+          "name": "The True Guardian of the Falls",
+          "description": "Ancient legends speak of a silent protector dwelling near the Forgotten Falls, meant to safeguard the delicate balance of the forest. Is this guardian real, and if so, where are they?",
+          "importance": "Could be a source of assistance or a key to understanding the blight.",
+          "status": "Unconfirmed legend, possibly an unknown character or creature."
+        }
+      ],
+      "episodes": [
+        {
+          "episode_number": 1,
+          "title": "The Whispering Wind",
+          "main_objective": "Introduce Meera and Karthik, establish Poomalai village, and introduce the initial signs of the blight and the discovery of the Whispering Stone.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Meera discovers the beautiful Valampuri conch shell near the base of the Karpaga Vriksham, which begins to show unusual dark spots.",
+          "character_development": "Meera's curiosity is ignited; Karthik is introduced as her inventive counterpoint.",
+          "mystery_progression": "The blight's appearance and the strange hum of the conch are introduced.",
+          "ending_hook": "Meera holds the conch to her ear, and a faint, ancient whisper fills her mind, showing a fleeting image of the Karpaga Vriksham in distress."
+        },
+        {
+          "episode_number": 2,
+          "title": "Echoes of the Past",
+          "main_objective": "Meera seeks help from Aachi to understand the conch, while the blight subtly worsens.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi"
+          ],
+          "key_event": "Aachi recognizes the conch as a Valampuri and explains its legendary connection to Poomalai's ancestors, but warns of its unpredictable nature. Meera experiences clearer visions of ancient village life and a shadowy presence.",
+          "character_development": "Meera begins to trust her connection with the conch; Aachi establishes her role as a wise guide.",
+          "mystery_progression": "The conch's ability to show visions is confirmed; the threat of the blight is recognized as more than just a disease.",
+          "ending_hook": "A vision from the conch shows a specific ancient symbol etched into a hidden part of the Karpaga Vriksham, but also a glimpse of a menacing, dark, root-like tendril creeping closer."
+        },
+        {
+          "episode_number": 3,
+          "title": "The Hidden Roots",
+          "main_objective": "The children investigate the ancient symbol and search for physical clues about the blight's spread.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Thatha"
+          ],
+          "key_event": "Following the vision, Meera and Karthik, with Thatha's help, find a hidden compartment at the base of the Karpaga Vriksham containing the ancient symbol and a decaying parchment. Karthik's invention (a light-amplifying lens) helps decipher faint writing on the parchment hinting at the 'Karpaga Beejam'.",
+          "character_development": "Karthik demonstrates his practical ingenuity; Meera learns to combine intuition with investigation.",
+          "mystery_progression": "A physical clue (parchment, symbol) is found, suggesting an ancient solution and introducing the concept of the 'Karpaga Beejam'.",
+          "ending_hook": "The parchment crumbles after revealing a partial map pointing towards the Forgotten Falls, just as the darkest tendrils of the blight spread further up the tree."
+        },
+        {
+          "episode_number": 4,
+          "title": "Journey to the Falls",
+          "main_objective": "The children embark on a journey to the Forgotten Falls, facing natural obstacles and learning more about the forest.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Thatha"
+          ],
+          "key_event": "Led by Thatha, Meera and Karthik navigate the forest to reach the Forgotten Falls. Karthik's knowledge of flora helps them identify safe paths, while Meera uses the conch to sense directions. They encounter a peculiar, glowing moss that seems to react to the conch.",
+          "character_development": "Meera and Karthik deepen their teamwork; Thatha shares his deep respect for nature.",
+          "mystery_progression": "The location of the Falls is reached; the mystery of the 'Karpaga Beejam' is connected to this place; the glowing moss introduces a new, unexplained phenomenon.",
+          "ending_hook": "At the Falls, Meera uses the conch, and it projects a stronger, clearer vision: an ancient ritual being performed with a glowing seed at the base of the waterfall, but the vision is abruptly cut short by a feeling of coldness."
+        },
+        {
+          "episode_number": 5,
+          "title": "The Guardian's Secret",
+          "main_objective": "Discover the 'Karpaga Beejam' and uncover the legend of the Guardian of the Falls.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Meera and Karthik, guided by the vision and Aachi's transmitted lore, find a hidden alcove behind the waterfall. Inside, they discover a pedestal and the petrified 'Karpaga Beejam'. The conch activates, revealing the history of the blight: a disruption caused by an ancient, aggressive fungal entity, and the previous guardian's sacrifice to contain it. The entity has reawakened.",
+          "character_development": "Meera faces the truth of a real, dangerous entity; Karthik processes complex historical information.",
+          "mystery_progression": "The Karpaga Beejam is found; the true nature and origin of the blight are revealed, as well as the story of the ancient guardian.",
+          "ending_hook": "As they retrieve the Beejam, the blight at Karpaga Vriksham intensifies, reaching out with shadowy tendrils towards the village homes, threatening to engulf everything."
+        },
+        {
+          "episode_number": 6,
+          "title": "The Spreading Shadow",
+          "main_objective": "Return to Poomalai and prepare to use the Karpaga Beejam against the growing blight, while the village faces increasing peril.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Meera and Karthik rush back to Poomalai, realizing the blight is accelerating. They find the village partially covered in the dark tendrils, causing plants to wither and animals to become agitated. Aachi explains the ritual needed to activate the Beejam, which requires a connection to the deepest roots of the Karpaga Vriksham.",
+          "character_development": "Meera feels the burden of leadership and responsibility; Karthik races against time to create a device to help activate the seed.",
+          "mystery_progression": "The urgency of the situation mounts; the method to use the Beejam is revealed, but it's dangerous.",
+          "ending_hook": "Karthik works feverishly on a device to help, as Meera prepares herself for the daunting ritual, knowing failure means the loss of their home. The Karpaga Vriksham groans audibly, almost as if in pain."
+        },
+        {
+          "episode_number": 7,
+          "title": "Heart of the Tree",
+          "main_objective": "Confront the blight and attempt to heal the Karpaga Vriksham using the Karpaga Beejam.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Meera, guided by Aachi and supported by Karthik's ingenuity (a modified 'seed planter' device), approaches the core of the Karpaga Vriksham. The blight actively tries to stop them, creating illusions and barriers. Meera connects with the Whispering Stone, using its power to channel the essence of the Beejam into the tree, directly combating the shadowy entity. The climax is a spiritual battle of light vs. shadow, life vs. decay.",
+          "character_development": "Meera shows immense courage and her connection to the Whispering Stone strengthens and matures. Karthik's quick thinking is critical under pressure.",
+          "mystery_progression": "The Blight entity is directly confronted and its influence begins to recede. The Whispering Stone's full potential for protection and memory is shown.",
+          "ending_hook": "The blight is vanquished, but the Karpaga Vriksham is weakened. Meera feels an overwhelming sense of ancient presence from the tree, and the Whispering Stone glows intensely, showing her a fleeting image of a vast, ancient network of similar sacred trees across the land, and a single, unknown figure observing from afar."
+        },
+        {
+          "episode_number": 8,
+          "title": "The Blossoming Future",
+          "main_objective": "Restore Poomalai, reflect on the arc's events, and set up future mysteries.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "Poomalai begins to recover. The Karpaga Vriksham starts to regenerate, slowly healing. Meera and Karthik reflect on their journey. Aachi explains that while the blight is gone from Poomalai, its roots might exist elsewhere. The Whispering Stone reveals another, smaller vision of a distant, similar sacred tree, and a faint symbol associated with the shadowy figure.",
+          "character_development": "Meera embraces her role as a guardian of Poomalai's balance; Karthik is inspired to invent solutions for larger ecological problems.",
+          "mystery_progression": "The blight is resolved locally; the lingering threat of its wider existence and the unknown figure are introduced. The full purpose of the Whispering Stone as a guide for greater balance is hinted.",
+          "ending_hook": "Meera, holding the now silent but warm Whispering Stone, looks towards the distant hills. She realizes Poomalai's crisis was just one part of a larger ecological and spiritual network under threat, and their adventure is far from over. The final shot is a wider view of the healthy Karpaga Vriksham, with a subtle, new growth."
+        }
+      ],
+      "central_mysteries": [
+        "The Blight of the Karpaga Vriksham: Its origin and cure.",
+        "The Whispering Stone's power: How to properly use it and its connection to the blight.",
+        "The Forgotten History: What past event links to the current crisis."
+      ],
+      "foreshadowing": [
+        {
+          "clue": "The glowing moss near the Forgotten Falls that reacts to the conch.",
+          "introduced_episode": 4,
+          "possible_future_connection": "Could be a rare energy-sensitive organism, or an indicator of latent magical energy in the environment. Could be used by a future villain or ally."
+        },
+        {
+          "clue": "The fleeting vision of a vast network of sacred trees and an unknown observing figure in the climax.",
+          "introduced_episode": 7,
+          "possible_future_connection": "Hints at a larger, interconnected world with similar sacred sites and a mysterious antagonist or organization monitoring these sites. The figure could be the true orchestrator of the blight or another powerful entity."
+        },
+        {
+          "clue": "Aachi's caution that the blight's 'roots might exist elsewhere'.",
+          "introduced_episode": 6,
+          "possible_future_connection": "Directly sets up future arcs where similar blights appear in other locations, hinting at a wider, systemic threat."
+        },
+        {
+          "clue": "The symbol seen with the observing figure in Episode 7's vision.",
+          "introduced_episode": 7,
+          "possible_future_connection": "A symbol of a new villain, a secret organization, or an ancient opposing force."
+        }
+      ],
+      "major_events": [
+        "Discovery of the Whispering Stone and the onset of the blight (Episode 1).",
+        "Aachi's explanation of the Valampuri's lore and the worsening blight (Episode 2).",
+        "Discovery of the ancient parchment and the hint of the 'Karpaga Beejam' (Episode 3).",
+        "Journey to the Forgotten Falls (Episode 4).",
+        "Discovery of the 'Karpaga Beejam' and the full history of the blight and ancient guardian (Episode 5).",
+        "The blight intensifies, threatening the entire village (Episode 6).",
+        "Climax: Meera uses the Karpaga Beejam and Whispering Stone to heal the Karpaga Vriksham and repel the blight (Episode 7).",
+        "Poomalai's recovery and the setup for a larger world (Episode 8)."
+      ],
+      "arc_climax": "Meera, empowered by the Whispering Stone and guided by Aachi, faces the full manifestation of the blight at the heart of the Karpaga Vriksham. She uses the Karpaga Beejam, infused with her courage and the conch's ancient wisdom, to drive back and contain the malevolent fungal entity, restoring the tree's life force.",
+      "arc_consequences": [
+        "The Karpaga Vriksham is healed and Poomalai is saved, but the tree bears scars, signifying its ordeal.",
+        "Meera and Karthik are recognized as young protectors of the village, their bond strengthened.",
+        "Meera's connection to the Whispering Stone is solidified, making her a potential future conduit for ancient wisdom.",
+        "The villagers gain a deeper appreciation for their sacred tree and the delicate balance of nature.",
+        "The knowledge of a wider, interconnected network of sacred trees and a lurking, persistent threat is unveiled, hinting at future dangers."
+      ],
+      "future_arc_hook": "The blight in Poomalai was just a symptom of a larger, systemic threat affecting other sacred sites. The Whispering Stone's final vision of a vast network of trees and a shadowy observer suggests a more organized, intelligent force is at play across the land, and Meera and Karthik might be called upon again to protect more than just their village.",
+      "id": "arc_001",
+      "arc_number": 1
+    }
+  },
+  "episodes": {
+    "arc_001_ep_01": {
+      "episode_number": 1,
+      "title": "The Whispering Wind",
+      "main_objective": "Introduce Meera and Karthik, establish Poomalai village, and introduce the initial signs of the blight and the discovery of the Whispering Stone.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Meera discovers the beautiful Valampuri conch shell near the base of the Karpaga Vriksham, which begins to show unusual dark spots.",
+      "character_development": "Meera's curiosity is ignited; Karthik is introduced as her inventive counterpoint.",
+      "mystery_progression": "The blight's appearance and the strange hum of the conch are introduced.",
+      "ending_hook": "Meera holds the conch to her ear, and a faint, ancient whisper fills her mind, showing a fleeting image of the Karpaga Vriksham in distress.",
+      "id": "arc_001_ep_01",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_02": {
+      "episode_number": 2,
+      "title": "Echoes of the Past",
+      "main_objective": "Meera seeks help from Aachi to understand the conch, while the blight subtly worsens.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi"
+      ],
+      "key_event": "Aachi recognizes the conch as a Valampuri and explains its legendary connection to Poomalai's ancestors, but warns of its unpredictable nature. Meera experiences clearer visions of ancient village life and a shadowy presence.",
+      "character_development": "Meera begins to trust her connection with the conch; Aachi establishes her role as a wise guide.",
+      "mystery_progression": "The conch's ability to show visions is confirmed; the threat of the blight is recognized as more than just a disease.",
+      "ending_hook": "A vision from the conch shows a specific ancient symbol etched into a hidden part of the Karpaga Vriksham, but also a glimpse of a menacing, dark, root-like tendril creeping closer.",
+      "id": "arc_001_ep_02",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_03": {
+      "episode_number": 3,
+      "title": "The Hidden Roots",
+      "main_objective": "The children investigate the ancient symbol and search for physical clues about the blight's spread.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Thatha"
+      ],
+      "key_event": "Following the vision, Meera and Karthik, with Thatha's help, find a hidden compartment at the base of the Karpaga Vriksham containing the ancient symbol and a decaying parchment. Karthik's invention (a light-amplifying lens) helps decipher faint writing on the parchment hinting at the 'Karpaga Beejam'.",
+      "character_development": "Karthik demonstrates his practical ingenuity; Meera learns to combine intuition with investigation.",
+      "mystery_progression": "A physical clue (parchment, symbol) is found, suggesting an ancient solution and introducing the concept of the 'Karpaga Beejam'.",
+      "ending_hook": "The parchment crumbles after revealing a partial map pointing towards the Forgotten Falls, just as the darkest tendrils of the blight spread further up the tree.",
+      "id": "arc_001_ep_03",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_04": {
+      "episode_number": 4,
+      "title": "Journey to the Falls",
+      "main_objective": "The children embark on a journey to the Forgotten Falls, facing natural obstacles and learning more about the forest.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Thatha"
+      ],
+      "key_event": "Led by Thatha, Meera and Karthik navigate the forest to reach the Forgotten Falls. Karthik's knowledge of flora helps them identify safe paths, while Meera uses the conch to sense directions. They encounter a peculiar, glowing moss that seems to react to the conch.",
+      "character_development": "Meera and Karthik deepen their teamwork; Thatha shares his deep respect for nature.",
+      "mystery_progression": "The location of the Falls is reached; the mystery of the 'Karpaga Beejam' is connected to this place; the glowing moss introduces a new, unexplained phenomenon.",
+      "ending_hook": "At the Falls, Meera uses the conch, and it projects a stronger, clearer vision: an ancient ritual being performed with a glowing seed at the base of the waterfall, but the vision is abruptly cut short by a feeling of coldness.",
+      "id": "arc_001_ep_04",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_05": {
+      "episode_number": 5,
+      "title": "The Guardian's Secret",
+      "main_objective": "Discover the 'Karpaga Beejam' and uncover the legend of the Guardian of the Falls.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Meera and Karthik, guided by the vision and Aachi's transmitted lore, find a hidden alcove behind the waterfall. Inside, they discover a pedestal and the petrified 'Karpaga Beejam'. The conch activates, revealing the history of the blight: a disruption caused by an ancient, aggressive fungal entity, and the previous guardian's sacrifice to contain it. The entity has reawakened.",
+      "character_development": "Meera faces the truth of a real, dangerous entity; Karthik processes complex historical information.",
+      "mystery_progression": "The Karpaga Beejam is found; the true nature and origin of the blight are revealed, as well as the story of the ancient guardian.",
+      "ending_hook": "As they retrieve the Beejam, the blight at Karpaga Vriksham intensifies, reaching out with shadowy tendrils towards the village homes, threatening to engulf everything.",
+      "id": "arc_001_ep_05",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_06": {
+      "episode_number": 6,
+      "title": "The Spreading Shadow",
+      "main_objective": "Return to Poomalai and prepare to use the Karpaga Beejam against the growing blight, while the village faces increasing peril.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Meera and Karthik rush back to Poomalai, realizing the blight is accelerating. They find the village partially covered in the dark tendrils, causing plants to wither and animals to become agitated. Aachi explains the ritual needed to activate the Beejam, which requires a connection to the deepest roots of the Karpaga Vriksham.",
+      "character_development": "Meera feels the burden of leadership and responsibility; Karthik races against time to create a device to help activate the seed.",
+      "mystery_progression": "The urgency of the situation mounts; the method to use the Beejam is revealed, but it's dangerous.",
+      "ending_hook": "Karthik works feverishly on a device to help, as Meera prepares herself for the daunting ritual, knowing failure means the loss of their home. The Karpaga Vriksham groans audibly, almost as if in pain.",
+      "id": "arc_001_ep_06",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_07": {
+      "episode_number": 7,
+      "title": "Heart of the Tree",
+      "main_objective": "Confront the blight and attempt to heal the Karpaga Vriksham using the Karpaga Beejam.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Meera, guided by Aachi and supported by Karthik's ingenuity (a modified 'seed planter' device), approaches the core of the Karpaga Vriksham. The blight actively tries to stop them, creating illusions and barriers. Meera connects with the Whispering Stone, using its power to channel the essence of the Beejam into the tree, directly combating the shadowy entity. The climax is a spiritual battle of light vs. shadow, life vs. decay.",
+      "character_development": "Meera shows immense courage and her connection to the Whispering Stone strengthens and matures. Karthik's quick thinking is critical under pressure.",
+      "mystery_progression": "The Blight entity is directly confronted and its influence begins to recede. The Whispering Stone's full potential for protection and memory is shown.",
+      "ending_hook": "The blight is vanquished, but the Karpaga Vriksham is weakened. Meera feels an overwhelming sense of ancient presence from the tree, and the Whispering Stone glows intensely, showing her a fleeting image of a vast, ancient network of similar sacred trees across the land, and a single, unknown figure observing from afar.",
+      "id": "arc_001_ep_07",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    },
+    "arc_001_ep_08": {
+      "episode_number": 8,
+      "title": "The Blossoming Future",
+      "main_objective": "Restore Poomalai, reflect on the arc's events, and set up future mysteries.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "Poomalai begins to recover. The Karpaga Vriksham starts to regenerate, slowly healing. Meera and Karthik reflect on their journey. Aachi explains that while the blight is gone from Poomalai, its roots might exist elsewhere. The Whispering Stone reveals another, smaller vision of a distant, similar sacred tree, and a faint symbol associated with the shadowy figure.",
+      "character_development": "Meera embraces her role as a guardian of Poomalai's balance; Karthik is inspired to invent solutions for larger ecological problems.",
+      "mystery_progression": "The blight is resolved locally; the lingering threat of its wider existence and the unknown figure are introduced. The full purpose of the Whispering Stone as a guide for greater balance is hinted.",
+      "ending_hook": "Meera, holding the now silent but warm Whispering Stone, looks towards the distant hills. She realizes Poomalai's crisis was just one part of a larger ecological and spiritual network under threat, and their adventure is far from over. The final shot is a wider view of the healthy Karpaga Vriksham, with a subtle, new growth.",
+      "id": "arc_001_ep_08",
+      "arc_id": "arc_001",
+      "arc_number": 1,
+      "status": "planned"
+    }
+  },
+  "locations": {
+    "poomalai_village": {
+      "name": "Poomalai Village",
+      "description": "A quaint Tamil village nestled at the foot of gentle hills, surrounded by lush paddy fields and dense forests. Traditional tiled-roof houses line narrow dirt paths, shaded by ancient trees. A central well serves the community. The village square often buzzes with activity, children playing, women drawing water, men tending to crops.",
+      "visual_identity": "Warm earthy tones (terracotta roofs, mud walls), vibrant splashes of color from clothing and flowers (jasmine, hibiscus), verdant green fields contrasting with darker forest greens. Soft morning light, long afternoon shadows. Sound of birds, distant temple bells, children's laughter.",
+      "id": "poomalai_village"
+    },
+    "karpaga_vriksham_sacred_banyan_tree": {
+      "name": "Karpaga Vriksham (Sacred Banyan Tree)",
+      "description": "A colossal, ancient banyan tree located at the heart of Poomalai, revered as the village's spiritual guardian. Its sprawling canopy provides shade for the entire village square, with roots hanging down like natural swings. A small, simple stone shrine dedicated to a local deity sits at its base.",
+      "visual_identity": "Enormous, thick, gnarled trunk with visible ancient carvings. Hundreds of aerial roots forming a natural curtain. Rich, dark green foliage, almost creating its own ecosystem. Always appears majestic and serene, even when threatened.",
+      "id": "karpaga_vriksham_sacred_banyan_tree"
+    },
+    "the_forgotten_falls": {
+      "name": "The Forgotten Falls",
+      "description": "A secluded waterfall deep within the forest bordering Poomalai, rumored to be a place of ancient power. Accessible only by a winding, overgrown path. The water cascades into a clear, rocky pool, surrounded by moss-covered stones and rare orchids.",
+      "visual_identity": "Lush, untouched greenery, sparkling clear water, smooth, dark stones. A sense of peace mixed with an air of mystery. Light filters through the dense canopy, creating dappled patterns. Sounds of rushing water and forest wildlife.",
+      "id": "the_forgotten_falls"
+    },
+    "aachi_s_hut": {
+      "name": "Aachi's Hut",
+      "description": "A small, unassuming hut on the edge of the village, overflowing with stacks of ancient scrolls, medicinal herbs drying from the rafters, and various intriguing artifacts. It serves as Aachi's home and the village's unofficial library and wisdom center.",
+      "visual_identity": "Rustic, cozy, filled with warm, flickering lamplight. Clay pots and woven baskets. Dominant colors are earthy browns and the vibrant greens and yellows of dried herbs. A sense of antiquity and accumulated knowledge.",
+      "id": "aachi_s_hut"
+    }
+  },
   "villains": {},
-
-  "artifacts": {},
-
-  "mysteries": {},
-
+  "artifacts": {
+    "the_whispering_stone_of_valampuri": {
+      "name": "The Whispering Stone of Valampuri",
+      "description": "A palm-sized, pristine white conch shell, exceptionally smooth and perfectly formed. It has a faint, iridescent sheen. When held to the ear, it emits a soft, almost imperceptible hum, and sometimes, with Meera's unique connection, ancient voices or images.",
+      "importance": "It is a sentient artifact that acts as a conduit to ancient memories and possibly a warning system. It will be crucial in revealing the history of the blight and its cure.",
+      "origin": "Said to be a gift from the guardian spirits of the forest to the first settlers of Poomalai, a keeper of memory and protector against imbalance.",
+      "id": "the_whispering_stone_of_valampuri"
+    },
+    "the_seed_of_life_karpaga_beejam": {
+      "name": "The Seed of Life (Karpaga Beejam)",
+      "description": "A small, dark, petrified seed, no bigger than a thumbnail, intricately etched with swirling patterns that resemble roots and leaves. It feels unusually heavy and pulses with a faint, internal warmth when touched.",
+      "importance": "Believed to be the original seed from which the Karpaga Vriksham grew. It holds the concentrated life force and healing properties of the sacred tree. Crucial for healing the tree.",
+      "origin": "Lore states it was planted by the first ancestor of Poomalai, imbued with the essence of pure forest life.",
+      "id": "the_seed_of_life_karpaga_beejam"
+    }
+  },
+  "mysteries": {
+    "the_whispering_stone_s_origins": {
+      "name": "The Whispering Stone's Origins",
+      "description": "What is the true nature and origin of the Valampuri conch? How does it grant visions and voices? What are its full capabilities?",
+      "importance": "Understanding it is key to deciphering the ancient warnings and finding solutions.",
+      "status": "Ongoing (partially revealed through Meera's connection).",
+      "id": "the_whispering_stone_s_origins"
+    },
+    "the_blight_of_the_karpaga_vriksham": {
+      "name": "The Blight of the Karpaga Vriksham",
+      "description": "A mysterious, shadowy corruption slowly draining the life from the Karpaga Vriksham and causing unease in the village. What is its source and how does it spread?",
+      "importance": "The central threat of the arc; its resolution is the arc's goal.",
+      "status": "Ongoing (source unknown, effects visible).",
+      "id": "the_blight_of_the_karpaga_vriksham"
+    },
+    "the_forgotten_history_of_poomalai": {
+      "name": "The Forgotten History of Poomalai",
+      "description": "The Whispering Stone hints at a forgotten period in Poomalai's past, possibly related to a similar threat or a powerful ancient protector. What secrets does this history hold?",
+      "importance": "Provides crucial context and clues for solving the current blight.",
+      "status": "Ongoing (revealed through visions and Aachi's lore).",
+      "id": "the_forgotten_history_of_poomalai"
+    },
+    "the_true_guardian_of_the_falls": {
+      "name": "The True Guardian of the Falls",
+      "description": "Ancient legends speak of a silent protector dwelling near the Forgotten Falls, meant to safeguard the delicate balance of the forest. Is this guardian real, and if so, where are they?",
+      "importance": "Could be a source of assistance or a key to understanding the blight.",
+      "status": "Unconfirmed legend, possibly an unknown character or creature.",
+      "id": "the_true_guardian_of_the_falls"
+    }
+  },
   "relationships": {},
-
-  "timeline": [],
-
-  "unresolved_threads": [],
-
-  "foreshadowing": [],
-
-  "major_events": []
+  "timeline": [
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the Whispering Stone and the onset of the blight (Episode 1)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Aachi's explanation of the Valampuri's lore and the worsening blight (Episode 2)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the ancient parchment and the hint of the 'Karpaga Beejam' (Episode 3)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Journey to the Forgotten Falls (Episode 4)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the 'Karpaga Beejam' and the full history of the blight and ancient guardian (Episode 5)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "The blight intensifies, threatening the entire village (Episode 6)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Climax: Meera uses the Karpaga Beejam and Whispering Stone to heal the Karpaga Vriksham and repel the blight (Episode 7)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Poomalai's recovery and the setup for a larger world (Episode 8)."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "The Karpaga Vriksham is healed and Poomalai is saved, but the tree bears scars, signifying its ordeal."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Meera and Karthik are recognized as young protectors of the village, their bond strengthened."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Meera's connection to the Whispering Stone is solidified, making her a potential future conduit for ancient wisdom."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "The villagers gain a deeper appreciation for their sacred tree and the delicate balance of nature."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "The knowledge of a wider, interconnected network of sacred trees and a lurking, persistent threat is unveiled, hinting at future dangers."
+    }
+  ],
+  "unresolved_threads": [
+    {
+      "name": "The Whispering Stone's Origins",
+      "description": "What is the true nature and origin of the Valampuri conch? How does it grant visions and voices? What are its full capabilities?",
+      "importance": "Understanding it is key to deciphering the ancient warnings and finding solutions.",
+      "status": "Ongoing (partially revealed through Meera's connection).",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "name": "The Blight of the Karpaga Vriksham",
+      "description": "A mysterious, shadowy corruption slowly draining the life from the Karpaga Vriksham and causing unease in the village. What is its source and how does it spread?",
+      "importance": "The central threat of the arc; its resolution is the arc's goal.",
+      "status": "Ongoing (source unknown, effects visible).",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "name": "The Forgotten History of Poomalai",
+      "description": "The Whispering Stone hints at a forgotten period in Poomalai's past, possibly related to a similar threat or a powerful ancient protector. What secrets does this history hold?",
+      "importance": "Provides crucial context and clues for solving the current blight.",
+      "status": "Ongoing (revealed through visions and Aachi's lore).",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "name": "The True Guardian of the Falls",
+      "description": "Ancient legends speak of a silent protector dwelling near the Forgotten Falls, meant to safeguard the delicate balance of the forest. Is this guardian real, and if so, where are they?",
+      "importance": "Could be a source of assistance or a key to understanding the blight.",
+      "status": "Unconfirmed legend, possibly an unknown character or creature.",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "name": "The Blight of the Karpaga Vriksham: Its origin and cure.",
+      "type": "central_mystery",
+      "arc": "The Whispering Stone of Valampuri",
+      "status": "active"
+    },
+    {
+      "name": "The Whispering Stone's power: How to properly use it and its connection to the blight.",
+      "type": "central_mystery",
+      "arc": "The Whispering Stone of Valampuri",
+      "status": "active"
+    },
+    {
+      "name": "The Forgotten History: What past event links to the current crisis.",
+      "type": "central_mystery",
+      "arc": "The Whispering Stone of Valampuri",
+      "status": "active"
+    },
+    {
+      "name": "Future Arc Hook",
+      "description": "The blight in Poomalai was just a symptom of a larger, systemic threat affecting other sacred sites. The Whispering Stone's final vision of a vast network of trees and a shadowy observer suggests a more organized, intelligent force is at play across the land, and Meera and Karthik might be called upon again to protect more than just their village.",
+      "type": "future_arc_hook",
+      "status": "active",
+      "arc": "The Whispering Stone of Valampuri"
+    }
+  ],
+  "foreshadowing": [
+    {
+      "clue": "The glowing moss near the Forgotten Falls that reacts to the conch.",
+      "introduced_episode": 4,
+      "possible_future_connection": "Could be a rare energy-sensitive organism, or an indicator of latent magical energy in the environment. Could be used by a future villain or ally.",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "clue": "The fleeting vision of a vast network of sacred trees and an unknown observing figure in the climax.",
+      "introduced_episode": 7,
+      "possible_future_connection": "Hints at a larger, interconnected world with similar sacred sites and a mysterious antagonist or organization monitoring these sites. The figure could be the true orchestrator of the blight or another powerful entity.",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "clue": "Aachi's caution that the blight's 'roots might exist elsewhere'.",
+      "introduced_episode": 6,
+      "possible_future_connection": "Directly sets up future arcs where similar blights appear in other locations, hinting at a wider, systemic threat.",
+      "arc": "The Whispering Stone of Valampuri"
+    },
+    {
+      "clue": "The symbol seen with the observing figure in Episode 7's vision.",
+      "introduced_episode": 7,
+      "possible_future_connection": "A symbol of a new villain, a secret organization, or an ancient opposing force.",
+      "arc": "The Whispering Stone of Valampuri"
+    }
+  ],
+  "major_events": [
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the Whispering Stone and the onset of the blight (Episode 1)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Aachi's explanation of the Valampuri's lore and the worsening blight (Episode 2)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the ancient parchment and the hint of the 'Karpaga Beejam' (Episode 3)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Journey to the Forgotten Falls (Episode 4)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Discovery of the 'Karpaga Beejam' and the full history of the blight and ancient guardian (Episode 5)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "The blight intensifies, threatening the entire village (Episode 6)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Climax: Meera uses the Karpaga Beejam and Whispering Stone to heal the Karpaga Vriksham and repel the blight (Episode 7)."
+    },
+    {
+      "arc": "The Whispering Stone of Valampuri",
+      "event": "Poomalai's recovery and the setup for a larger world (Episode 8)."
+    }
+  ]
 }
