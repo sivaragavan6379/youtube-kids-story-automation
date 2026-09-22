@@ -29,9 +29,9 @@ jobs:
         run: |
           python ai/story_director.py
 
-      - name: Upload generated episode
+      - name: Upload generated arc
         uses: actions/upload-artifact@v4
         with:
-          name: gemini-test-output
-          path: output/generated_episode.json
+          name: gemini-arc-test
+          path: output/generated_arc.json
           if-no-files-found: error
