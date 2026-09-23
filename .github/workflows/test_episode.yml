@@ -13,22 +13,107 @@ jobs:
 
     steps:
 
+      # =====================================================
+      # 1. CHECKOUT
+      # =====================================================
+
       - name: Checkout repository
         uses: actions/checkout@v4
+
+
+      # =====================================================
+      # 2. SETUP PYTHON
+      # =====================================================
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+
+      # =====================================================
+      # 3. INSTALL DEPENDENCIES
+      # =====================================================
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+
+      # =====================================================
+      # 4. GENERATE STORY ARC
+      # =====================================================
+
+      - name: Generate Story Arc
+        run: |
+          python ai/arc_director.py
+
+
+      # =====================================================
+      # 5. VERIFY GENERATED ARC
+      # =====================================================
+
+      - name: Verify generated arc
+        run: |
+          echo "Checking generated arc..."
+
+          if [ ! -f output/generated_arc.json ]; then
+            echo "ERROR: generated_arc.json was not created."
+            exit 1
+          fi
+
+          echo "✅ generated_arc.json found."
+
+          python -m json.tool output/generated_arc.json > /dev/null
+
+          echo "✅ generated_arc.json is valid JSON."
+
+
+      # =====================================================
+      # 6. GENERATE EPISODE 1
+      # =====================================================
+
       - name: Generate Episode 1
         run: |
           python ai/episode_director.py
+
+
+      # =====================================================
+      # 7. VERIFY GENERATED EPISODE
+      # =====================================================
+
+      - name: Verify generated episode
+        run: |
+          echo "Checking generated episode..."
+
+          if [ ! -f output/generated_episode_01.json ]; then
+            echo "ERROR: generated_episode_01.json was not created."
+            exit 1
+          fi
+
+          echo "✅ generated_episode_01.json found."
+
+          python -m json.tool output/generated_episode_01.json > /dev/null
+
+          echo "✅ generated_episode_01.json is valid JSON."
+
+
+      # =====================================================
+      # 8. UPLOAD GENERATED ARC
+      # =====================================================
+
+      - name: Upload generated arc
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-story-arc
+          path: output/generated_arc.json
+          if-no-files-found: error
+
+
+      # =====================================================
+      # 9. UPLOAD GENERATED EPISODE
+      # =====================================================
 
       - name: Upload generated episode
         uses: actions/upload-artifact@v4
