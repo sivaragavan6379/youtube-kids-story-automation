@@ -5,7 +5,7 @@
     "description": "A connected Tamil animated story universe.",
     "current_phase": 1,
     "current_series": null,
-    "current_arc": "arc_002",
+    "current_arc": "arc_003",
     "current_episode": null
   },
   "characters": {
@@ -52,10 +52,18 @@
       "status": "active",
       "arc_history": [
         "The Whispering Stone of Valampuri",
-        "The Fading Lotus of Kanthar Nagar"
+        "The Fading Lotus of Kanthar Nagar",
+        "The Emerald Peak's Silent Song"
       ],
       "appearance_type": "returning",
-      "last_arc": "The Fading Lotus of Kanthar Nagar"
+      "last_arc": "The Emerald Peak's Silent Song",
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "main",
+          "role": "main_character"
+        }
+      ]
     },
     "karthik": {
       "name": "Karthik",
@@ -98,10 +106,18 @@
       "status": "active",
       "arc_history": [
         "The Whispering Stone of Valampuri",
-        "The Fading Lotus of Kanthar Nagar"
+        "The Fading Lotus of Kanthar Nagar",
+        "The Emerald Peak's Silent Song"
       ],
       "appearance_type": "returning",
-      "last_arc": "The Fading Lotus of Kanthar Nagar"
+      "last_arc": "The Emerald Peak's Silent Song",
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "main",
+          "role": "main_character"
+        }
+      ]
     },
     "aachi": {
       "name": "Aachi",
@@ -142,10 +158,31 @@
       "status": "active",
       "arc_history": [
         "The Whispering Stone of Valampuri",
-        "The Fading Lotus of Kanthar Nagar"
+        "The Fading Lotus of Kanthar Nagar",
+        "The Emerald Peak's Silent Song"
       ],
       "appearance_type": "returning",
-      "last_arc": "The Fading Lotus of Kanthar Nagar"
+      "last_arc": "The Emerald Peak's Silent Song",
+      "return_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "reason_for_return": "To provide crucial ancient wisdom, interpret Meera's expanded visions from the Whispering Stone, and offer guidance on the cosmic significance of the new sacred site.",
+          "role_in_arc": "Mentor and historical consultant from Poomalai, guiding the children from afar through cryptic messages or visions.",
+          "continuity_connection": "Her established role as a wise elder with vast knowledge of lore and spiritual connections (Arc 001, Arc 002), and her deep bond with Meera and Karthik."
+        }
+      ],
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "returning",
+          "role": "Mentor and historical consultant from Poomalai, guiding the children from afar through cryptic messages or visions."
+        },
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "supporting",
+          "role": "supporting_character"
+        }
+      ]
     },
     "thatha": {
       "name": "Thatha",
@@ -189,10 +226,31 @@
       "status": "active",
       "arc_history": [
         "The Whispering Stone of Valampuri",
-        "The Fading Lotus of Kanthar Nagar"
+        "The Fading Lotus of Kanthar Nagar",
+        "The Emerald Peak's Silent Song"
       ],
       "appearance_type": "returning",
-      "last_arc": "The Fading Lotus of Kanthar Nagar"
+      "last_arc": "The Emerald Peak's Silent Song",
+      "return_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "reason_for_return": "To assist with practical advice regarding travel, logistics, or identifying natural elements crucial for a high-altitude journey, and perhaps creating special mountain-adapted gadgets.",
+          "role_in_arc": "Practical advisor and inventor's assistant, offering grounded wisdom and support from Poomalai.",
+          "continuity_connection": "His expertise in local flora/fauna and practical problem-solving (Arc 001, Arc 002), and his loving relationship with Karthik."
+        }
+      ],
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "returning",
+          "role": "Practical advisor and inventor's assistant, offering grounded wisdom and support from Poomalai."
+        },
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "supporting",
+          "role": "supporting_character"
+        }
+      ]
     },
     "anya": {
       "name": "Anya",
@@ -235,9 +293,30 @@
       "status": "active",
       "appearance_type": "returning",
       "first_arc": "The Fading Lotus of Kanthar Nagar",
-      "last_arc": "The Fading Lotus of Kanthar Nagar",
+      "last_arc": "The Emerald Peak's Silent Song",
       "arc_history": [
-        "The Fading Lotus of Kanthar Nagar"
+        "The Fading Lotus of Kanthar Nagar",
+        "The Emerald Peak's Silent Song"
+      ],
+      "return_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "reason_for_return": "To join Meera and Karthik as an active ally, expanding her role as a guardian beyond her marshland, and adapting her unique skills to a new, mountainous environment.",
+          "role_in_arc": "Fellow guardian and active participant in the adventure, bringing her resourcefulness and unique understanding of sacred site protection.",
+          "continuity_connection": "Her established strong bond of friendship and shared purpose with Meera and Karthik (Arc 002), and her new role as a guardian of sacred sites linked by the network."
+        }
+      ],
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "returning",
+          "role": "Fellow guardian and active participant in the adventure, bringing her resourcefulness and unique understanding of sacred site protection."
+        },
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "main",
+          "role": "main_character"
+        }
       ]
     },
     "kaalan": {
@@ -288,6 +367,116 @@
       "arc_history": [
         "The Fading Lotus of Kanthar Nagar"
       ]
+    },
+    "ranjani": {
+      "name": "Ranjani",
+      "type": "Mountain guardian, elder",
+      "appearance": "Approximately 50-60 years old. Lean, sun-weathered dark skin tone, sharp, observant eyes that seem to hold ancient knowledge. Long grey hair often braided with colorful prayer threads and wildflowers, tied up. Wears practical, layered cotton clothing in earthy tones, suitable for mountain dwelling. Always carries a sturdy carved wooden staff. Distinctive feature: A small pouch on her belt filled with various mountain herbs and stones.",
+      "personality": [
+        "Resilient",
+        "Quiet",
+        "Deeply spiritual",
+        "Distrustful of outsiders",
+        "Fiercely protective",
+        "Pragmatic",
+        "Wise"
+      ],
+      "goal": "To protect the Emerald Peak and the Sky-Stone from any threat, maintaining the delicate balance of the mountain's energy.",
+      "motivation": "An inherited duty passed down through generations of mountain guardians and a deep, spiritual connection to the mountain and its ancient traditions.",
+      "strengths": [
+        "Expert mountaineer and tracker",
+        "Vast knowledge of mountain flora and fauna",
+        "Strong spiritual connection to the Sky-Stone",
+        "Skilled in ancient mountain rituals",
+        "Patient and observant"
+      ],
+      "weaknesses": [
+        "Stubborn",
+        "Slow to trust new people or methods",
+        "Can be overly traditional",
+        "Struggles with understanding advanced technology"
+      ],
+      "abilities": [
+        "Expert climber and navigator of mountain terrain",
+        "Master herbalist and healer with mountain plants",
+        "Can sense subtle shifts in the mountain's energy and spiritual well-being",
+        "Deep understanding of celestial alignments and their effect on the Sky-Stone"
+      ],
+      "relationships": [
+        "Ancestral connection to the Sky-Stone and its previous guardians.",
+        "Initially wary of Meera, Karthik, and Anya but grows to respect and trust them as fellow protectors of sacred sites."
+      ],
+      "voice_style": "Calm, low, measured, with a deep resonance, often speaks in riddles or ancient proverbs, rarely raises her voice.",
+      "story_role": "Introduces Meera and Karthik to the unique challenges, lore, and spiritual practices of the mountain. Acts as their local guide and mentor, providing crucial historical context for the Sky-Stone and challenging their perspectives, ultimately becoming a vital ally.",
+      "id": "ranjani",
+      "status": "active",
+      "appearance_type": "returning",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ],
+      "return_history": [],
+      "appearance_history": [
+        {
+          "arc": "The Emerald Peak's Silent Song",
+          "type": "supporting",
+          "role": "supporting_character"
+        }
+      ]
+    },
+    "vetri": {
+      "name": "Vetri",
+      "type": "Antagonist, Umbral Weaver agent (manipulator/technologist)",
+      "appearance": "Appears to be in his late 20s or early 30s. Average height, slender build. Pale skin, sharp, angular face with cold, calculating dark eyes. His short, slicked-back black hair is always immaculate. Wears modern, dark, tailored clothing that allows for silent movement, often with subtle, almost invisible technological enhancements hidden within. Distinctive feature: A silver pen-like device he often taps thoughtfully, which can emit subtle energy pulses or recordings. He wears a refined version of the Umbral Weaver symbol as a small, elegant brooch.",
+      "personality": [
+        "Intellectual",
+        "Manipulative",
+        "Arrogant",
+        "Precise",
+        "Ruthless",
+        "Calculating",
+        "Dismissive of ancient traditions",
+        "Patient but easily irritated when plans are thwarted"
+      ],
+      "goal": "To corrupt and sever the Sky-Stone's celestial connection, thereby draining its cosmic energy and bringing this vital nexus under the Umbral Weavers' control.",
+      "motivation": "Believes The Umbral Weavers' 'order' represents the ultimate evolution for the world, driven by a desire for intellectual supremacy and a misguided sense of creating a 'perfect' system by controlling all natural and cosmic energies through advanced technology.",
+      "strengths": [
+        "Highly intelligent and analytical",
+        "Strategic planner and tactician",
+        "Technologically adept, utilizing advanced Umbral Weaver tech",
+        "Skilled at subtle manipulation and psychological warfare",
+        "Capable of creating complex illusions and energy interference"
+      ],
+      "weaknesses": [
+        "Overly arrogant, often underestimates 'primitive' wisdom and intuition",
+        "Relies too heavily on technology, which can be disrupted",
+        "Prone to intellectualizing emotions, making him vulnerable to genuine empathy",
+        "Can be overly confident, leading to overlooking simple solutions"
+      ],
+      "abilities": [
+        "Uses Umbral Weaver technology to disrupt natural and cosmic energy flows",
+        "Can generate localized illusions and holographic projections",
+        "Projects minor energy blasts and force fields",
+        "Mentally influences weaker individuals through subtle frequency manipulation",
+        "Skilled in bypassing ancient safeguards and data extraction."
+      ],
+      "relationships": [
+        "A high-ranking agent of 'The Umbral Weavers' leader.",
+        "Direct antagonist to Meera, Karthik, Anya, and Ranjani."
+      ],
+      "voice_style": "Smooth, educated, calm, and often condescending, with a slight electronic crispness when using his devices.",
+      "story_role": "Represents a more modern, calculating, and technologically-oriented facet of the Umbral Weavers' threat, contrasting with Kaalan's blight-focused methods. He tests Karthik's scientific understanding and Meera's intuition against advanced manipulation and engineered disruption.",
+      "id": "vetri",
+      "status": "active",
+      "appearance_type": "new",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ],
+      "return_history": [],
+      "appearance_history": []
     }
   },
   "series": {},
@@ -1011,6 +1200,383 @@
       "future_arc_hook": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect.",
       "id": "arc_002",
       "arc_number": 2
+    },
+    "arc_003": {
+      "title": "The Emerald Peak's Silent Song",
+      "summary": "Guided by Meera's Whispering Stone and the fragmented 'Umbral Weaver' symbol, the trio – Meera, Karthik, and Anya – embark on a perilous journey to the majestic Emerald Peak. There, an ancient Sky-Stone, which connects to celestial energies, is slowly falling silent due to a new, insidious form of blight. They encounter Ranjani, the mountain's reclusive guardian, and confront Vetri, a cunning and technologically advanced agent of The Umbral Weavers. This arc delves deeper into the organization's overarching plans, their varied methods of corruption, and the cosmic connections of the network of sacred sites.",
+      "theme": "The fusion of ancient wisdom and modern innovation, the enduring spirit of guardianship, and the cosmic interconnectedness of all life against a sophisticated, calculating evil.",
+      "central_conflict": "Meera, Karthik, and Anya, along with the new mountain guardian Ranjani, must prevent Vetri, a manipulative Umbral Weaver agent, from severing the sacred Sky-Stone's celestial connection, which would allow The Umbral Weavers to control a vital nexus of cosmic energy.",
+      "arc_goal": "To save the Emerald Peak's sacred Sky-Stone, understand the unique manifestation of the blight in a high-altitude, celestial environment, capture or gain crucial intelligence about Vetri and The Umbral Weavers' technological methods, and further decipher the significance of the central dark symbol in the network of sacred sites.",
+      "planned_episode_count": 7,
+      "main_characters": [
+        "Meera",
+        "Karthik",
+        "Anya"
+      ],
+      "supporting_characters": [
+        "Aachi",
+        "Thatha",
+        "Ranjani"
+      ],
+      "new_characters": [
+        {
+          "name": "Ranjani",
+          "type": "Mountain guardian, elder",
+          "appearance": "Approximately 50-60 years old. Lean, sun-weathered dark skin tone, sharp, observant eyes that seem to hold ancient knowledge. Long grey hair often braided with colorful prayer threads and wildflowers, tied up. Wears practical, layered cotton clothing in earthy tones, suitable for mountain dwelling. Always carries a sturdy carved wooden staff. Distinctive feature: A small pouch on her belt filled with various mountain herbs and stones.",
+          "personality": [
+            "Resilient",
+            "Quiet",
+            "Deeply spiritual",
+            "Distrustful of outsiders",
+            "Fiercely protective",
+            "Pragmatic",
+            "Wise"
+          ],
+          "goal": "To protect the Emerald Peak and the Sky-Stone from any threat, maintaining the delicate balance of the mountain's energy.",
+          "motivation": "An inherited duty passed down through generations of mountain guardians and a deep, spiritual connection to the mountain and its ancient traditions.",
+          "strengths": [
+            "Expert mountaineer and tracker",
+            "Vast knowledge of mountain flora and fauna",
+            "Strong spiritual connection to the Sky-Stone",
+            "Skilled in ancient mountain rituals",
+            "Patient and observant"
+          ],
+          "weaknesses": [
+            "Stubborn",
+            "Slow to trust new people or methods",
+            "Can be overly traditional",
+            "Struggles with understanding advanced technology"
+          ],
+          "abilities": [
+            "Expert climber and navigator of mountain terrain",
+            "Master herbalist and healer with mountain plants",
+            "Can sense subtle shifts in the mountain's energy and spiritual well-being",
+            "Deep understanding of celestial alignments and their effect on the Sky-Stone"
+          ],
+          "relationships": [
+            "Ancestral connection to the Sky-Stone and its previous guardians.",
+            "Initially wary of Meera, Karthik, and Anya but grows to respect and trust them as fellow protectors of sacred sites."
+          ],
+          "voice_style": "Calm, low, measured, with a deep resonance, often speaks in riddles or ancient proverbs, rarely raises her voice.",
+          "story_role": "Introduces Meera and Karthik to the unique challenges, lore, and spiritual practices of the mountain. Acts as their local guide and mentor, providing crucial historical context for the Sky-Stone and challenging their perspectives, ultimately becoming a vital ally."
+        },
+        {
+          "name": "Vetri",
+          "type": "Antagonist, Umbral Weaver agent (manipulator/technologist)",
+          "appearance": "Appears to be in his late 20s or early 30s. Average height, slender build. Pale skin, sharp, angular face with cold, calculating dark eyes. His short, slicked-back black hair is always immaculate. Wears modern, dark, tailored clothing that allows for silent movement, often with subtle, almost invisible technological enhancements hidden within. Distinctive feature: A silver pen-like device he often taps thoughtfully, which can emit subtle energy pulses or recordings. He wears a refined version of the Umbral Weaver symbol as a small, elegant brooch.",
+          "personality": [
+            "Intellectual",
+            "Manipulative",
+            "Arrogant",
+            "Precise",
+            "Ruthless",
+            "Calculating",
+            "Dismissive of ancient traditions",
+            "Patient but easily irritated when plans are thwarted"
+          ],
+          "goal": "To corrupt and sever the Sky-Stone's celestial connection, thereby draining its cosmic energy and bringing this vital nexus under the Umbral Weavers' control.",
+          "motivation": "Believes The Umbral Weavers' 'order' represents the ultimate evolution for the world, driven by a desire for intellectual supremacy and a misguided sense of creating a 'perfect' system by controlling all natural and cosmic energies through advanced technology.",
+          "strengths": [
+            "Highly intelligent and analytical",
+            "Strategic planner and tactician",
+            "Technologically adept, utilizing advanced Umbral Weaver tech",
+            "Skilled at subtle manipulation and psychological warfare",
+            "Capable of creating complex illusions and energy interference"
+          ],
+          "weaknesses": [
+            "Overly arrogant, often underestimates 'primitive' wisdom and intuition",
+            "Relies too heavily on technology, which can be disrupted",
+            "Prone to intellectualizing emotions, making him vulnerable to genuine empathy",
+            "Can be overly confident, leading to overlooking simple solutions"
+          ],
+          "abilities": [
+            "Uses Umbral Weaver technology to disrupt natural and cosmic energy flows",
+            "Can generate localized illusions and holographic projections",
+            "Projects minor energy blasts and force fields",
+            "Mentally influences weaker individuals through subtle frequency manipulation",
+            "Skilled in bypassing ancient safeguards and data extraction."
+          ],
+          "relationships": [
+            "A high-ranking agent of 'The Umbral Weavers' leader.",
+            "Direct antagonist to Meera, Karthik, Anya, and Ranjani."
+          ],
+          "voice_style": "Smooth, educated, calm, and often condescending, with a slight electronic crispness when using his devices.",
+          "story_role": "Represents a more modern, calculating, and technologically-oriented facet of the Umbral Weavers' threat, contrasting with Kaalan's blight-focused methods. He tests Karthik's scientific understanding and Meera's intuition against advanced manipulation and engineered disruption."
+        }
+      ],
+      "returning_characters": [
+        {
+          "name": "Aachi",
+          "reason_for_return": "To provide crucial ancient wisdom, interpret Meera's expanded visions from the Whispering Stone, and offer guidance on the cosmic significance of the new sacred site.",
+          "role_in_arc": "Mentor and historical consultant from Poomalai, guiding the children from afar through cryptic messages or visions.",
+          "continuity_connection": "Her established role as a wise elder with vast knowledge of lore and spiritual connections (Arc 001, Arc 002), and her deep bond with Meera and Karthik."
+        },
+        {
+          "name": "Thatha",
+          "reason_for_return": "To assist with practical advice regarding travel, logistics, or identifying natural elements crucial for a high-altitude journey, and perhaps creating special mountain-adapted gadgets.",
+          "role_in_arc": "Practical advisor and inventor's assistant, offering grounded wisdom and support from Poomalai.",
+          "continuity_connection": "His expertise in local flora/fauna and practical problem-solving (Arc 001, Arc 002), and his loving relationship with Karthik."
+        },
+        {
+          "name": "Anya",
+          "reason_for_return": "To join Meera and Karthik as an active ally, expanding her role as a guardian beyond her marshland, and adapting her unique skills to a new, mountainous environment.",
+          "role_in_arc": "Fellow guardian and active participant in the adventure, bringing her resourcefulness and unique understanding of sacred site protection.",
+          "continuity_connection": "Her established strong bond of friendship and shared purpose with Meera and Karthik (Arc 002), and her new role as a guardian of sacred sites linked by the network."
+        }
+      ],
+      "locations": [
+        {
+          "name": "Poomalai Village",
+          "description": "Meera and Karthik's home village, now recovering and serving as a safe base for initial consultations and receiving guidance from Aachi and Thatha before embarking on their next journey.",
+          "visual_identity": "Warm earthy tones, traditional tiled-roof houses, verdant green fields. The Karpaga Vriksham stands healed, its scars a reminder of past trials. A sense of peace and familiarity."
+        },
+        {
+          "name": "Kanthar Nagar Village",
+          "description": "Anya's marshland home, now healed and thriving, where Anya joins Meera and Karthik for their new adventure. It acts as an initial gathering point for the expanded team.",
+          "visual_identity": "Lush greens of marsh plants, shimmering blues of water, dark, rich browns of wood and soil. Elaborate wooden architecture. The Luminous Lotus glows with renewed vitality. A sense of vibrant, recovered life."
+        },
+        {
+          "name": "The Emerald Peak",
+          "description": "A majestic, mist-shrouded mountain, revered as a sacred site. Its towering slopes are covered in ancient, hardy trees and unique high-altitude flora, with sheer cliffs and hidden caves. The air is crisp and thin, often filled with the sound of wind and distant bird calls. Legends speak of it touching the heavens.",
+          "visual_identity": "Dominant shades of deep green from coniferous forests, grey and white from exposed rock and snow-capped summits, soft blues and purples from mountain flowers. Mists frequently swirl around its upper reaches, giving it an ethereal quality. Stark contrasts of light and shadow on its rugged terrain."
+        },
+        {
+          "name": "The Sky-Stone Temple",
+          "description": "An ancient, intricately carved stone temple built directly into the side of the Emerald Peak, near its summit. It houses the sacred Sky-Stone. The temple's architecture blends seamlessly with the mountain, featuring astronomical alignments and carvings depicting constellations and celestial events. It feels ancient and infused with cosmic energy.",
+          "visual_identity": "Dark grey, weathered stone, adorned with eroded but still visible carvings of stars, planets, and mythical celestial beings. Openings in the temple align with specific points in the sky. Inside, the light is dim, with faint glows emanating from crystalline formations. A sense of timelessness and connection to the vast universe."
+        },
+        {
+          "name": "The Whispering Grotto (Emerald Peak)",
+          "description": "A hidden cave system deep within the Emerald Peak, accessible only through treacherous paths. It's filled with remarkable crystalline formations and vibrant patches of the glowing moss. The grotto hums with an ancient, resonant energy, and its walls are covered in forgotten celestial maps and glyphs.",
+          "visual_identity": "Dark, cool, and damp, contrasting with the vibrant, ethereal glow of the moss and crystals. Shimmering mineral deposits on cave walls. Sounds of dripping water and faint echoes. A profound sense of latent power and forgotten knowledge."
+        }
+      ],
+      "artifacts": [
+        {
+          "name": "The Whispering Stone of Valampuri",
+          "description": "Meera's palm-sized, pristine white conch shell. Its connection to Meera has deepened, now capable of not only sensing terrestrial blight but also cosmic anomalies and resonating with celestial energies. It can project focused bursts of purifying energy and show clearer, more complex visions.",
+          "importance": "Remains Meera's primary tool for sensing the blight's presence, understanding its history, and channeling natural energy. Its capabilities expand to sense a wider network of sacred sites and their cosmic connections.",
+          "origin": "A gift from the guardian spirits of the forest to Poomalai's first settlers, now understood as a key component in a global network of spiritual sensors connected even to celestial bodies."
+        },
+        {
+          "name": "The Lotus Weaver's Loom",
+          "description": "Anya's exquisitely carved, petrified wooden loom. Now understood as a versatile artifact, it can analyze and channel energy patterns from different sacred sites, not just the Luminous Lotus. Its iridescent threads shimmer with stored natural energy.",
+          "importance": "Anya's personal artifact for analyzing and manipulating the blight's energy patterns and channeling pure energy for healing. It proves adaptable to new environments and challenges.",
+          "origin": "Crafted by the first 'Lotus Weavers', an ancient lineage of marsh guardians who understood how to channel and weave the Luminous Lotus's vital energy. Its principles are now understood to apply to broader energy manipulation."
+        },
+        {
+          "name": "The Sky-Stone",
+          "description": "A colossal, ancient crystalline formation at the heart of the Emerald Peak Temple, humming with subtle cosmic energy. It appears as a multifaceted obelisk of a deep, luminous blue, embedded with tiny, star-like inclusions. It resonates with celestial alignments and radiates a calming spiritual presence.",
+          "importance": "The sacred site of the Emerald Peak, acting as a powerful conduit for cosmic energy, vital for the mountain's ecological and spiritual balance. It forms a crucial part of the wider network of sacred sites and is the target of the Umbral Weavers' blight.",
+          "origin": "Believed to have fallen from the heavens in ancient times, imbued with starlight and cosmic wisdom, and subsequently enshrined by the mountain's first inhabitants who became its guardians."
+        },
+        {
+          "name": "The Celestial Compass",
+          "description": "A small, palm-sized, spherical device made of polished meteoritic iron, etched with ancient star charts and symbols. It contains a single, perpetually spinning point of light that aligns with specific celestial bodies or powerful energy sources when activated.",
+          "importance": "A crucial guide found within the Sky-Stone Temple. It not only points to other sacred sites in the network but also highlights specific celestial alignments or cosmic entities, potentially revealing the Umbral Weavers' ultimate, wider goal.",
+          "origin": "An ancient navigational and divinatory tool created by the original guardians of the Emerald Peak to track celestial events and locate powerful energy nodes across the land and sky."
+        }
+      ],
+      "mysteries": [
+        {
+          "name": "The Umbral Weavers' True Nexus and Leader",
+          "description": "What is the true location and nature of the dominant, pulsating dark symbol Meera saw? Is it a physical place, a being, or a nexus of corrupted energy? Who is the mastermind behind the Umbral Weavers and what is their grand design?",
+          "importance": "The central overarching mystery. Solving it means understanding and ultimately defeating the true antagonist of the universe.",
+          "status": "Ongoing (The symbol is now linked to a larger, cosmic threat, and Vetri's actions provide new clues about their goals)."
+        },
+        {
+          "name": "The Whispering Stone's Cosmic Connections",
+          "description": "How does the Whispering Stone sense and connect to cosmic energies beyond the terrestrial network of sacred sites? Are there other 'whispering stones' or similar artifacts attuned to celestial phenomena?",
+          "importance": "Understanding this connection is vital for comprehending the true, potentially universe-spanning scope of the blight and finding new avenues for resistance.",
+          "status": "Ongoing (Meera's abilities are expanding to sense celestial distress, hinting at a higher purpose for the Stone)."
+        },
+        {
+          "name": "The Nature of the Blight on the Emerald Peak",
+          "description": "How does this new, technologically-driven blight specifically affect a crystalline, cosmic-energy-infused artifact like the Sky-Stone? How does it differ from the organic blights seen in Poomalai and Kanthar Nagar, and what does this reveal about the Umbral Weavers' adaptability?",
+          "importance": "Understanding the unique manifestation of the blight and Vetri's methods is crucial for defeating him in this arc and anticipating future, varied threats.",
+          "status": "New mystery (The blight adapts to its environment, suggesting a versatile and intelligent source)."
+        },
+        {
+          "name": "The Legend of the Sky-Stone and its Guardians",
+          "description": "What ancient lore protects the Emerald Peak, and why have the guardians like Ranjani remained so secretive? What secrets about celestial energy and the wider network are hidden in the Sky-Stone Temple's history?",
+          "importance": "The history and artifacts of the mountain are essential for understanding and restoring the Sky-Stone, and may reveal critical weaknesses of the Umbral Weavers.",
+          "status": "New mystery (Revealed through Ranjani's lineage and the Silent Sky-Stone Temple Ruins)."
+        },
+        {
+          "name": "The Persistent Glowing Moss's Cosmic Link",
+          "description": "The glowing moss is now present in the Emerald Peak's Whispering Grotto and reacts to the Sky-Stone's energy and the blight. What is its true nature, and why does it appear in all blighted sacred sites, seemingly as an indicator of ancient and cosmic energy?",
+          "importance": "It acts as a consistent environmental indicator of magical/blight energy, now extended to cosmic energy, potentially revealing hidden pathways, vulnerabilities, or even a systemic 'nervous system' of the sacred network.",
+          "status": "Continuing (Its connection to blight and ancient energy deepens, now hinting at a cosmic role)."
+        },
+        {
+          "name": "Kaalan's True Nature",
+          "description": "Kaalan's mask cracked, revealing dark, swirling energy beneath. Was he human, or a construct/entity created by the Umbral Weavers? What does this imply about the Umbral Weavers' power to transform or create agents?",
+          "importance": "Understanding the true nature of the Umbral Weaver agents will be crucial in confronting higher-ranking members or the leader.",
+          "status": "Continuing (A lingering question, potentially answered by Vetri's actions or by future revelations about the Umbral Weavers' technology and magic)."
+        }
+      ],
+      "episodes": [
+        {
+          "episode_number": 1,
+          "title": "A Beacon in the Sky",
+          "main_objective": "Re-establish the unified trio of Meera, Karthik, and Anya. Introduce the next threat through the Whispering Stone, leading them to the Emerald Peak. Gain initial guidance from Aachi and Thatha.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Aachi",
+            "Thatha"
+          ],
+          "key_event": "The Whispering Stone, now charged from the Kanthar Nagar victory, projects a persistent vision of a majestic mountain piercing the clouds, adorned with a shimmering light that is flickering and fading. It's accompanied by the Umbral Weaver symbol. Aachi explains this could be a 'Sky-Stone', a rare site connected to cosmic energies, and advises caution for the mountain journey. Anya prepares to join them.",
+          "character_development": "Meera's confidence in her abilities grows, but she feels the weight of increased responsibility. Karthik begins researching celestial alignments and mountain navigation. Anya showcases her enthusiasm and readiness for new challenges.",
+          "mystery_progression": "The Whispering Stone's ability to sense cosmic distress is revealed. The Umbral Weaver symbol is confirmed as the key identifier for the spreading threat. The concept of a 'Sky-Stone' and its celestial connection is introduced.",
+          "ending_hook": "As they depart from Kanthar Nagar, the Whispering Stone pulses with an intense, unsettling hum, and Meera sees a fleeting, unsettling vision of the mountain's light dimming rapidly, intertwined with mechanical, crystalline tendrils – a new form of blight."
+        },
+        {
+          "episode_number": 2,
+          "title": "Ascent into Silence",
+          "main_objective": "Meera, Karthik, and Anya journey to the Emerald Peak, facing its unique challenges, and encounter the mountain's reclusive guardian, Ranjani.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani"
+          ],
+          "key_event": "The trio experiences the harsh realities of mountain travel (thin air, treacherous paths). Anya's marsh-honed agility is challenged, prompting Karthik to adapt some small gadgets for climbing. They encounter Ranjani, the stoic mountain guardian, who is initially wary and tries to turn them away, believing outsiders are the cause of the mountain's 'silent song' (the fading Sky-Stone).",
+          "character_development": "Meera uses empathy and the Whispering Stone's visions to try and bridge the distrust with Ranjani. Karthik adapts his inventive skills to the new environment. Anya demonstrates resilience and adaptability in unfamiliar terrain.",
+          "mystery_progression": "The Sky-Stone's 'silent song' is established as the blight's symptom. Ranjani introduces the mountain's deep history and the guardians' secluded traditions. The glowing moss is subtly noticed in mountain crevices, reacting to the encroaching blight.",
+          "ending_hook": "As the sun sets, casting long shadows, Ranjani points to the distant temple entrance, where a faint, sickly glow emanates, confirming her fears and hinting at the peril within. She begrudgingly agrees to lead them, realizing the threat is internal."
+        },
+        {
+          "episode_number": 3,
+          "title": "The Crystalline Blight",
+          "main_objective": "Reach the Sky-Stone Temple, discover the Sky-Stone and its unique blight, and have the first confrontation with the cunning Umbral Weaver agent, Vetri.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani",
+            "Vetri"
+          ],
+          "key_event": "Ranjani leads them to the ancient Sky-Stone Temple. Inside, they find the magnificent Sky-Stone, but it's partially covered in shimmering, crystalline blight that pulses with a cold, unnatural light. Vetri appears, not as a brute like Kaalan, but as a suave, manipulative figure. He attempts to distract them with false narratives about the 'progress' his organization offers, trying to turn Ranjani against the children, or them against Ranjani, using advanced holographic illusions and sonic disruptions.",
+          "character_development": "Meera's intuition warns her of Vetri's deceit. Karthik is intrigued and challenged by Vetri's advanced tech. Anya stands firm, instinctively recognizing manipulation. Ranjani's protective instincts are reignited.",
+          "mystery_progression": "The unique, crystalline nature of the new blight is revealed. Vetri is introduced as a more intellectual and technologically-focused Umbral Weaver agent. The symbol on his brooch confirms him as part of the organization. The method of corrupting the Sky-Stone is understood as a subtle severance of celestial links.",
+          "ending_hook": "Vetri, with a condescending smile, activates a device that intensifies the crystalline blight, causing the Sky-Stone to emit a mournful, high-pitched hum. He then vanishes, leaving behind a subtle energy signature that Karthik scrambles to analyze, realizing the depth of the technological threat."
+        },
+        {
+          "episode_number": 4,
+          "title": "Whispers of the Cosmos",
+          "main_objective": "Explore the Whispering Grotto, discover the Celestial Compass, and learn about the Sky-Stone's deep celestial connections and the Umbral Weavers' objective.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani"
+          ],
+          "key_event": "Ranjani, recalling ancient prophecies, leads the trio to the Whispering Grotto. The glowing moss here reacts intensely to Meera's Whispering Stone, revealing ancient celestial maps and glyphs on the cave walls. Guided by the Stone, they uncover the Celestial Compass, which immediately aligns with a specific star cluster related to the Sky-Stone. Meera receives fragmented visions of the Umbral Weavers attempting to 're-align' celestial bodies for their own nefarious purposes.",
+          "character_development": "Ranjani fully embraces Meera, Karthik, and Anya as allies, sharing more of her ancestral knowledge. Meera's connection to the cosmic aspect of the network deepens. Karthik is fascinated by the Celestial Compass, eager to understand its workings. Anya recognizes the Loom's potential to interpret new energy patterns.",
+          "mystery_progression": "The Celestial Compass is discovered as a key artifact, revealing the Sky-Stone's celestial connections. The Umbral Weavers' cosmic ambitions are hinted at. The glowing moss is confirmed as a universal energy indicator, including cosmic energies.",
+          "ending_hook": "The Celestial Compass spins wildly, not just pointing to the Sky-Stone, but also to a distant, uncharted constellation, and then rapidly shifts its focus to a faint, pulsating light far beyond their solar system, leaving the children with a chilling realization of the true scale of the threat."
+        },
+        {
+          "episode_number": 5,
+          "title": "Starlight and Shadow",
+          "main_objective": "The children learn to activate and use the Celestial Compass in conjunction with other artifacts, preparing for a direct confrontation with Vetri as he attempts a major disruption.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani",
+            "Vetri"
+          ],
+          "key_event": "Back at the temple, Karthik works to understand the Celestial Compass's mechanics, realizing it needs a specific energy frequency to fully activate. Ranjani shares ancient chants and star lore that help attune it. Anya uses the Lotus Weaver's Loom to analyze the patterns of the crystalline blight, realizing it's a 'frequency jammer'. Meera uses the Whispering Stone to focus pure energy, activating the Compass. Vetri returns, deploying advanced drones and force fields to disrupt their efforts and accelerate the Sky-Stone's corruption, triggering minor rockslides.",
+          "character_development": "Karthik's ingenuity bridges ancient and modern tech. Ranjani adapts her traditions to modern challenges. Meera learns to synchronize her powers with the new artifacts. Anya's analytical skills with the Loom prove vital against tech-based blight.",
+          "mystery_progression": "The Celestial Compass's activation method and its role in revealing Umbral Weaver's deeper plan become clear. Vetri's technological prowess and cunning are fully showcased. The blight is identified as a frequency disruption.",
+          "ending_hook": "As the Celestial Compass glows brightly, momentarily forcing Vetri's drones back, Meera receives a short, sharp vision from the Whispering Stone: the 'dominant dark symbol' she saw before is now intricately linked to a specific celestial alignment, and Vetri is about to sever this link permanently. Vetri, enraged, prepares a devastating, focused energy blast directly at the Sky-Stone."
+        },
+        {
+          "episode_number": 6,
+          "title": "Cosmic Clash",
+          "main_objective": "Meera, Karthik, Anya, and Ranjani confront Vetri in a climactic battle to save the Sky-Stone from permanent corruption and severing of its cosmic connection.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani",
+            "Vetri"
+          ],
+          "key_event": "Vetri launches his final, concentrated attack, attempting to fully sever the Sky-Stone's celestial connection, which would allow the Umbral Weavers to reroute its cosmic energy. Meera uses the Whispering Stone to channel purifying energy to counter the blight, while Karthik, using the Celestial Compass and his modified gadgets, pinpoints Vetri's energy source and creates a feedback loop. Anya, with Ranjani's guidance, uses the Lotus Weaver's Loom to 're-weave' the Sky-Stone's energy patterns, shielding it from Vetri's attacks. The climax is a dynamic battle of ancient wisdom and combined ingenuity against advanced technology and manipulation, where the children must align the Sky-Stone with its true celestial point.",
+          "character_development": "Meera masters the Whispering Stone's cosmic capabilities. Karthik's inventions prove capable of combating advanced tech. Anya integrates her weaving skills with celestial energies. Ranjani shows fierce, active protection of her sacred site, overcoming her initial distrust and proving her bravery.",
+          "mystery_progression": "Vetri's true tactical brilliance and the depth of the Umbral Weavers' technological corruption are revealed. The Umbral Weaver symbol on his brooch pulses with greater power, indicating a direct link to his masters.",
+          "ending_hook": "Vetri's sophisticated equipment begins to overload under their combined assault. With a snarl of frustration, he makes a tactical retreat, his brooch falling off and shattering, revealing a complex, miniature circuit board etched with an evolved 'Umbral Weaver' symbol. The Sky-Stone, though scarred, begins to glow with renewed, stronger celestial light."
+        },
+        {
+          "episode_number": 7,
+          "title": "Echoes from the Stars",
+          "main_objective": "Heal the Sky-Stone, reflect on the arc's events, confirm the Umbral Weavers' cosmic ambitions, and set up the next major threat.",
+          "important_characters": [
+            "Meera",
+            "Karthik",
+            "Anya",
+            "Ranjani",
+            "Aachi"
+          ],
+          "key_event": "The Sky-Stone is stabilized, its luminous blue restored, and the Emerald Peak returns to harmony. Ranjani expresses deep gratitude and formally pledges her allegiance to the network of guardians. Karthik studies the shattered brooch fragment, discovering hidden data and a new, more complex Umbral Weaver symbol, hinting at their internal hierarchy and a grander 'celestial harvesting' plan. Meera's Whispering Stone, in conjunction with the Celestial Compass, projects a powerful, stable vision: the 'dominant dark symbol' at the network's center is now revealed to be a massive, unseen orbital station or celestial anomaly that the Umbral Weavers are attempting to fully power, not just a terrestrial nexus.",
+          "character_development": "Meera fully understands her role as a universal conduit. Karthik commits to developing countermeasures against Umbral Weaver tech. Anya solidifies her identity as a multi-environment guardian. Ranjani finds peace and a renewed purpose in the larger alliance of guardians. Aachi sends words of pride and caution.",
+          "mystery_progression": "Vetri is defeated (temporarily), and new details about Umbral Weaver technology and cosmic ambitions are revealed. The true nature of the 'dominant dark symbol' as an orbital station/anomaly is a major revelation. The symbol on Vetri's brooch hints at internal Umbral Weaver structure. The Glowing Moss reacts universally, glowing brighter across all saved sites.",
+          "ending_hook": "Meera holds the Whispering Stone, now vibrating with new cosmic data. The Celestial Compass points to the distant celestial anomaly, now visible as a faint, unnatural shimmer in the night sky. The children realize the Umbral Weavers' ultimate goal is not just terrestrial control but cosmic domination, and their next adventure must take them beyond their world. The future of the entire celestial network, and possibly the universe, depends on them stopping The Umbral Weavers from activating their ultimate weapon."
+        }
+      ],
+      "central_mysteries": [
+        "The Umbral Weavers' True Nexus and Leader: Who is the mastermind behind the orbital station/celestial anomaly and what is their ultimate goal?",
+        "The Whispering Stone's Cosmic Connections: How can Meera fully harness its ability to communicate with and protect the cosmic network?",
+        "The Nature of Umbral Weaver Agents: Are they human, transformed, or constructs? What is the significance of their varying tactics (blight vs. tech)?",
+        "The Persistent Glowing Moss's Universal Role: What is its ultimate purpose in the network of sacred sites, and how does it react to cosmic blight?"
+      ],
+      "foreshadowing": [
+        {
+          "clue": "The Celestial Compass points to a distant, uncharted constellation and a faint, pulsating light far beyond the solar system.",
+          "introduced_episode": 4,
+          "possible_future_connection": "This directly sets up a future arc involving space travel or a threat originating from beyond Earth, revealing the truly cosmic scale of the Umbral Weavers' ambition."
+        },
+        {
+          "clue": "Vetri's shattered brooch fragment reveals a complex circuit board and an evolved 'Umbral Weaver' symbol.",
+          "introduced_episode": 6,
+          "possible_future_connection": "This hints at an internal hierarchy, different factions, or specialized roles within the Umbral Weavers, and suggests their technology is rapidly advancing. The symbol itself may contain encrypted data or a new target."
+        },
+        {
+          "clue": "Meera's final vision confirms the 'dominant dark symbol' is a massive, unseen orbital station or celestial anomaly.",
+          "introduced_episode": 7,
+          "possible_future_connection": "This is the ultimate nexus of the Umbral Weavers' power, their final weapon or base of operations, and the ultimate destination for the children in a grand finale arc."
+        },
+        {
+          "clue": "Ranjani mentions ancient prophecies of 'star-weavers' and 'sky-serpents' who uphold cosmic balance.",
+          "introduced_episode": 5,
+          "possible_future_connection": "This hints at ancient cosmic entities or civilizations that previously battled threats similar to the Umbral Weavers, potentially leading to new allies or sources of knowledge in future space-faring arcs."
+        }
+      ],
+      "major_events": [
+        "The Whispering Stone shows visions of the blighted Emerald Peak and Sky-Stone (Episode 1).",
+        "Meera, Karthik, and Anya journey to the Emerald Peak and encounter Ranjani (Episode 2).",
+        "Discovery of the Sky-Stone Temple, the crystalline blight, and first confrontation with Vetri (Episode 3).",
+        "Exploration of the Whispering Grotto, discovery of the Celestial Compass, and revelations of Umbral Weaver's cosmic ambitions (Episode 4).",
+        "The children learn to activate the Celestial Compass and combine artifacts; Vetri escalates his attack (Episode 5).",
+        "Climax: Meera, Karthik, Anya, and Ranjani unite to fight Vetri and save the Sky-Stone's celestial connection (Episode 6).",
+        "Vetri is repelled; the Sky-Stone is healed; new revelations about the Umbral Weavers' orbital station/celestial anomaly (Episode 7)."
+      ],
+      "arc_climax": "In a desperate struggle at the Sky-Stone Temple, Vetri attempts to fully sever the Sky-Stone's cosmic connection. Meera, channeling intensified purifying energy from the Whispering Stone, disrupts Vetri's blight. Karthik, using the newly understood Celestial Compass and his adapted gadgets, creates a precise energy pulse that overloads Vetri's tech, simultaneously aligning the Sky-Stone with its true celestial point. Anya, guided by Ranjani's ancient wisdom, uses the Lotus Weaver's Loom to 're-weave' and reinforce the Sky-Stone's cosmic energy patterns, creating a powerful shield. Their combined, synchronized efforts overwhelm Vetri's defenses, forcing him to retreat, leaving behind a crucial, technologically advanced fragment of his Umbral Weaver brooch.",
+      "arc_consequences": [
+        "The Emerald Peak and its Sky-Stone are healed and their celestial connection restored, strengthening the entire network of sacred sites.",
+        "Meera's abilities with the Whispering Stone mature to encompass cosmic sensing and energy manipulation, giving her a broader understanding of the universe's balance.",
+        "Karthik's inventive skills advance to integrate ancient artifacts with modern technology, making him capable of combating more sophisticated threats.",
+        "Anya expands her guardianship and resourcefulness beyond marshlands, adapting her Loom to new energy types and environments, solidifying her bond with the core trio.",
+        "Ranjani, the mountain guardian, becomes a trusted ally, integrating the Emerald Peak's lore and strength into the broader alliance of sacred site protectors.",
+        "Vetri is identified as a key, technologically adept agent of 'The Umbral Weavers', providing crucial insights into their advanced methods and internal structure.",
+        "The Umbral Weavers' ultimate goal is revealed to extend beyond terrestrial control to cosmic domination, with a powerful orbital station/celestial anomaly as their central nexus, making the threat global and potentially universal."
+      ],
+      "future_arc_hook": "With the Sky-Stone saved, the Celestial Compass now projects a clear, stable image of the Umbral Weavers' true nexus: a colossal, dark orbital station or celestial anomaly pulsating with corrupted energy, positioned to drain power from the cosmic network. The fragment of Vetri's brooch, upon further analysis by Karthik, reveals a fragment of its design and a sequence of coordinates, hinting at its true purpose and activation. Meera's Whispering Stone continues to hum with a new, urgent celestial frequency. The children realize their next journey must take them beyond the confines of their world, into the cosmos itself, to confront the Umbral Weavers' leader at their ultimate stronghold and prevent a universal catastrophe.",
+      "id": "arc_003",
+      "arc_number": 3
     }
   },
   "episodes": {
@@ -1289,6 +1855,144 @@
       "arc_id": "arc_002",
       "arc_number": 2,
       "status": "planned"
+    },
+    "arc_003_ep_01": {
+      "episode_number": 1,
+      "title": "A Beacon in the Sky",
+      "main_objective": "Re-establish the unified trio of Meera, Karthik, and Anya. Introduce the next threat through the Whispering Stone, leading them to the Emerald Peak. Gain initial guidance from Aachi and Thatha.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Aachi",
+        "Thatha"
+      ],
+      "key_event": "The Whispering Stone, now charged from the Kanthar Nagar victory, projects a persistent vision of a majestic mountain piercing the clouds, adorned with a shimmering light that is flickering and fading. It's accompanied by the Umbral Weaver symbol. Aachi explains this could be a 'Sky-Stone', a rare site connected to cosmic energies, and advises caution for the mountain journey. Anya prepares to join them.",
+      "character_development": "Meera's confidence in her abilities grows, but she feels the weight of increased responsibility. Karthik begins researching celestial alignments and mountain navigation. Anya showcases her enthusiasm and readiness for new challenges.",
+      "mystery_progression": "The Whispering Stone's ability to sense cosmic distress is revealed. The Umbral Weaver symbol is confirmed as the key identifier for the spreading threat. The concept of a 'Sky-Stone' and its celestial connection is introduced.",
+      "ending_hook": "As they depart from Kanthar Nagar, the Whispering Stone pulses with an intense, unsettling hum, and Meera sees a fleeting, unsettling vision of the mountain's light dimming rapidly, intertwined with mechanical, crystalline tendrils – a new form of blight.",
+      "id": "arc_003_ep_01",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_02": {
+      "episode_number": 2,
+      "title": "Ascent into Silence",
+      "main_objective": "Meera, Karthik, and Anya journey to the Emerald Peak, facing its unique challenges, and encounter the mountain's reclusive guardian, Ranjani.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani"
+      ],
+      "key_event": "The trio experiences the harsh realities of mountain travel (thin air, treacherous paths). Anya's marsh-honed agility is challenged, prompting Karthik to adapt some small gadgets for climbing. They encounter Ranjani, the stoic mountain guardian, who is initially wary and tries to turn them away, believing outsiders are the cause of the mountain's 'silent song' (the fading Sky-Stone).",
+      "character_development": "Meera uses empathy and the Whispering Stone's visions to try and bridge the distrust with Ranjani. Karthik adapts his inventive skills to the new environment. Anya demonstrates resilience and adaptability in unfamiliar terrain.",
+      "mystery_progression": "The Sky-Stone's 'silent song' is established as the blight's symptom. Ranjani introduces the mountain's deep history and the guardians' secluded traditions. The glowing moss is subtly noticed in mountain crevices, reacting to the encroaching blight.",
+      "ending_hook": "As the sun sets, casting long shadows, Ranjani points to the distant temple entrance, where a faint, sickly glow emanates, confirming her fears and hinting at the peril within. She begrudgingly agrees to lead them, realizing the threat is internal.",
+      "id": "arc_003_ep_02",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_03": {
+      "episode_number": 3,
+      "title": "The Crystalline Blight",
+      "main_objective": "Reach the Sky-Stone Temple, discover the Sky-Stone and its unique blight, and have the first confrontation with the cunning Umbral Weaver agent, Vetri.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani",
+        "Vetri"
+      ],
+      "key_event": "Ranjani leads them to the ancient Sky-Stone Temple. Inside, they find the magnificent Sky-Stone, but it's partially covered in shimmering, crystalline blight that pulses with a cold, unnatural light. Vetri appears, not as a brute like Kaalan, but as a suave, manipulative figure. He attempts to distract them with false narratives about the 'progress' his organization offers, trying to turn Ranjani against the children, or them against Ranjani, using advanced holographic illusions and sonic disruptions.",
+      "character_development": "Meera's intuition warns her of Vetri's deceit. Karthik is intrigued and challenged by Vetri's advanced tech. Anya stands firm, instinctively recognizing manipulation. Ranjani's protective instincts are reignited.",
+      "mystery_progression": "The unique, crystalline nature of the new blight is revealed. Vetri is introduced as a more intellectual and technologically-focused Umbral Weaver agent. The symbol on his brooch confirms him as part of the organization. The method of corrupting the Sky-Stone is understood as a subtle severance of celestial links.",
+      "ending_hook": "Vetri, with a condescending smile, activates a device that intensifies the crystalline blight, causing the Sky-Stone to emit a mournful, high-pitched hum. He then vanishes, leaving behind a subtle energy signature that Karthik scrambles to analyze, realizing the depth of the technological threat.",
+      "id": "arc_003_ep_03",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_04": {
+      "episode_number": 4,
+      "title": "Whispers of the Cosmos",
+      "main_objective": "Explore the Whispering Grotto, discover the Celestial Compass, and learn about the Sky-Stone's deep celestial connections and the Umbral Weavers' objective.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani"
+      ],
+      "key_event": "Ranjani, recalling ancient prophecies, leads the trio to the Whispering Grotto. The glowing moss here reacts intensely to Meera's Whispering Stone, revealing ancient celestial maps and glyphs on the cave walls. Guided by the Stone, they uncover the Celestial Compass, which immediately aligns with a specific star cluster related to the Sky-Stone. Meera receives fragmented visions of the Umbral Weavers attempting to 're-align' celestial bodies for their own nefarious purposes.",
+      "character_development": "Ranjani fully embraces Meera, Karthik, and Anya as allies, sharing more of her ancestral knowledge. Meera's connection to the cosmic aspect of the network deepens. Karthik is fascinated by the Celestial Compass, eager to understand its workings. Anya recognizes the Loom's potential to interpret new energy patterns.",
+      "mystery_progression": "The Celestial Compass is discovered as a key artifact, revealing the Sky-Stone's celestial connections. The Umbral Weavers' cosmic ambitions are hinted at. The glowing moss is confirmed as a universal energy indicator, including cosmic energies.",
+      "ending_hook": "The Celestial Compass spins wildly, not just pointing to the Sky-Stone, but also to a distant, uncharted constellation, and then rapidly shifts its focus to a faint, pulsating light far beyond their solar system, leaving the children with a chilling realization of the true scale of the threat.",
+      "id": "arc_003_ep_04",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_05": {
+      "episode_number": 5,
+      "title": "Starlight and Shadow",
+      "main_objective": "The children learn to activate and use the Celestial Compass in conjunction with other artifacts, preparing for a direct confrontation with Vetri as he attempts a major disruption.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani",
+        "Vetri"
+      ],
+      "key_event": "Back at the temple, Karthik works to understand the Celestial Compass's mechanics, realizing it needs a specific energy frequency to fully activate. Ranjani shares ancient chants and star lore that help attune it. Anya uses the Lotus Weaver's Loom to analyze the patterns of the crystalline blight, realizing it's a 'frequency jammer'. Meera uses the Whispering Stone to focus pure energy, activating the Compass. Vetri returns, deploying advanced drones and force fields to disrupt their efforts and accelerate the Sky-Stone's corruption, triggering minor rockslides.",
+      "character_development": "Karthik's ingenuity bridges ancient and modern tech. Ranjani adapts her traditions to modern challenges. Meera learns to synchronize her powers with the new artifacts. Anya's analytical skills with the Loom prove vital against tech-based blight.",
+      "mystery_progression": "The Celestial Compass's activation method and its role in revealing Umbral Weaver's deeper plan become clear. Vetri's technological prowess and cunning are fully showcased. The blight is identified as a frequency disruption.",
+      "ending_hook": "As the Celestial Compass glows brightly, momentarily forcing Vetri's drones back, Meera receives a short, sharp vision from the Whispering Stone: the 'dominant dark symbol' she saw before is now intricately linked to a specific celestial alignment, and Vetri is about to sever this link permanently. Vetri, enraged, prepares a devastating, focused energy blast directly at the Sky-Stone.",
+      "id": "arc_003_ep_05",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_06": {
+      "episode_number": 6,
+      "title": "Cosmic Clash",
+      "main_objective": "Meera, Karthik, Anya, and Ranjani confront Vetri in a climactic battle to save the Sky-Stone from permanent corruption and severing of its cosmic connection.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani",
+        "Vetri"
+      ],
+      "key_event": "Vetri launches his final, concentrated attack, attempting to fully sever the Sky-Stone's celestial connection, which would allow the Umbral Weavers to reroute its cosmic energy. Meera uses the Whispering Stone to channel purifying energy to counter the blight, while Karthik, using the Celestial Compass and his modified gadgets, pinpoints Vetri's energy source and creates a feedback loop. Anya, with Ranjani's guidance, uses the Lotus Weaver's Loom to 're-weave' the Sky-Stone's energy patterns, shielding it from Vetri's attacks. The climax is a dynamic battle of ancient wisdom and combined ingenuity against advanced technology and manipulation, where the children must align the Sky-Stone with its true celestial point.",
+      "character_development": "Meera masters the Whispering Stone's cosmic capabilities. Karthik's inventions prove capable of combating advanced tech. Anya integrates her weaving skills with celestial energies. Ranjani shows fierce, active protection of her sacred site, overcoming her initial distrust and proving her bravery.",
+      "mystery_progression": "Vetri's true tactical brilliance and the depth of the Umbral Weavers' technological corruption are revealed. The Umbral Weaver symbol on his brooch pulses with greater power, indicating a direct link to his masters.",
+      "ending_hook": "Vetri's sophisticated equipment begins to overload under their combined assault. With a snarl of frustration, he makes a tactical retreat, his brooch falling off and shattering, revealing a complex, miniature circuit board etched with an evolved 'Umbral Weaver' symbol. The Sky-Stone, though scarred, begins to glow with renewed, stronger celestial light.",
+      "id": "arc_003_ep_06",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
+    },
+    "arc_003_ep_07": {
+      "episode_number": 7,
+      "title": "Echoes from the Stars",
+      "main_objective": "Heal the Sky-Stone, reflect on the arc's events, confirm the Umbral Weavers' cosmic ambitions, and set up the next major threat.",
+      "important_characters": [
+        "Meera",
+        "Karthik",
+        "Anya",
+        "Ranjani",
+        "Aachi"
+      ],
+      "key_event": "The Sky-Stone is stabilized, its luminous blue restored, and the Emerald Peak returns to harmony. Ranjani expresses deep gratitude and formally pledges her allegiance to the network of guardians. Karthik studies the shattered brooch fragment, discovering hidden data and a new, more complex Umbral Weaver symbol, hinting at their internal hierarchy and a grander 'celestial harvesting' plan. Meera's Whispering Stone, in conjunction with the Celestial Compass, projects a powerful, stable vision: the 'dominant dark symbol' at the network's center is now revealed to be a massive, unseen orbital station or celestial anomaly that the Umbral Weavers are attempting to fully power, not just a terrestrial nexus.",
+      "character_development": "Meera fully understands her role as a universal conduit. Karthik commits to developing countermeasures against Umbral Weaver tech. Anya solidifies her identity as a multi-environment guardian. Ranjani finds peace and a renewed purpose in the larger alliance of guardians. Aachi sends words of pride and caution.",
+      "mystery_progression": "Vetri is defeated (temporarily), and new details about Umbral Weaver technology and cosmic ambitions are revealed. The true nature of the 'dominant dark symbol' as an orbital station/anomaly is a major revelation. The symbol on Vetri's brooch hints at internal Umbral Weaver structure. The Glowing Moss reacts universally, glowing brighter across all saved sites.",
+      "ending_hook": "Meera holds the Whispering Stone, now vibrating with new cosmic data. The Celestial Compass points to the distant celestial anomaly, now visible as a faint, unnatural shimmer in the night sky. The children realize the Umbral Weavers' ultimate goal is not just terrestrial control but cosmic domination, and their next adventure must take them beyond their world. The future of the entire celestial network, and possibly the universe, depends on them stopping The Umbral Weavers from activating their ultimate weapon.",
+      "id": "arc_003_ep_07",
+      "arc_id": "arc_003",
+      "arc_number": 3,
+      "status": "planned"
     }
   },
   "locations": {
@@ -1333,6 +2037,24 @@
       "description": "Deep within the less-traversed parts of the Kanthar Nagar marsh lie the partially submerged and heavily overgrown ruins of an ancient stone temple. Legend says this was once a powerful nexus, and a sanctuary for the original Lotus Weavers—guardians of the Luminous Lotus. It holds forgotten lore and possibly ancient defensive mechanisms against threats to the marsh. The ruins are eerily quiet, save for the sounds of the marsh.",
       "visual_identity": "Dark, moss-covered stone structures, partially submerged in murky water. Vines and strangler figs entwine the ancient pillars and walls. Intricate but heavily eroded carvings depict lotus motifs and ancient rituals. Patches of the glowing moss (seen in Arc 001) are present here, reacting subtly to energy fluctuations. The atmosphere is solemn and mysterious.",
       "id": "the_silent_temple_ruins"
+    },
+    "the_emerald_peak": {
+      "name": "The Emerald Peak",
+      "description": "A majestic, mist-shrouded mountain, revered as a sacred site. Its towering slopes are covered in ancient, hardy trees and unique high-altitude flora, with sheer cliffs and hidden caves. The air is crisp and thin, often filled with the sound of wind and distant bird calls. Legends speak of it touching the heavens.",
+      "visual_identity": "Dominant shades of deep green from coniferous forests, grey and white from exposed rock and snow-capped summits, soft blues and purples from mountain flowers. Mists frequently swirl around its upper reaches, giving it an ethereal quality. Stark contrasts of light and shadow on its rugged terrain.",
+      "id": "the_emerald_peak"
+    },
+    "the_sky_stone_temple": {
+      "name": "The Sky-Stone Temple",
+      "description": "An ancient, intricately carved stone temple built directly into the side of the Emerald Peak, near its summit. It houses the sacred Sky-Stone. The temple's architecture blends seamlessly with the mountain, featuring astronomical alignments and carvings depicting constellations and celestial events. It feels ancient and infused with cosmic energy.",
+      "visual_identity": "Dark grey, weathered stone, adorned with eroded but still visible carvings of stars, planets, and mythical celestial beings. Openings in the temple align with specific points in the sky. Inside, the light is dim, with faint glows emanating from crystalline formations. A sense of timelessness and connection to the vast universe.",
+      "id": "the_sky_stone_temple"
+    },
+    "the_whispering_grotto_emerald_peak": {
+      "name": "The Whispering Grotto (Emerald Peak)",
+      "description": "A hidden cave system deep within the Emerald Peak, accessible only through treacherous paths. It's filled with remarkable crystalline formations and vibrant patches of the glowing moss. The grotto hums with an ancient, resonant energy, and its walls are covered in forgotten celestial maps and glyphs.",
+      "visual_identity": "Dark, cool, and damp, contrasting with the vibrant, ethereal glow of the moss and crystals. Shimmering mineral deposits on cave walls. Sounds of dripping water and faint echoes. A profound sense of latent power and forgotten knowledge.",
+      "id": "the_whispering_grotto_emerald_peak"
     }
   },
   "villains": {},
@@ -1357,6 +2079,20 @@
       "importance": "An ancient relic of Kanthar Nagar's original guardians, the Lotus Weavers. It holds the 'blueprint' for the Luminous Lotus's energy flow and can amplify or redirect its vitality. Crucial for understanding the unique blight of the marsh and, ultimately, for healing the Luminous Lotus.",
       "origin": "Crafted by the first 'Lotus Weavers', an ancient lineage of marsh guardians who understood how to channel and weave the Luminous Lotus's vital energy for protection and healing.",
       "id": "the_lotus_weaver_s_loom"
+    },
+    "the_sky_stone": {
+      "name": "The Sky-Stone",
+      "description": "A colossal, ancient crystalline formation at the heart of the Emerald Peak Temple, humming with subtle cosmic energy. It appears as a multifaceted obelisk of a deep, luminous blue, embedded with tiny, star-like inclusions. It resonates with celestial alignments and radiates a calming spiritual presence.",
+      "importance": "The sacred site of the Emerald Peak, acting as a powerful conduit for cosmic energy, vital for the mountain's ecological and spiritual balance. It forms a crucial part of the wider network of sacred sites and is the target of the Umbral Weavers' blight.",
+      "origin": "Believed to have fallen from the heavens in ancient times, imbued with starlight and cosmic wisdom, and subsequently enshrined by the mountain's first inhabitants who became its guardians.",
+      "id": "the_sky_stone"
+    },
+    "the_celestial_compass": {
+      "name": "The Celestial Compass",
+      "description": "A small, palm-sized, spherical device made of polished meteoritic iron, etched with ancient star charts and symbols. It contains a single, perpetually spinning point of light that aligns with specific celestial bodies or powerful energy sources when activated.",
+      "importance": "A crucial guide found within the Sky-Stone Temple. It not only points to other sacred sites in the network but also highlights specific celestial alignments or cosmic entities, potentially revealing the Umbral Weavers' ultimate, wider goal.",
+      "origin": "An ancient navigational and divinatory tool created by the original guardians of the Emerald Peak to track celestial events and locate powerful energy nodes across the land and sky.",
+      "id": "the_celestial_compass"
     }
   },
   "mysteries": {
@@ -1446,6 +2182,78 @@
       "last_arc": "The Fading Lotus of Kanthar Nagar",
       "arc_history": [
         "The Fading Lotus of Kanthar Nagar"
+      ]
+    },
+    "the_umbral_weavers_true_nexus_and_leader": {
+      "name": "The Umbral Weavers' True Nexus and Leader",
+      "description": "What is the true location and nature of the dominant, pulsating dark symbol Meera saw? Is it a physical place, a being, or a nexus of corrupted energy? Who is the mastermind behind the Umbral Weavers and what is their grand design?",
+      "importance": "The central overarching mystery. Solving it means understanding and ultimately defeating the true antagonist of the universe.",
+      "status": "active",
+      "id": "the_umbral_weavers_true_nexus_and_leader",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ]
+    },
+    "the_whispering_stone_s_cosmic_connections": {
+      "name": "The Whispering Stone's Cosmic Connections",
+      "description": "How does the Whispering Stone sense and connect to cosmic energies beyond the terrestrial network of sacred sites? Are there other 'whispering stones' or similar artifacts attuned to celestial phenomena?",
+      "importance": "Understanding this connection is vital for comprehending the true, potentially universe-spanning scope of the blight and finding new avenues for resistance.",
+      "status": "active",
+      "id": "the_whispering_stone_s_cosmic_connections",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ]
+    },
+    "the_nature_of_the_blight_on_the_emerald_peak": {
+      "name": "The Nature of the Blight on the Emerald Peak",
+      "description": "How does this new, technologically-driven blight specifically affect a crystalline, cosmic-energy-infused artifact like the Sky-Stone? How does it differ from the organic blights seen in Poomalai and Kanthar Nagar, and what does this reveal about the Umbral Weavers' adaptability?",
+      "importance": "Understanding the unique manifestation of the blight and Vetri's methods is crucial for defeating him in this arc and anticipating future, varied threats.",
+      "status": "active",
+      "id": "the_nature_of_the_blight_on_the_emerald_peak",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ]
+    },
+    "the_legend_of_the_sky_stone_and_its_guardians": {
+      "name": "The Legend of the Sky-Stone and its Guardians",
+      "description": "What ancient lore protects the Emerald Peak, and why have the guardians like Ranjani remained so secretive? What secrets about celestial energy and the wider network are hidden in the Sky-Stone Temple's history?",
+      "importance": "The history and artifacts of the mountain are essential for understanding and restoring the Sky-Stone, and may reveal critical weaknesses of the Umbral Weavers.",
+      "status": "active",
+      "id": "the_legend_of_the_sky_stone_and_its_guardians",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ]
+    },
+    "the_persistent_glowing_moss_s_cosmic_link": {
+      "name": "The Persistent Glowing Moss's Cosmic Link",
+      "description": "The glowing moss is now present in the Emerald Peak's Whispering Grotto and reacts to the Sky-Stone's energy and the blight. What is its true nature, and why does it appear in all blighted sacred sites, seemingly as an indicator of ancient and cosmic energy?",
+      "importance": "It acts as a consistent environmental indicator of magical/blight energy, now extended to cosmic energy, potentially revealing hidden pathways, vulnerabilities, or even a systemic 'nervous system' of the sacred network.",
+      "status": "active",
+      "id": "the_persistent_glowing_moss_s_cosmic_link",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
+      ]
+    },
+    "kaalan_s_true_nature": {
+      "name": "Kaalan's True Nature",
+      "description": "Kaalan's mask cracked, revealing dark, swirling energy beneath. Was he human, or a construct/entity created by the Umbral Weavers? What does this imply about the Umbral Weavers' power to transform or create agents?",
+      "importance": "Understanding the true nature of the Umbral Weaver agents will be crucial in confronting higher-ranking members or the leader.",
+      "status": "active",
+      "id": "kaalan_s_true_nature",
+      "first_arc": "The Emerald Peak's Silent Song",
+      "last_arc": "The Emerald Peak's Silent Song",
+      "arc_history": [
+        "The Emerald Peak's Silent Song"
       ]
     }
   },
@@ -1580,6 +2388,76 @@
       "type": "arc_consequence",
       "arc": "The Fading Lotus of Kanthar Nagar",
       "event": "The children realize the blight is adaptable and the fight to protect the sacred network is far from over."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The Whispering Stone shows visions of the blighted Emerald Peak and Sky-Stone (Episode 1)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Meera, Karthik, and Anya journey to the Emerald Peak and encounter Ranjani (Episode 2)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Discovery of the Sky-Stone Temple, the crystalline blight, and first confrontation with Vetri (Episode 3)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Exploration of the Whispering Grotto, discovery of the Celestial Compass, and revelations of Umbral Weaver's cosmic ambitions (Episode 4)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The children learn to activate the Celestial Compass and combine artifacts; Vetri escalates his attack (Episode 5)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Climax: Meera, Karthik, Anya, and Ranjani unite to fight Vetri and save the Sky-Stone's celestial connection (Episode 6)."
+    },
+    {
+      "type": "major_event",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Vetri is repelled; the Sky-Stone is healed; new revelations about the Umbral Weavers' orbital station/celestial anomaly (Episode 7)."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The Emerald Peak and its Sky-Stone are healed and their celestial connection restored, strengthening the entire network of sacred sites."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Meera's abilities with the Whispering Stone mature to encompass cosmic sensing and energy manipulation, giving her a broader understanding of the universe's balance."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Karthik's inventive skills advance to integrate ancient artifacts with modern technology, making him capable of combating more sophisticated threats."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Anya expands her guardianship and resourcefulness beyond marshlands, adapting her Loom to new energy types and environments, solidifying her bond with the core trio."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Ranjani, the mountain guardian, becomes a trusted ally, integrating the Emerald Peak's lore and strength into the broader alliance of sacred site protectors."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Vetri is identified as a key, technologically adept agent of 'The Umbral Weavers', providing crucial insights into their advanced methods and internal structure."
+    },
+    {
+      "type": "arc_consequence",
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The Umbral Weavers' ultimate goal is revealed to extend beyond terrestrial control to cosmic domination, with a powerful orbital station/celestial anomaly as their central nexus, making the threat global and potentially universal."
     }
   ],
   "unresolved_threads": [
@@ -1631,11 +2509,11 @@
     },
     {
       "name": "Future Arc Hook",
-      "description": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect.",
+      "description": "With the Sky-Stone saved, the Celestial Compass now projects a clear, stable image of the Umbral Weavers' true nexus: a colossal, dark orbital station or celestial anomaly pulsating with corrupted energy, positioned to drain power from the cosmic network. The fragment of Vetri's brooch, upon further analysis by Karthik, reveals a fragment of its design and a sequence of coordinates, hinting at its true purpose and activation. Meera's Whispering Stone continues to hum with a new, urgent celestial frequency. The children realize their next journey must take them beyond the confines of their world, into the cosmos itself, to confront the Umbral Weavers' leader at their ultimate stronghold and prevent a universal catastrophe.",
       "type": "future_arc_hook",
       "status": "active",
       "arc": "The Whispering Stone of Valampuri",
-      "last_arc": "The Fading Lotus of Kanthar Nagar"
+      "last_arc": "The Emerald Peak's Silent Song"
     },
     {
       "name": "The Whispering Stone's Wider Connection",
@@ -1688,6 +2566,72 @@
       "name": "The Nature of Kaalan and his Blight: What is his true power and how does it manifest differently in various ecosystems?",
       "type": "central_mystery",
       "arc": "The Fading Lotus of Kanthar Nagar",
+      "status": "active"
+    },
+    {
+      "name": "The Umbral Weavers' True Nexus and Leader",
+      "description": "What is the true location and nature of the dominant, pulsating dark symbol Meera saw? Is it a physical place, a being, or a nexus of corrupted energy? Who is the mastermind behind the Umbral Weavers and what is their grand design?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "The Whispering Stone's Cosmic Connections",
+      "description": "How does the Whispering Stone sense and connect to cosmic energies beyond the terrestrial network of sacred sites? Are there other 'whispering stones' or similar artifacts attuned to celestial phenomena?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "The Nature of the Blight on the Emerald Peak",
+      "description": "How does this new, technologically-driven blight specifically affect a crystalline, cosmic-energy-infused artifact like the Sky-Stone? How does it differ from the organic blights seen in Poomalai and Kanthar Nagar, and what does this reveal about the Umbral Weavers' adaptability?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "The Legend of the Sky-Stone and its Guardians",
+      "description": "What ancient lore protects the Emerald Peak, and why have the guardians like Ranjani remained so secretive? What secrets about celestial energy and the wider network are hidden in the Sky-Stone Temple's history?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "The Persistent Glowing Moss's Cosmic Link",
+      "description": "The glowing moss is now present in the Emerald Peak's Whispering Grotto and reacts to the Sky-Stone's energy and the blight. What is its true nature, and why does it appear in all blighted sacred sites, seemingly as an indicator of ancient and cosmic energy?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "Kaalan's True Nature",
+      "description": "Kaalan's mask cracked, revealing dark, swirling energy beneath. Was he human, or a construct/entity created by the Umbral Weavers? What does this imply about the Umbral Weavers' power to transform or create agents?",
+      "type": "mystery",
+      "status": "active",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "name": "The Umbral Weavers' True Nexus and Leader: Who is the mastermind behind the orbital station/celestial anomaly and what is their ultimate goal?",
+      "type": "central_mystery",
+      "arc": "The Emerald Peak's Silent Song",
+      "status": "active"
+    },
+    {
+      "name": "The Whispering Stone's Cosmic Connections: How can Meera fully harness its ability to communicate with and protect the cosmic network?",
+      "type": "central_mystery",
+      "arc": "The Emerald Peak's Silent Song",
+      "status": "active"
+    },
+    {
+      "name": "The Nature of Umbral Weaver Agents: Are they human, transformed, or constructs? What is the significance of their varying tactics (blight vs. tech)?",
+      "type": "central_mystery",
+      "arc": "The Emerald Peak's Silent Song",
+      "status": "active"
+    },
+    {
+      "name": "The Persistent Glowing Moss's Universal Role: What is its ultimate purpose in the network of sacred sites, and how does it react to cosmic blight?",
+      "type": "central_mystery",
+      "arc": "The Emerald Peak's Silent Song",
       "status": "active"
     }
   ],
@@ -1744,6 +2688,35 @@
       "type": "future_arc_hook",
       "arc": "The Fading Lotus of Kanthar Nagar",
       "description": "Though Kaalan was repelled, the fragment of his mask with the 'Umbral Weaver' symbol serves as a tangible clue. Meera's Whispering Stone provides a powerful, persistent vision of a vast network of sacred sites, with a single, dominant 'Umbral Weaver' symbol at its core, indicating the main nexus of their power. The children realize this is a global organization with a hidden leader, and the fate of the entire network rests on their ability to uncover the true mastermind behind 'The Umbral Weavers' and their ultimate, world-altering agenda. The glowing moss is seen faintly in other distant visions, hinting at the next blighted sacred site they must protect."
+    },
+    {
+      "clue": "The Celestial Compass points to a distant, uncharted constellation and a faint, pulsating light far beyond the solar system.",
+      "introduced_episode": 4,
+      "possible_future_connection": "This directly sets up a future arc involving space travel or a threat originating from beyond Earth, revealing the truly cosmic scale of the Umbral Weavers' ambition.",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "clue": "Vetri's shattered brooch fragment reveals a complex circuit board and an evolved 'Umbral Weaver' symbol.",
+      "introduced_episode": 6,
+      "possible_future_connection": "This hints at an internal hierarchy, different factions, or specialized roles within the Umbral Weavers, and suggests their technology is rapidly advancing. The symbol itself may contain encrypted data or a new target.",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "clue": "Meera's final vision confirms the 'dominant dark symbol' is a massive, unseen orbital station or celestial anomaly.",
+      "introduced_episode": 7,
+      "possible_future_connection": "This is the ultimate nexus of the Umbral Weavers' power, their final weapon or base of operations, and the ultimate destination for the children in a grand finale arc.",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "clue": "Ranjani mentions ancient prophecies of 'star-weavers' and 'sky-serpents' who uphold cosmic balance.",
+      "introduced_episode": 5,
+      "possible_future_connection": "This hints at ancient cosmic entities or civilizations that previously battled threats similar to the Umbral Weavers, potentially leading to new allies or sources of knowledge in future space-faring arcs.",
+      "arc": "The Emerald Peak's Silent Song"
+    },
+    {
+      "type": "future_arc_hook",
+      "arc": "The Emerald Peak's Silent Song",
+      "description": "With the Sky-Stone saved, the Celestial Compass now projects a clear, stable image of the Umbral Weavers' true nexus: a colossal, dark orbital station or celestial anomaly pulsating with corrupted energy, positioned to drain power from the cosmic network. The fragment of Vetri's brooch, upon further analysis by Karthik, reveals a fragment of its design and a sequence of coordinates, hinting at its true purpose and activation. Meera's Whispering Stone continues to hum with a new, urgent celestial frequency. The children realize their next journey must take them beyond the confines of their world, into the cosmos itself, to confront the Umbral Weavers' leader at their ultimate stronghold and prevent a universal catastrophe."
     }
   ],
   "major_events": [
@@ -1806,6 +2779,34 @@
     {
       "arc": "The Fading Lotus of Kanthar Nagar",
       "event": "Climax: Meera, Karthik, and Anya combine powers to repel Kaalan and restore the Luminous Lotus (Episode 7)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The Whispering Stone shows visions of the blighted Emerald Peak and Sky-Stone (Episode 1)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Meera, Karthik, and Anya journey to the Emerald Peak and encounter Ranjani (Episode 2)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Discovery of the Sky-Stone Temple, the crystalline blight, and first confrontation with Vetri (Episode 3)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Exploration of the Whispering Grotto, discovery of the Celestial Compass, and revelations of Umbral Weaver's cosmic ambitions (Episode 4)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "The children learn to activate the Celestial Compass and combine artifacts; Vetri escalates his attack (Episode 5)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Climax: Meera, Karthik, Anya, and Ranjani unite to fight Vetri and save the Sky-Stone's celestial connection (Episode 6)."
+    },
+    {
+      "arc": "The Emerald Peak's Silent Song",
+      "event": "Vetri is repelled; the Sky-Stone is healed; new revelations about the Umbral Weavers' orbital station/celestial anomaly (Episode 7)."
     }
   ]
 }
