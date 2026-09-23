@@ -640,6 +640,27 @@ The Episode Director will later use this
 arc plan to create individual episodes.
 
 Return ONLY JSON matching the provided schema.
+OUTPUT SIZE RULES:
+
+Keep the response detailed but compact.
+
+Do not write excessively long descriptions.
+
+For character appearance, use approximately 2-4 sentences.
+
+For personality, use 5-8 concise traits.
+
+For goals and motivations, use 1-2 sentences each.
+
+For relationships, use concise descriptions.
+
+For locations and artifacts, use approximately 2-3 sentences.
+
+Episode descriptions should be concise but contain the important story progression.
+
+Never repeat the same information in multiple fields.
+
+The complete JSON must fit within the output limit.
 """
 
 
