@@ -1147,7 +1147,7 @@ Return ONLY JSON matching the provided schema.
 
                                 temperature=1.0,
 
-                                max_output_tokens=16000
+                                max_output_tokens=32768
                             )
                         )
                     )
