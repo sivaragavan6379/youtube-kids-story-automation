@@ -1,0 +1,38 @@
+name: Test Episode Director
+
+on:
+  workflow_dispatch:
+
+jobs:
+  episode-test:
+
+    runs-on: ubuntu-latest
+
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Episode 1
+        run: |
+          python ai/episode_director.py
+
+      - name: Upload generated episode
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-episode-01
+          path: output/generated_episode_01.json
+          if-no-files-found: error
