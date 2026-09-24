@@ -11,8 +11,9 @@ from google.genai import types
 # CONFIGURATION
 # ============================================================
 
-PRIMARY_MODEL = "gemini-3.5-flash-lite"
-FALLBACK_MODEL = "gemini-3.5-flash"
+PRIMARY_MODEL = "gemini-3.1-flash-lite"
+FALLBACK_MODEL = "gemini-3.5-flash-lite"
+
 
 MAX_RETRIES = 4
 
