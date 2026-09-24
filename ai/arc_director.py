@@ -11,14 +11,18 @@ from google.genai import types
 # CONFIGURATION
 # ============================================================
 
-PRIMARY_MODEL = "gemini-3.1-flash-lite"
+PRIMARY_MODEL = "gemini-3.8-flash"
 FALLBACK_MODEL = "gemini-3.5-flash-lite"
 
 # Gemini models are tried in this order for each API key.
 GEMINI_MODELS = [
     PRIMARY_MODEL,
     FALLBACK_MODEL,
+    "gemini-3.6-flash",
 ]
+
+# Gemini 3.8 migration: do not send deprecated
+# sampling parameters such as temperature/top_p/top_k.
 
 # Maximum retries for a retryable error on one model/key combination.
 MAX_RETRIES = 4
@@ -1200,8 +1204,6 @@ The complete JSON must fit within the output limit.
 
                                 response_schema=schema,
 
-                                temperature=1.0,
-
                                 max_output_tokens=32768
                             )
                         )
@@ -1271,8 +1273,10 @@ The complete JSON must fit within the output limit.
 
                 if attempt < MAX_RETRIES:
 
+                    # Exponential backoff for temporary Gemini
+                    # service/capacity errors.
                     wait_seconds = (
-                        5 * (
+                        8 * (
                             2 ** (
                                 attempt - 1
                             )
