@@ -14,7 +14,13 @@ from google.genai import types
 PRIMARY_MODEL = "gemini-3.1-flash-lite"
 FALLBACK_MODEL = "gemini-3.5-flash-lite"
 
+# Gemini models are tried in this order for each API key.
+GEMINI_MODELS = [
+    PRIMARY_MODEL,
+    FALLBACK_MODEL,
+]
 
+# Maximum retries for a retryable error on one model/key combination.
 MAX_RETRIES = 4
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,17 +47,32 @@ class ArcDirector:
 
     def __init__(self):
 
-        api_key = os.getenv("GEMINI_API_KEY")
+        # Keep API keys in environment variables only.
+        # Never print or store the actual key values in logs/files.
+        configured_keys = [
+            os.getenv("GEMINI_API_KEY"),
+            os.getenv("GEMINI_API_KEY_2"),
+        ]
 
-        if not api_key:
+        # Remove empty values and accidental duplicates.
+        self.api_keys = list(
+            dict.fromkeys(
+                key.strip()
+                for key in configured_keys
+                if key and key.strip()
+            )
+        )
+
+        if not self.api_keys:
 
             raise RuntimeError(
-                "GEMINI_API_KEY environment variable "
-                "was not found."
+                "No Gemini API keys were found. "
+                "Set GEMINI_API_KEY and/or GEMINI_API_KEY_2."
             )
 
-        self.client = genai.Client(
-            api_key=api_key
+        print(
+            f"🔑 Gemini API keys available: "
+            f"{len(self.api_keys)}"
         )
 
 
@@ -1134,10 +1155,22 @@ The complete JSON must fit within the output limit.
         self,
         model_name,
         prompt,
-        schema
+        schema,
+        api_key,
+        key_number
     ):
 
         last_error = None
+
+        # A fresh client is created for the selected key.
+        # This makes API-key fallback explicit and predictable.
+        client = genai.Client(
+            api_key=api_key
+        )
+
+        print(
+            f"🔑 Using Gemini API key {key_number}"
+        )
 
         for attempt in range(
             1,
@@ -1152,7 +1185,7 @@ The complete JSON must fit within the output limit.
                 )
 
                 response = (
-                    self.client.models.generate_content(
+                    client.models.generate_content(
 
                         model=model_name,
 
@@ -1193,7 +1226,8 @@ The complete JSON must fit within the output limit.
 
                 print(
                     f"✅ Response received "
-                    f"from {model_name}"
+                    f"from {model_name} "
+                    f"using API key {key_number}"
                 )
 
                 return response_text
@@ -1213,32 +1247,24 @@ The complete JSON must fit within the output limit.
                 )
 
                 retryable = (
-
                     "503" in error_text
-
                     or
-                    "UNAVAILABLE"
-                    in error_text
-
+                    "UNAVAILABLE" in error_text
                     or
                     "429" in error_text
-
                     or
-                    "RESOURCE_EXHAUSTED"
-                    in error_text
-
+                    "RESOURCE_EXHAUSTED" in error_text
                     or
                     "500" in error_text
-
                     or
-                    "INTERNAL"
-                    in error_text
+                    "INTERNAL" in error_text
                 )
 
                 if not retryable:
 
                     print(
-                        "❌ Error is not retryable."
+                        "❌ Error is not retryable "
+                        "for this model/key."
                     )
 
                     break
@@ -1265,6 +1291,7 @@ The complete JSON must fit within the output limit.
 
         raise RuntimeError(
             f"Model {model_name} failed "
+            f"with API key {key_number} "
             f"after {MAX_RETRIES} attempts.\n"
             f"Last error: {last_error}"
         )
@@ -1308,76 +1335,91 @@ The complete JSON must fit within the output limit.
 
         print()
 
-        models_to_try = [
-
-            PRIMARY_MODEL,
-
-            FALLBACK_MODEL
-        ]
+        models_to_try = list(
+            GEMINI_MODELS
+        )
 
         response_text = None
 
         last_error = None
 
-        for model_name in models_to_try:
+        # Try every configured API key with the model fallback chain.
+        #
+        # Key 1 -> primary model -> fallback model
+        # Key 2 -> primary model -> fallback model
 
-            print()
-            print(
-                "--------------------------------------------"
-            )
+        for key_index, api_key in enumerate(
+            self.api_keys,
+            start=1
+        ):
 
-            print(
-                f"🤖 Trying model: "
-                f"{model_name}"
-            )
+            for model_name in models_to_try:
 
-            print(
-                "--------------------------------------------"
-            )
-
-            try:
-
-                response_text = (
-                    self.request_gemini(
-
-                        model_name=model_name,
-
-                        prompt=prompt,
-
-                        schema=schema
-                    )
+                print()
+                print(
+                    "--------------------------------------------"
                 )
+                print(
+                    f"🔑 API key {key_index}/"
+                    f"{len(self.api_keys)}"
+                )
+                print(
+                    f"🤖 Trying model: "
+                    f"{model_name}"
+                )
+                print(
+                    "--------------------------------------------"
+                )
+
+                try:
+
+                    response_text = (
+                        self.request_gemini(
+
+                            model_name=model_name,
+
+                            prompt=prompt,
+
+                            schema=schema,
+
+                            api_key=api_key,
+
+                            key_number=key_index
+                        )
+                    )
+
+                    # Successful response.
+                    break
+
+                except Exception as error:
+
+                    last_error = error
+
+                    print()
+                    print(
+                        f"⚠️ Model "
+                        f"{model_name} failed "
+                        f"with API key {key_index}."
+                    )
+
+                    print(
+                        f"Reason: {error}"
+                    )
+
+                    continue
+
+            if response_text:
 
                 break
 
-            except Exception as error:
-
-                last_error = error
+            if key_index < len(self.api_keys):
 
                 print()
-
                 print(
-                    f"⚠️ Model "
-                    f"{model_name} failed."
+                    f"➡️ Switching to Gemini API key "
+                    f"{key_index + 1}..."
                 )
 
-                print(
-                    f"Reason: {error}"
-                )
-
-                print()
-
-                if model_name != FALLBACK_MODEL:
-
-                    print(
-                        "➡️ Switching to fallback model..."
-                    )
-
-                else:
-
-                    print(
-                        "❌ All Gemini models failed."
-                    )
 
         if not response_text:
 
