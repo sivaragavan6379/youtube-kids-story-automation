@@ -99,6 +99,12 @@ jobs:
 
           echo "✅ generated_episode_01.json is valid JSON."
 
+      - name: Update Universe Memory from Episode
+        run: |
+          echo "Updating universe memory from generated episode..."
+          python universe/memory_manager.py
+          echo "✅ Universe memory updated."
+
 
       # =====================================================
       # 8. UPLOAD GENERATED ARC
