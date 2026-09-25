@@ -278,52 +278,232 @@ class UniverseMemoryManager:
     # ========================================================
 
     def add_character(self, character):
-        """Add a new character without overwriting established continuity."""
+
         if not isinstance(character, dict):
             return None
 
-        name = str(character.get("name", "")).strip()
+        name = character.get("name")
+
         if not name:
             return None
 
-        existing = self.find_by_name("characters", name)
+        existing = self.find_by_name(
+            "characters",
+            name
+        )
+
         current_arc = self.arc.get("title")
 
+        # ====================================================
+        # RETURNING CHARACTER
+        # ====================================================
+
         if existing:
-            print(f"🔁 Returning character detected: {name}")
-            history = existing.setdefault("arc_history", [])
+
+            print(
+                f"🔒 Returning character identity preserved: {name}"
+            )
+
+            # ------------------------------------------------
+            # Character history
+            # ------------------------------------------------
+
+            history = existing.setdefault(
+                "arc_history",
+                []
+            )
+
             if current_arc and current_arc not in history:
                 history.append(current_arc)
+
+            # ------------------------------------------------
+            # Preserve canonical identity
+            # ------------------------------------------------
+
+            canonical = existing.setdefault(
+                "canonical_identity",
+                {}
+            )
+
+            # If an older character does not yet have a
+            # canonical identity, create it from the
+            # originally stored information.
+            if not canonical.get("appearance"):
+
+                canonical["appearance"] = existing.get(
+                    "appearance",
+                    ""
+                )
+
+            if not canonical.get("voice_style"):
+
+                canonical["voice_style"] = existing.get(
+                    "voice_style",
+                    ""
+                )
+
+            canonical.setdefault(
+                "identity_locked",
+                True
+            )
+
+            canonical.setdefault(
+                "design_version",
+                1
+            )
+
+            canonical.setdefault(
+                "first_defined_arc",
+                existing.get("first_arc")
+            )
+
+            canonical.setdefault(
+                "reference_image",
+                None
+            )
+
+            canonical.setdefault(
+                "reference_asset_id",
+                None
+            )
+
+            # ------------------------------------------------
+            # IMPORTANT:
+            # NEVER overwrite canonical appearance
+            # for a returning character.
+            # ------------------------------------------------
+
+            canonical_appearance = canonical.get(
+                "appearance",
+                existing.get("appearance", "")
+            )
+
+            canonical_voice = canonical.get(
+                "voice_style",
+                existing.get("voice_style", "")
+            )
+
+            # ------------------------------------------------
+            # Update only non-identity information.
+            # ------------------------------------------------
+
+            for key, value in character.items():
+
+                if key in {
+                    "appearance",
+                    "voice_style",
+                    "canonical_identity",
+                    "id",
+                    "first_arc"
+                }:
+                    continue
+
+                if key not in existing:
+                    existing[key] = value
+
+            # ------------------------------------------------
+            # Restore canonical values.
+            # ------------------------------------------------
+
+            if canonical_appearance:
+                existing["appearance"] = (
+                    canonical_appearance
+                )
+
+            if canonical_voice:
+                existing["voice_style"] = (
+                    canonical_voice
+                )
+
+            existing["canonical_identity"] = canonical
 
             existing["appearance_type"] = "returning"
             existing["status"] = "active"
             existing["last_arc"] = current_arc
 
-            for key, value in character.items():
-                if key in {"id", "first_arc", "last_arc", "arc_history", "appearance_type"}:
-                    continue
-                if key not in existing:
-                    existing[key] = value
+            print(
+                f"   🔐 Canonical face/design locked"
+            )
 
-            existing.setdefault("return_history", [])
-            existing.setdefault("appearance_history", [])
             return existing
 
+        # ====================================================
+        # NEW CHARACTER
+        # ====================================================
+
         character_copy = dict(character)
-        character_id = self.unique_id("characters", self.make_id(name))
+
+        character_id = self.unique_id(
+            "characters",
+            self.make_id(name)
+        )
+
         character_copy["id"] = character_id
-        character_copy.setdefault("status", "active")
+
+        character_copy.setdefault(
+            "status",
+            "active"
+        )
+
         character_copy["appearance_type"] = "new"
+
         character_copy["first_arc"] = current_arc
+
         character_copy["last_arc"] = current_arc
-        history = character_copy.setdefault("arc_history", [])
+
+        # ----------------------------------------------------
+        # Create canonical character identity
+        # ----------------------------------------------------
+
+        character_copy["canonical_identity"] = {
+
+            "identity_locked": True,
+
+            "design_version": 1,
+
+            "first_defined_arc": current_arc,
+
+            # The first appearance description becomes
+            # the authoritative visual identity.
+            "appearance": character_copy.get(
+                "appearance",
+                ""
+            ),
+
+            # The original voice style becomes the
+            # canonical voice identity.
+            "voice_style": character_copy.get(
+                "voice_style",
+                ""
+            ),
+
+            # These will later be connected to the
+            # actual visual asset/reference system.
+            "reference_image": None,
+
+            "reference_asset_id": None
+        }
+
+        history = character_copy.setdefault(
+            "arc_history",
+            []
+        )
+
         if current_arc and current_arc not in history:
             history.append(current_arc)
-        character_copy.setdefault("return_history", [])
-        character_copy.setdefault("appearance_history", [])
 
-        self.memory["characters"][character_id] = character_copy
-        print(f"🆕 New character added: {name}")
+        self.memory[
+            "characters"
+        ][character_id] = character_copy
+
+        print(
+            f"🆕 New character added: {name}"
+        )
+
+        print(
+            f"   🔒 Canonical identity created"
+        )
+
         return character_copy
 
     # ========================================================
