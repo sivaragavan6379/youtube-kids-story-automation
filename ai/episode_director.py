@@ -11,8 +11,9 @@ from google.genai import types
 # CONFIGURATION
 # ============================================================
 
-PRIMARY_MODEL = "gemini-2.5-flash"
-FALLBACK_MODEL = "gemini-2.5-flash-lite"
+PRIMARY_MODEL = "gemini-3.8-flash"
+FALLBACK_MODEL = "gemini-3.5-flash-lite"
+GEMINI_MODELS = [PRIMARY_MODEL, FALLBACK_MODEL]
 
 MAX_RETRIES = 4
 
@@ -33,15 +34,36 @@ class EpisodeDirector:
 
     def __init__(self):
 
-        self.api_key = os.getenv("GEMINI_API_KEY")
+        # ----------------------------------------------------
+        # Support multiple Gemini API keys from different
+        # projects. The first key is preferred; the second
+        # key is used as a fallback.
+        # ----------------------------------------------------
 
-        if not self.api_key:
+        self.api_keys = []
+
+        for env_name in (
+            "GEMINI_API_KEY",
+            "GEMINI_API_KEY_2"
+        ):
+
+            value = os.getenv(env_name)
+
+            if value and value.strip():
+                value = value.strip()
+
+                if value not in self.api_keys:
+                    self.api_keys.append(value)
+
+        if not self.api_keys:
             raise RuntimeError(
-                "GEMINI_API_KEY environment variable is missing."
+                "No Gemini API key was found. "
+                "Set GEMINI_API_KEY."
             )
 
-        self.client = genai.Client(
-            api_key=self.api_key
+        print(
+            f"🔑 Gemini API keys available: "
+            f"{len(self.api_keys)}"
         )
 
         OUTPUT_DIR.mkdir(
@@ -171,6 +193,7 @@ class EpisodeDirector:
         wanted = {
             name.strip().lower()
             for name in character_names
+            if isinstance(name, str) and name.strip()
         }
 
         def recursive_search(value):
@@ -183,33 +206,439 @@ class EpisodeDirector:
                     isinstance(name, str)
                     and name.strip().lower() in wanted
                 ):
-
                     found.append(value)
 
                 for child in value.values():
-
                     recursive_search(child)
 
             elif isinstance(value, list):
 
                 for child in value:
-
                     recursive_search(child)
 
         recursive_search(universe)
 
-        # Remove duplicates
+        # Remove duplicates, preferring the richest record.
         unique = {}
 
         for character in found:
 
             name = character.get("name")
 
-            if name:
+            if not name:
+                continue
 
-                unique[name.lower()] = character
+            key = name.strip().lower()
+
+            if key not in unique:
+                unique[key] = character
+                continue
+
+            old = unique[key]
+
+            # Prefer a record that already contains a
+            # canonical identity block.
+            if (
+                "canonical_identity" not in old
+                and "canonical_identity" in character
+            ):
+                unique[key] = character
 
         return list(unique.values())
+
+
+    # ========================================================
+    # BUILD CANONICAL CHARACTER PROFILES
+    # ========================================================
+
+    def build_canonical_character_profiles(
+        self,
+        universe,
+        arc,
+        episode
+    ):
+
+        # Characters explicitly required by this episode.
+        requested_names = []
+
+        for name in episode.get(
+            "important_characters",
+            []
+        ):
+
+            if isinstance(name, str):
+                requested_names.append(name)
+
+        # Also include names from the arc-level main/supporting
+        # lists when they are used by the episode.
+        for name in (
+            arc.get("main_characters", [])
+            + arc.get("supporting_characters", [])
+        ):
+
+            if isinstance(name, str):
+                requested_names.append(name)
+
+        # Include all names from the current arc's
+        # returning-character list.
+        for item in arc.get(
+            "returning_characters",
+            []
+        ):
+
+            if isinstance(item, dict):
+                name = item.get("name")
+
+                if isinstance(name, str):
+                    requested_names.append(name)
+
+        # Deduplicate while preserving order.
+        requested_names = list(
+            dict.fromkeys(
+                name.strip()
+                for name in requested_names
+                if name and name.strip()
+            )
+        )
+
+        memory_characters = self.find_characters_in_memory(
+            universe,
+            requested_names
+        )
+
+        profiles = {}
+
+        for character in memory_characters:
+
+            name = character.get("name")
+
+            if not name:
+                continue
+
+            canonical = character.get(
+                "canonical_identity"
+            )
+
+            if not isinstance(canonical, dict):
+                canonical = {}
+
+            appearance = (
+                canonical.get("appearance")
+                or character.get("appearance")
+                or ""
+            )
+
+            voice_style = (
+                canonical.get("voice_style")
+                or character.get("voice_style")
+                or ""
+            )
+
+            profiles[name.strip().lower()] = {
+                "name": name,
+                "canonical_id": character.get(
+                    "id"
+                ),
+                "identity_locked": bool(
+                    canonical.get(
+                        "identity_locked",
+                        True
+                    )
+                ),
+                "design_version": canonical.get(
+                    "design_version",
+                    1
+                ),
+                "first_defined_arc": canonical.get(
+                    "first_defined_arc",
+                    character.get("first_arc")
+                ),
+                "appearance": appearance,
+                "voice_style": voice_style,
+                "personality": character.get(
+                    "personality",
+                    []
+                ),
+                "story_role": character.get(
+                    "story_role",
+                    ""
+                ),
+                "source": "universe_memory"
+            }
+
+        # ----------------------------------------------------
+        # Current-arc NEW characters may not have been written
+        # into universe_memory.json yet. Their first arc
+        # definition becomes the temporary canonical identity
+        # for this episode. memory_manager.py will permanently
+        # lock it when the arc is committed to memory.
+        # ----------------------------------------------------
+
+        for character in arc.get(
+            "new_characters",
+            []
+        ):
+
+            if not isinstance(character, dict):
+                continue
+
+            name = character.get("name")
+
+            if not isinstance(name, str) or not name.strip():
+                continue
+
+            key = name.strip().lower()
+
+            if key in profiles:
+                continue
+
+            profiles[key] = {
+                "name": name,
+                "canonical_id": None,
+                "identity_locked": True,
+                "design_version": 1,
+                "first_defined_arc": arc.get(
+                    "title"
+                ),
+                "appearance": character.get(
+                    "appearance",
+                    ""
+                ),
+                "voice_style": character.get(
+                    "voice_style",
+                    ""
+                ),
+                "personality": character.get(
+                    "personality",
+                    []
+                ),
+                "story_role": character.get(
+                    "story_role",
+                    ""
+                ),
+                "source": "current_arc_new_character"
+            }
+
+        # ----------------------------------------------------
+        # Validate every explicitly requested character.
+        # This prevents silent visual identity drift caused by
+        # missing character records.
+        # ----------------------------------------------------
+
+        missing = [
+            name
+            for name in requested_names
+            if name.strip().lower() not in profiles
+        ]
+
+        if missing:
+            raise RuntimeError(
+                "Character identity records were not found for: "
+                + ", ".join(missing)
+                + ". Add the characters to the universe memory "
+                  "or the current arc before generating the episode."
+            )
+
+        return [
+            profiles[name.strip().lower()]
+            for name in requested_names
+            if name.strip().lower() in profiles
+        ]
+
+
+    # ========================================================
+    # ATTACH CANONICAL CHARACTER REFERENCES
+    # ========================================================
+
+    def attach_canonical_character_references(
+        self,
+        result,
+        canonical_profiles
+    ):
+
+        profile_map = {
+            profile["name"].strip().lower(): profile
+            for profile in canonical_profiles
+        }
+
+        episode = result["episode"]
+
+        episode["canonical_character_identities"] = []
+
+        # Keep one copy per character at episode level.
+        seen_episode = set()
+
+        for profile in canonical_profiles:
+
+            key = profile["name"].strip().lower()
+
+            if key in seen_episode:
+                continue
+
+            seen_episode.add(key)
+
+            episode[
+                "canonical_character_identities"
+            ].append(
+                {
+                    "name": profile["name"],
+                    "canonical_id": profile.get(
+                        "canonical_id"
+                    ),
+                    "identity_locked": True,
+                    "design_version": profile.get(
+                        "design_version",
+                        1
+                    ),
+                    "appearance": profile.get(
+                        "appearance",
+                        ""
+                    ),
+                    "voice_style": profile.get(
+                        "voice_style",
+                        ""
+                    )
+                }
+            )
+
+        # Add deterministic character references to every
+        # scene. These references are created by our code,
+        # not by Gemini, so a model cannot accidentally
+        # invent a different appearance.
+        for scene in episode.get(
+            "scenes",
+            []
+        ):
+
+            scene_profiles = []
+
+            for name in scene.get(
+                "characters",
+                []
+            ):
+
+                if not isinstance(name, str):
+                    continue
+
+                profile = profile_map.get(
+                    name.strip().lower()
+                )
+
+                if not profile:
+                    continue
+
+                scene_profiles.append(
+                    {
+                        "name": profile["name"],
+                        "canonical_id": profile.get(
+                            "canonical_id"
+                        ),
+                        "identity_locked": True,
+                        "design_version": profile.get(
+                            "design_version",
+                            1
+                        ),
+                        "appearance": profile.get(
+                            "appearance",
+                            ""
+                        ),
+                        "voice_style": profile.get(
+                            "voice_style",
+                            ""
+                        )
+                    }
+                )
+
+            scene["character_references"] = (
+                scene_profiles
+            )
+
+            # Add a short deterministic identity lock to the
+            # visual prompt. This is intentionally appended
+            # after Gemini generation.
+            if scene_profiles:
+
+                lock_lines = []
+
+                for profile in scene_profiles:
+
+                    lock_lines.append(
+                        f'{profile["name"]}: '
+                        f'{profile["appearance"]}'
+                    )
+
+                identity_lock = (
+                    " CHARACTER CONTINUITY LOCK: "
+                    "Use the exact established appearance "
+                    "of these characters. Do not redesign, "
+                    "re-face, de-age, recolor hair/skin, "
+                    "change defining features, or alter "
+                    "canonical clothing identity. "
+                    + " | ".join(lock_lines)
+                )
+
+                visual_prompt = scene.get(
+                    "visual_prompt",
+                    ""
+                )
+
+                scene["visual_prompt"] = (
+                    visual_prompt.rstrip()
+                    + identity_lock
+                )
+
+        return result
+
+
+    # ========================================================
+    # VALIDATE CHARACTER REFERENCES
+    # ========================================================
+
+    def validate_character_references(
+        self,
+        result
+    ):
+
+        episode = result["episode"]
+
+        episode_profiles = {
+            item.get("name", "").strip().lower()
+            for item in episode.get(
+                "canonical_character_identities",
+                []
+            )
+            if isinstance(item, dict)
+            and isinstance(item.get("name"), str)
+        }
+
+        for index, scene in enumerate(
+            episode.get("scenes", []),
+            start=1
+        ):
+
+            for name in scene.get(
+                "characters",
+                []
+            ):
+
+                if not isinstance(name, str):
+                    continue
+
+                if name.strip().lower() not in episode_profiles:
+                    raise RuntimeError(
+                        f"Scene {index} uses character "
+                        f"'{name}' without a canonical "
+                        "character identity reference."
+                    )
+
+            if "character_references" not in scene:
+                raise RuntimeError(
+                    f"Scene {index} is missing "
+                    "character_references."
+                )
+
+        return True
+
 
 
     # ========================================================
@@ -230,13 +659,14 @@ class EpisodeDirector:
             )
         )
 
-        character_data = self.find_characters_in_memory(
+        canonical_profiles = self.build_canonical_character_profiles(
             universe,
-            important_characters
+            arc,
+            episode
         )
 
         character_text = json.dumps(
-            character_data,
+            canonical_profiles,
             ensure_ascii=False,
             indent=2
         )
@@ -446,6 +876,52 @@ Do NOT change:
 
 The visual description must remain consistent across
 future episodes.
+
+============================================================
+CANONICAL CHARACTER IDENTITY LOCK
+============================================================
+
+The CHARACTER INFORMATION above contains the
+authoritative visual identity for every character used
+by this episode.
+
+For every character:
+
+1. Treat the canonical appearance as immutable.
+2. Use the SAME face structure and defining facial features.
+3. Use the SAME skin tone and eye characteristics.
+4. Use the SAME hair color, hairstyle and hair shape.
+5. Preserve the SAME body proportions and apparent age.
+6. Preserve canonical clothing identity and important
+   accessories unless the story explicitly requires a
+   temporary costume change.
+7. Never create a "new version" of an existing character.
+8. Never reinterpret an existing character's face.
+9. Never silently change identity because of a different
+   location, emotion, camera angle or action.
+10. Expressions, poses, lighting and camera angles may
+    change, but identity must NOT change.
+
+RETURNING CHARACTER RULE:
+
+If a character already exists in universe memory,
+the canonical_identity.appearance is authoritative.
+Do not use a newly invented appearance description.
+
+NEW CHARACTER RULE:
+
+If a character is introduced for the first time in this
+arc, use the appearance supplied in the current arc
+character profile consistently throughout all scenes.
+That appearance becomes the character's canonical design
+when the universe memory is updated.
+
+FLOW PRODUCTION RULE:
+
+Every visual_prompt must preserve the canonical identity
+of every character appearing in that scene. The same
+character should look like the same actor/animated model
+throughout the series.
 
 ============================================================
 STORY STRUCTURE
@@ -1036,152 +1512,158 @@ character_state_changes
         schema
     ):
 
-        models_to_try = [
-            PRIMARY_MODEL,
-            FALLBACK_MODEL
-        ]
-
         last_error = None
 
-        for model_name in models_to_try:
+        # Try each configured key and each model.
+        # This is useful when separate Gemini projects have
+        # different temporary capacity conditions.
+        for key_index, api_key in enumerate(
+            self.api_keys,
+            start=1
+        ):
 
-            print()
-            print(
-                "============================================"
+            client = genai.Client(
+                api_key=api_key
             )
 
-            print(
-                f"🤖 Trying model: {model_name}"
-            )
+            for model_name in GEMINI_MODELS:
 
-            print(
-                "============================================"
-            )
+                print()
+                print(
+                    "============================================"
+                )
 
-            for attempt in range(
-                1,
-                MAX_RETRIES + 1
-            ):
+                print(
+                    f"🔑 Trying Gemini key {key_index}/"
+                    f"{len(self.api_keys)}"
+                )
 
-                try:
+                print(
+                    f"🤖 Trying model: {model_name}"
+                )
 
-                    print(
-                        f"🔄 Attempt "
-                        f"{attempt}/{MAX_RETRIES}"
-                    )
+                print(
+                    "============================================"
+                )
 
-                    response = (
-                        self.client.models.generate_content(
+                for attempt in range(
+                    1,
+                    MAX_RETRIES + 1
+                ):
 
-                            model=model_name,
-
-                            contents=prompt,
-
-                            config=(
-                                types.GenerateContentConfig(
-
-                                    response_mime_type=(
-                                        "application/json"
-                                    ),
-
-                                    response_schema=schema,
-
-                                    temperature=0.9,
-
-                                    max_output_tokens=18000
-                                )
-                            )
-                        )
-                    )
-
-                    if (
-                        response
-                        and response.text
-                    ):
+                    try:
 
                         print(
-                            f"✅ Response received "
-                            f"from {model_name}"
+                            f"🔄 Attempt "
+                            f"{attempt}/{MAX_RETRIES}"
                         )
 
-                        return response.text
+                        response = (
+                            client.models.generate_content(
 
-                    raise RuntimeError(
-                        "Gemini returned an empty response."
-                    )
+                                model=model_name,
 
-                except Exception as error:
+                                contents=prompt,
 
-                    last_error = error
+                                config=(
+                                    types.GenerateContentConfig(
 
-                    error_text = str(error)
+                                        response_mime_type=(
+                                            "application/json"
+                                        ),
 
-                    print()
-                    print(
-                        f"⚠️ Gemini error:"
-                    )
-                    print(
-                        error_text
-                    )
+                                        response_schema=schema,
 
-                    temporary_error = (
-
-                        "503" in error_text
-
-                        or
-                        "UNAVAILABLE" in error_text
-
-                        or
-                        "429" in error_text
-
-                        or
-                        "RESOURCE_EXHAUSTED"
-                        in error_text
-
-                        or
-                        "500" in error_text
-                    )
-
-                    if (
-                        temporary_error
-                        and
-                        attempt < MAX_RETRIES
-                    ):
-
-                        wait_seconds = (
-                            5 *
-                            (
-                                2 ** (
-                                    attempt - 1
+                                        max_output_tokens=18000
+                                    )
                                 )
                             )
                         )
 
+                        if (
+                            response
+                            and response.text
+                        ):
+
+                            print(
+                                f"✅ Response received "
+                                f"from {model_name} "
+                                f"using key {key_index}."
+                            )
+
+                            return response.text
+
+                        raise RuntimeError(
+                            "Gemini returned an empty response."
+                        )
+
+                    except Exception as error:
+
+                        last_error = error
+
+                        error_text = str(error)
+
+                        print()
                         print(
-                            f"⏳ Waiting "
-                            f"{wait_seconds} seconds..."
+                            "⚠️ Gemini error:"
+                        )
+                        print(
+                            error_text
                         )
 
-                        time.sleep(
-                            wait_seconds
+                        temporary_error = (
+                            "503" in error_text
+                            or "UNAVAILABLE" in error_text
+                            or "429" in error_text
+                            or "RESOURCE_EXHAUSTED"
+                            in error_text
+                            or "500" in error_text
+                            or "INTERNAL" in error_text
                         )
 
-                        continue
+                        if (
+                            temporary_error
+                            and attempt < MAX_RETRIES
+                        ):
 
-                    break
+                            wait_seconds = (
+                                8 *
+                                (
+                                    2 ** (
+                                        attempt - 1
+                                    )
+                                )
+                            )
 
-            print()
-            print(
-                f"⚠️ Model {model_name} failed."
-            )
+                            print(
+                                f"⏳ Waiting "
+                                f"{wait_seconds} seconds..."
+                            )
 
-            print(
-                "➡️ Trying fallback model..."
-            )
+                            time.sleep(
+                                wait_seconds
+                            )
+
+                            continue
+
+                        break
+
+                print()
+                print(
+                    f"⚠️ Model {model_name} "
+                    f"failed with key {key_index}."
+                )
+
+            if key_index < len(self.api_keys):
+
+                print(
+                    "➡️ All models failed for this key. "
+                    "Trying the next Gemini API key..."
+                )
 
         raise RuntimeError(
             "Gemini episode generation failed "
-            "after all retries and fallback models.\n"
+            "after all API keys, retries and models.\n"
             f"Last error: {last_error}"
         )
 
@@ -1219,6 +1701,14 @@ character_state_changes
         episode = self.get_episode(
             arc,
             episode_number
+        )
+
+        canonical_profiles = (
+            self.build_canonical_character_profiles(
+                universe,
+                arc,
+                episode
+            )
         )
 
         prompt = self.build_prompt(
@@ -1264,6 +1754,20 @@ character_state_changes
             )
 
         self.validate_episode(
+            result
+        )
+
+        # ----------------------------------------------------
+        # Attach canonical character identities
+        # deterministically after Gemini generation.
+        # ----------------------------------------------------
+
+        self.attach_canonical_character_references(
+            result,
+            canonical_profiles
+        )
+
+        self.validate_character_references(
             result
         )
 
