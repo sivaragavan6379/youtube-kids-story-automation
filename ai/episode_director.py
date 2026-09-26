@@ -1,6 +1,7 @@
 import os
 import json
 import time
+import re
 from pathlib import Path
 
 from google import genai
@@ -248,6 +249,129 @@ class EpisodeDirector:
 
 
     # ========================================================
+    # SAFE CHARACTER ID
+    # ========================================================
+
+    def make_character_id(self, name):
+        """
+        Create the same deterministic base ID format used by
+        universe/memory_manager.py.
+        """
+        text = str(name or "").strip().lower()
+
+        text = re.sub(
+            r"[^a-z0-9]+",
+            "_",
+            text
+        )
+
+        text = re.sub(
+            r"_+",
+            "_",
+            text
+        )
+
+        text = text.strip("_")
+
+        return text or "unknown"
+
+
+    # ========================================================
+    # UNIQUE CHARACTER ID
+    # ========================================================
+
+    def get_unique_character_id(
+        self,
+        universe,
+        name
+    ):
+        """
+        Resolve the permanent character ID.
+
+        Existing characters:
+            use their stored ID.
+
+        New characters:
+            use the same deterministic ID algorithm as
+            memory_manager.py, including collision suffixes.
+        """
+        base_id = self.make_character_id(name)
+
+        characters = universe.get(
+            "characters",
+            {}
+        )
+
+        if not isinstance(characters, dict):
+            characters = {}
+
+        # If the normalized ID is already occupied, determine
+        # whether it belongs to this exact character.
+        existing_by_id = characters.get(base_id)
+
+        if isinstance(existing_by_id, dict):
+
+            stored_name = str(
+                existing_by_id.get(
+                    "name",
+                    ""
+                )
+            ).strip().lower()
+
+            if stored_name == str(
+                name
+            ).strip().lower():
+
+                return (
+                    existing_by_id.get("id")
+                    or base_id
+                )
+
+        # Search all stored records by character name.
+        wanted = str(
+            name
+        ).strip().lower()
+
+        for character in characters.values():
+
+            if not isinstance(
+                character,
+                dict
+            ):
+                continue
+
+            stored_name = str(
+                character.get(
+                    "name",
+                    ""
+                )
+            ).strip().lower()
+
+            if stored_name == wanted:
+
+                return (
+                    character.get("id")
+                    or base_id
+                )
+
+        # New character. Match memory_manager.py's
+        # unique_id() behavior.
+        if base_id not in characters:
+            return base_id
+
+        counter = 2
+
+        while True:
+
+            candidate = f"{base_id}_{counter}"
+
+            if candidate not in characters:
+                return candidate
+
+            counter += 1
+
+
+    # ========================================================
     # BUILD CANONICAL CHARACTER PROFILES
     # ========================================================
 
@@ -336,8 +460,12 @@ class EpisodeDirector:
 
             profiles[name.strip().lower()] = {
                 "name": name,
-                "canonical_id": character.get(
-                    "id"
+                "canonical_id": (
+                    character.get("id")
+                    or self.get_unique_character_id(
+                        universe,
+                        name
+                    )
                 ),
                 "identity_locked": bool(
                     canonical.get(
@@ -394,7 +522,10 @@ class EpisodeDirector:
 
             profiles[key] = {
                 "name": name,
-                "canonical_id": None,
+                "canonical_id": self.get_unique_character_id(
+                    universe,
+                    name
+                ),
                 "identity_locked": True,
                 "design_version": 1,
                 "first_defined_arc": arc.get(
@@ -635,6 +766,76 @@ class EpisodeDirector:
                 raise RuntimeError(
                     f"Scene {index} is missing "
                     "character_references."
+                )
+
+            for reference in scene.get(
+                "character_references",
+                []
+            ):
+
+                if not isinstance(
+                    reference,
+                    dict
+                ):
+                    raise RuntimeError(
+                        f"Scene {index} contains an invalid "
+                        "character reference."
+                    )
+
+                reference_name = str(
+                    reference.get(
+                        "name",
+                        ""
+                    )
+                ).strip()
+
+                canonical_id = str(
+                    reference.get(
+                        "canonical_id",
+                        ""
+                    )
+                ).strip()
+
+                if (
+                    not reference_name
+                    or not canonical_id
+                ):
+                    raise RuntimeError(
+                        f"Scene {index} contains a character "
+                        "reference without a canonical_id."
+                    )
+
+        for item in episode.get(
+            "canonical_character_identities",
+            []
+        ):
+
+            if not isinstance(
+                item,
+                dict
+            ):
+                raise RuntimeError(
+                    "Invalid canonical character identity record."
+                )
+
+            name = str(
+                item.get(
+                    "name",
+                    ""
+                )
+            ).strip()
+
+            canonical_id = str(
+                item.get(
+                    "canonical_id",
+                    ""
+                )
+            ).strip()
+
+            if not name or not canonical_id:
+                raise RuntimeError(
+                    "Every canonical character identity "
+                    "must contain both name and canonical_id."
                 )
 
         return True
@@ -916,6 +1117,10 @@ character profile consistently throughout all scenes.
 That appearance becomes the character's canonical design
 when the universe memory is updated.
 
+The supplied canonical_id is the character's permanent
+identity key. Never change it, invent a second ID for the
+same character, or return null for canonical_id.
+
 FLOW PRODUCTION RULE:
 
 Every visual_prompt must preserve the canonical identity
@@ -1176,6 +1381,10 @@ unresolved_mysteries
 introduced_clues
 future_hook
 character_state_changes
+
+The Python program will attach canonical_character_identities
+and scene character_references after generation. These records
+must retain the supplied canonical IDs.
 """
 
 
@@ -1710,6 +1919,23 @@ character_state_changes
                 episode
             )
         )
+
+        # Every character identity used by this episode must
+        # have a deterministic canonical ID before Gemini runs.
+        for profile in canonical_profiles:
+
+            canonical_id = str(
+                profile.get(
+                    "canonical_id",
+                    ""
+                )
+            ).strip()
+
+            if not canonical_id:
+                raise RuntimeError(
+                    "Canonical ID generation failed for "
+                    f"character: {profile.get('name')}"
+                )
 
         prompt = self.build_prompt(
             universe,
