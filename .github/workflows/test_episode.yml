@@ -105,6 +105,41 @@ jobs:
           python universe/memory_manager.py
           echo "✅ Universe memory updated."
 
+      - name: Generate Flow Scene Files
+        run: |
+          echo "Generating Google Flow-ready scene files..."
+          python ai/scene_director.py
+          echo "✅ Scene files generated."
+
+      - name: Verify generated scenes
+        run: |
+          if [ ! -f output/scenes/index.json ]; then
+            echo "❌ Scene index not found"
+            exit 1
+          fi
+
+          scene_count=$(find output/scenes -name "scene_*.json" | wc -l)
+
+          if [ "$scene_count" -ne 8 ]; then
+            echo "❌ Expected 8 scene files, found $scene_count"
+            exit 1
+          fi
+
+          echo "✅ Found $scene_count scene files"
+
+          for file in output/scenes/scene_*.json; do
+            python -m json.tool "$file" > /dev/null
+          done
+
+          echo "✅ All scene JSON files are valid."
+
+      - name: Upload Flow scene files
+        uses: actions/upload-artifact@v4
+        with:
+          name: flow-scene-files
+          path: output/scenes/
+          if-no-files-found: error   
+
 
       # =====================================================
       # 8. UPLOAD GENERATED ARC
