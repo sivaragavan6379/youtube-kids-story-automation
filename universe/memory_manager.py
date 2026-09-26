@@ -650,7 +650,675 @@ class UniverseMemoryManager:
         print(f"↩️ {appearance_type.title()} character: {name}")
         return existing
 
-    # ========================================================\n    # LOAD GENERATED EPISODE IF AVAILABLE\n    # ========================================================\n\n    def load_generated_episode(self):\n        """Load the generated episode when it exists."""\n        if not EPISODE_OUTPUT_FILE.exists():\n            print()\n            print("ℹ️ No generated episode found yet.")\n            print("   Episode memory update will be skipped.")\n            return None\n\n        try:\n            episode_data = self.load_json(EPISODE_OUTPUT_FILE)\n        except Exception as error:\n            print(f"⚠️ Could not load generated episode: {error}")\n            return None\n\n        if not isinstance(episode_data, dict):\n            print("⚠️ Generated episode is not a JSON object.")\n            return None\n\n        episode = episode_data.get("episode")\n        if not isinstance(episode, dict):\n            print("⚠️ Generated episode does not contain a valid 'episode' object.")\n            return None\n\n        print(f"✅ Generated episode loaded: {episode.get('title', 'Untitled')}")\n        return episode\n\n\n    # ========================================================\n    # PROCESS CHARACTER FROM EPISODE REFERENCE\n    # ========================================================\n\n    def process_episode_character_reference(self, character_reference, episode_number, scene_number):\n        """Persist a character reference produced by Episode Director."""\n        if not isinstance(character_reference, dict):\n            return None\n\n        name = str(character_reference.get("name", "")).strip()\n        if not name:\n            return None\n\n        appearance = str(character_reference.get("appearance", "")).strip()\n        voice_style = str(character_reference.get("voice_style", "")).strip()\n        incoming_canonical = character_reference.get("canonical_identity")\n        if not isinstance(incoming_canonical, dict):\n            incoming_canonical = {}\n\n        character_data = {\n            "name": name,\n            "appearance": appearance,\n            "voice_style": voice_style\n        }\n        if incoming_canonical:\n            character_data["canonical_identity"] = dict(incoming_canonical)\n\n        existing = self.find_by_name("characters", name)\n\n        if not existing:\n            character_data["canonical_identity"] = {\n                "identity_locked": True,\n                "design_version": int(incoming_canonical.get("design_version", 1) or 1),\n                "first_defined_arc": self.arc.get("title"),\n                "appearance": appearance,\n                "voice_style": voice_style,\n                "reference_image": incoming_canonical.get("reference_image"),\n                "reference_asset_id": incoming_canonical.get("reference_asset_id")\n            }\n            existing = self.add_character(character_data)\n            if existing:\n                print(f"🆕 Episode-introduced character saved permanently: {name}")\n        else:\n            existing = self.add_character(character_data)\n\n        if not existing:\n            return None\n\n        try:\n            safe_episode = int(episode_number)\n        except (TypeError, ValueError):\n            safe_episode = 0\n        try:\n            safe_scene = int(scene_number)\n        except (TypeError, ValueError):\n            safe_scene = 0\n\n        episode_history = existing.setdefault("episode_history", [])\n        episode_record = {\n            "episode": safe_episode,\n            "scene": safe_scene,\n            "arc": self.arc.get("title"),\n            "type": "episode_appearance"\n        }\n        if episode_record not in episode_history:\n            episode_history.append(episode_record)\n\n        if "first_episode" not in existing:\n            existing["first_episode"] = safe_episode\n        existing["last_episode"] = safe_episode\n        existing["last_arc"] = self.arc.get("title")\n        existing["status"] = "active"\n\n        appearance_history = existing.setdefault("appearance_history", [])\n        scene_record = {\n            "arc": self.arc.get("title"),\n            "episode": safe_episode,\n            "scene": safe_scene,\n            "type": "on_screen"\n        }\n        if scene_record not in appearance_history:\n            appearance_history.append(scene_record)\n\n        canonical = existing.setdefault("canonical_identity", {})\n        canonical["identity_locked"] = True\n        if not canonical.get("appearance"):\n            canonical["appearance"] = existing.get("appearance", "")\n        if not canonical.get("voice_style"):\n            canonical["voice_style"] = existing.get("voice_style", "")\n        canonical.setdefault("design_version", 1)\n        canonical.setdefault("first_defined_arc", existing.get("first_arc"))\n        canonical.setdefault("reference_image", None)\n        canonical.setdefault("reference_asset_id", None)\n        existing["canonical_identity"] = canonical\n        return existing\n\n\n    # ========================================================\n    # PROCESS GENERATED EPISODE\n    # ========================================================\n\n    def process_generated_episode(self):\n        """Persist generated episode characters, states and continuity."""\n        episode = self.load_generated_episode()\n        if not episode:\n            return False\n\n        episode_number = episode.get("episode_number", 1)\n        try:\n            episode_number = int(episode_number)\n        except (TypeError, ValueError):\n            episode_number = 1\n\n        episode_title = str(episode.get("title", f"Episode {episode_number}")).strip()\n        current_arc_title = self.arc.get("title")\n\n        canonical_identities = episode.get("canonical_character_identities", [])\n        if isinstance(canonical_identities, list):\n            for reference in canonical_identities:\n                self.process_episode_character_reference(reference, episode_number, 0)\n\n        scenes = episode.get("scenes", [])\n        if not isinstance(scenes, list):\n            scenes = []\n\n        scene_count = 0\n        for scene in scenes:\n            if not isinstance(scene, dict):\n                continue\n            scene_number = scene.get("scene_number", scene_count + 1)\n            try:\n                scene_number = int(scene_number)\n            except (TypeError, ValueError):\n                scene_number = scene_count + 1\n            scene_count += 1\n\n            references = scene.get("character_references", [])\n            if isinstance(references, list):\n                for reference in references:\n                    self.process_episode_character_reference(reference, episode_number, scene_number)\n\n            scene_characters = scene.get("characters", [])\n            if isinstance(scene_characters, list):\n                for name in scene_characters:\n                    if not isinstance(name, str):\n                        continue\n                    existing = self.find_by_name("characters", name)\n                    if not existing:\n                        continue\n                    history = existing.setdefault("episode_history", [])\n                    record = {\n                        "episode": episode_number,\n                        "scene": scene_number,\n                        "arc": current_arc_title,\n                        "type": "episode_appearance"\n                    }\n                    if record not in history:\n                        history.append(record)\n                    if "first_episode" not in existing:\n                        existing["first_episode"] = episode_number\n                    existing["last_episode"] = episode_number\n\n        state_changes = episode.get("character_state_changes", [])\n        if isinstance(state_changes, list):\n            for state_change in state_changes:\n                if not isinstance(state_change, dict):\n                    continue\n                name = str(state_change.get("character", "")).strip()\n                change = str(state_change.get("change", "")).strip()\n                if not name or not change:\n                    continue\n                existing = self.find_by_name("characters", name)\n                if not existing:\n                    print(f"⚠️ State change references unknown character: {name}")\n                    continue\n                state_history = existing.setdefault("state_history", [])\n                state_record = {\n                    "arc": current_arc_title,\n                    "episode": episode_number,\n                    "change": change\n                }\n                if state_record not in state_history:\n                    state_history.append(state_record)\n                existing["current_state"] = change\n\n        arc_id = self.memory["universe"].get("current_arc")\n        episode_id = f"{arc_id}_ep_{episode_number:02d}" if arc_id else None\n\n        if episode_id and episode_id in self.memory["episodes"]:\n            episode_record = self.memory["episodes"][episode_id]\n            episode_record["status"] = "generated"\n            episode_record["title"] = episode_title\n            episode_record["episode_number"] = episode_number\n            episode_record["generated_output_file"] = str(EPISODE_OUTPUT_FILE.relative_to(BASE_DIR))\n            episode_record["scene_count"] = scene_count\n            episode_record["generated_summary"] = episode.get("summary", "")\n            episode_record["continuity_used"] = episode.get("continuity_used", [])\n            episode_record["new_information"] = episode.get("new_information", [])\n            episode_record["unresolved_mysteries"] = episode.get("unresolved_mysteries", [])\n            episode_record["introduced_clues"] = episode.get("introduced_clues", [])\n            episode_record["future_hook"] = episode.get("future_hook", "")\n        else:\n            if not arc_id:\n                arc_id = "unknown_arc"\n            episode_id = f"{arc_id}_ep_{episode_number:02d}"\n            self.memory["episodes"].setdefault(episode_id, {\n                "id": episode_id,\n                "arc_id": arc_id,\n                "episode_number": episode_number,\n                "title": episode_title,\n                "status": "generated",\n                "generated_output_file": str(EPISODE_OUTPUT_FILE.relative_to(BASE_DIR)),\n                "scene_count": scene_count,\n                "generated_summary": episode.get("summary", "")\n            })\n\n        continuity_record = {\n            "arc": current_arc_title,\n            "episode": episode_number,\n            "title": episode_title,\n            "continuity_used": episode.get("continuity_used", []),\n            "new_information": episode.get("new_information", []),\n            "introduced_clues": episode.get("introduced_clues", []),\n            "future_hook": episode.get("future_hook", "")\n        }\n        episode_memory = self.memory.setdefault("episode_continuity", [])\n        if not any(\n            isinstance(old, dict)\n            and old.get("arc") == continuity_record["arc"]\n            and old.get("episode") == continuity_record["episode"]\n            for old in episode_memory\n        ):\n            episode_memory.append(continuity_record)\n\n        self.memory["universe"]["current_episode"] = episode_number\n        self.memory["universe"]["current_arc"] = arc_id\n\n        print("🧠 GENERATED EPISODE MEMORY UPDATE COMPLETE")\n        print(f"   Episode: {episode_number} - {episode_title}")\n        print(f"   Scenes processed: {scene_count}")\n        return True\n\n\n    # ========================================================
+    # ========================================================
+    # LOAD GENERATED EPISODE
+    # ========================================================
+
+    def load_generated_episode(self):
+        """Load the generated episode if it exists."""
+        if not EPISODE_OUTPUT_FILE.exists():
+            print()
+            print("ℹ️ No generated episode found.")
+            print("   Skipping episode-specific memory update.")
+            return None
+
+        try:
+            episode_data = self.load_json(
+                EPISODE_OUTPUT_FILE
+            )
+        except Exception as error:
+            print(
+                f"⚠️ Could not load generated episode: {error}"
+            )
+            return None
+
+        if not isinstance(episode_data, dict):
+            print("⚠️ Generated episode is not a JSON object.")
+            return None
+
+        episode = episode_data.get("episode")
+
+        if not isinstance(episode, dict):
+            print(
+                "⚠️ Generated episode does not contain "
+                "a valid 'episode' object."
+            )
+            return None
+
+        print(
+            f"✅ Generated episode loaded: "
+            f"{episode.get('title', 'Untitled')}"
+        )
+
+        return episode
+
+
+    # ========================================================
+    # PROCESS EPISODE CHARACTER REFERENCE
+    # ========================================================
+
+    def process_episode_character_reference(
+        self,
+        character_reference,
+        episode_number,
+        scene_number
+    ):
+        """
+        Permanently save a character found in the generated
+        episode while preserving an already locked identity.
+        """
+        if not isinstance(character_reference, dict):
+            return None
+
+        name = str(
+            character_reference.get("name", "")
+        ).strip()
+
+        if not name:
+            return None
+
+        appearance = str(
+            character_reference.get(
+                "appearance",
+                ""
+            )
+        ).strip()
+
+        voice_style = str(
+            character_reference.get(
+                "voice_style",
+                ""
+            )
+        ).strip()
+
+        incoming_canonical = (
+            character_reference.get(
+                "canonical_identity"
+            )
+        )
+
+        if not isinstance(
+            incoming_canonical,
+            dict
+        ):
+            incoming_canonical = {}
+
+        existing = self.find_by_name(
+            "characters",
+            name
+        )
+
+        # ----------------------------------------------------
+        # NEW CHARACTER
+        # ----------------------------------------------------
+
+        if not existing:
+
+            character_data = {
+                "name": name,
+                "appearance": appearance,
+                "voice_style": voice_style,
+                "canonical_identity": {
+                    "identity_locked": True,
+                    "design_version": int(
+                        incoming_canonical.get(
+                            "design_version",
+                            1
+                        ) or 1
+                    ),
+                    "first_defined_arc": self.arc.get(
+                        "title"
+                    ),
+                    "appearance": appearance,
+                    "voice_style": voice_style,
+                    "reference_image": incoming_canonical.get(
+                        "reference_image"
+                    ),
+                    "reference_asset_id": incoming_canonical.get(
+                        "reference_asset_id"
+                    )
+                }
+            }
+
+            existing = self.add_character(
+                character_data
+            )
+
+            if existing:
+                print(
+                    f"🆕 Episode-introduced character "
+                    f"saved permanently: {name}"
+                )
+
+        # ----------------------------------------------------
+        # RETURNING CHARACTER
+        # ----------------------------------------------------
+
+        else:
+            # add_character() contains the identity lock and
+            # will not overwrite canonical appearance/voice.
+            existing = self.add_character(
+                {
+                    "name": name,
+                    "appearance": appearance,
+                    "voice_style": voice_style
+                }
+            )
+
+        if not existing:
+            return None
+
+        try:
+            safe_episode = int(
+                episode_number
+            )
+        except (TypeError, ValueError):
+            safe_episode = 0
+
+        try:
+            safe_scene = int(
+                scene_number
+            )
+        except (TypeError, ValueError):
+            safe_scene = 0
+
+        current_arc = self.arc.get(
+            "title"
+        )
+
+        # ----------------------------------------------------
+        # Episode history
+        # ----------------------------------------------------
+
+        episode_history = existing.setdefault(
+            "episode_history",
+            []
+        )
+
+        episode_record = {
+            "episode": safe_episode,
+            "scene": safe_scene,
+            "arc": current_arc,
+            "type": "episode_appearance"
+        }
+
+        if episode_record not in episode_history:
+            episode_history.append(
+                episode_record
+            )
+
+        if "first_episode" not in existing:
+            existing["first_episode"] = safe_episode
+
+        existing["last_episode"] = safe_episode
+        existing["last_arc"] = current_arc
+        existing["status"] = "active"
+
+        # ----------------------------------------------------
+        # Appearance history
+        # ----------------------------------------------------
+
+        appearance_history = existing.setdefault(
+            "appearance_history",
+            []
+        )
+
+        appearance_record = {
+            "arc": current_arc,
+            "episode": safe_episode,
+            "scene": safe_scene,
+            "type": "on_screen"
+        }
+
+        if appearance_record not in appearance_history:
+            appearance_history.append(
+                appearance_record
+            )
+
+        # ----------------------------------------------------
+        # Re-assert canonical identity
+        # ----------------------------------------------------
+
+        canonical = existing.setdefault(
+            "canonical_identity",
+            {}
+        )
+
+        canonical["identity_locked"] = True
+
+        if not canonical.get("appearance"):
+            canonical["appearance"] = existing.get(
+                "appearance",
+                ""
+            )
+
+        if not canonical.get("voice_style"):
+            canonical["voice_style"] = existing.get(
+                "voice_style",
+                ""
+            )
+
+        canonical.setdefault(
+            "design_version",
+            1
+        )
+
+        canonical.setdefault(
+            "first_defined_arc",
+            existing.get("first_arc")
+        )
+
+        canonical.setdefault(
+            "reference_image",
+            None
+        )
+
+        canonical.setdefault(
+            "reference_asset_id",
+            None
+        )
+
+        existing["canonical_identity"] = canonical
+
+        return existing
+
+
+    # ========================================================
+    # PROCESS GENERATED EPISODE
+    # ========================================================
+
+    def process_generated_episode(self):
+        """
+        Persist generated episode continuity into universe memory.
+
+        This is intentionally safe to run repeatedly. Existing
+        canonical character identities are preserved.
+        """
+        episode = self.load_generated_episode()
+
+        if not episode:
+            return False
+
+        episode_number = episode.get(
+            "episode_number",
+            1
+        )
+
+        try:
+            episode_number = int(
+                episode_number
+            )
+        except (TypeError, ValueError):
+            episode_number = 1
+
+        episode_title = str(
+            episode.get(
+                "title",
+                f"Episode {episode_number}"
+            )
+        ).strip()
+
+        current_arc = self.arc.get(
+            "title"
+        )
+
+        # ----------------------------------------------------
+        # 1. Top-level canonical identities
+        # ----------------------------------------------------
+
+        canonical_identities = episode.get(
+            "canonical_character_identities",
+            []
+        )
+
+        if isinstance(
+            canonical_identities,
+            list
+        ):
+            for reference in canonical_identities:
+                self.process_episode_character_reference(
+                    reference,
+                    episode_number,
+                    0
+                )
+
+        # ----------------------------------------------------
+        # 2. Every scene
+        # ----------------------------------------------------
+
+        scenes = episode.get(
+            "scenes",
+            []
+        )
+
+        if not isinstance(
+            scenes,
+            list
+        ):
+            scenes = []
+
+        scene_count = 0
+
+        for scene in scenes:
+
+            if not isinstance(
+                scene,
+                dict
+            ):
+                continue
+
+            scene_number = scene.get(
+                "scene_number",
+                scene_count + 1
+            )
+
+            try:
+                scene_number = int(
+                    scene_number
+                )
+            except (TypeError, ValueError):
+                scene_number = scene_count + 1
+
+            scene_count += 1
+
+            references = scene.get(
+                "character_references",
+                []
+            )
+
+            if isinstance(
+                references,
+                list
+            ):
+                for reference in references:
+                    self.process_episode_character_reference(
+                        reference,
+                        episode_number,
+                        scene_number
+                    )
+
+            # Also record scene appearances from the simple
+            # characters list.
+            scene_characters = scene.get(
+                "characters",
+                []
+            )
+
+            if isinstance(
+                scene_characters,
+                list
+            ):
+                for name in scene_characters:
+
+                    if not isinstance(
+                        name,
+                        str
+                    ):
+                        continue
+
+                    existing = self.find_by_name(
+                        "characters",
+                        name
+                    )
+
+                    if not existing:
+                        # Never invent an identity from a name alone.
+                        continue
+
+                    episode_history = existing.setdefault(
+                        "episode_history",
+                        []
+                    )
+
+                    record = {
+                        "episode": episode_number,
+                        "scene": scene_number,
+                        "arc": current_arc,
+                        "type": "episode_appearance"
+                    }
+
+                    if record not in episode_history:
+                        episode_history.append(
+                            record
+                        )
+
+                    if "first_episode" not in existing:
+                        existing["first_episode"] = (
+                            episode_number
+                        )
+
+                    existing["last_episode"] = (
+                        episode_number
+                    )
+
+        # ----------------------------------------------------
+        # 3. Character state changes
+        # ----------------------------------------------------
+
+        state_changes = episode.get(
+            "character_state_changes",
+            []
+        )
+
+        if isinstance(
+            state_changes,
+            list
+        ):
+            for state_change in state_changes:
+
+                if not isinstance(
+                    state_change,
+                    dict
+                ):
+                    continue
+
+                name = str(
+                    state_change.get(
+                        "character",
+                        ""
+                    )
+                ).strip()
+
+                change = str(
+                    state_change.get(
+                        "change",
+                        ""
+                    )
+                ).strip()
+
+                if not name or not change:
+                    continue
+
+                existing = self.find_by_name(
+                    "characters",
+                    name
+                )
+
+                if not existing:
+                    print(
+                        f"⚠️ State change references "
+                        f"unknown character: {name}"
+                    )
+                    continue
+
+                state_history = existing.setdefault(
+                    "state_history",
+                    []
+                )
+
+                state_record = {
+                    "arc": current_arc,
+                    "episode": episode_number,
+                    "change": change
+                }
+
+                if state_record not in state_history:
+                    state_history.append(
+                        state_record
+                    )
+
+                existing["current_state"] = change
+
+        # ----------------------------------------------------
+        # 4. Update matching episode record
+        # ----------------------------------------------------
+
+        arc_id = self.memory["universe"].get(
+            "current_arc"
+        )
+
+        if not arc_id:
+            arc_id = self.make_id(
+                current_arc or "unknown_arc"
+            )
+
+        episode_id = (
+            f"{arc_id}_ep_{episode_number:02d}"
+        )
+
+        episode_record = self.memory[
+            "episodes"
+        ].get(
+            episode_id
+        )
+
+        if episode_record is None:
+            episode_record = {
+                "id": episode_id,
+                "arc_id": arc_id,
+                "arc_number": self.memory[
+                    "universe"
+                ].get(
+                    "current_phase",
+                    1
+                ),
+                "episode_number": episode_number
+            }
+
+            self.memory[
+                "episodes"
+            ][episode_id] = episode_record
+
+        episode_record["title"] = episode_title
+        episode_record["status"] = "generated"
+        episode_record[
+            "generated_output_file"
+        ] = str(
+            EPISODE_OUTPUT_FILE.relative_to(
+                BASE_DIR
+            )
+        )
+        episode_record[
+            "scene_count"
+        ] = scene_count
+        episode_record[
+            "generated_summary"
+        ] = episode.get(
+            "summary",
+            ""
+        )
+        episode_record[
+            "continuity_used"
+        ] = episode.get(
+            "continuity_used",
+            []
+        )
+        episode_record[
+            "new_information"
+        ] = episode.get(
+            "new_information",
+            []
+        )
+        episode_record[
+            "unresolved_mysteries"
+        ] = episode.get(
+            "unresolved_mysteries",
+            []
+        )
+        episode_record[
+            "introduced_clues"
+        ] = episode.get(
+            "introduced_clues",
+            []
+        )
+        episode_record[
+            "future_hook"
+        ] = episode.get(
+            "future_hook",
+            ""
+        )
+
+        # ----------------------------------------------------
+        # 5. Episode continuity history
+        # ----------------------------------------------------
+
+        continuity_record = {
+            "arc": current_arc,
+            "episode": episode_number,
+            "title": episode_title,
+            "continuity_used": episode.get(
+                "continuity_used",
+                []
+            ),
+            "new_information": episode.get(
+                "new_information",
+                []
+            ),
+            "introduced_clues": episode.get(
+                "introduced_clues",
+                []
+            ),
+            "future_hook": episode.get(
+                "future_hook",
+                ""
+            )
+        }
+
+        episode_memory = self.memory.setdefault(
+            "episode_continuity",
+            []
+        )
+
+        duplicate = any(
+            isinstance(old, dict)
+            and old.get("arc") == current_arc
+            and old.get("episode") == episode_number
+            for old in episode_memory
+        )
+
+        if not duplicate:
+            episode_memory.append(
+                continuity_record
+            )
+
+        # ----------------------------------------------------
+        # 6. Universe state
+        # ----------------------------------------------------
+
+        self.memory["universe"][
+            "current_episode"
+        ] = episode_number
+
+        self.memory["universe"][
+            "current_arc"
+        ] = arc_id
+
+        print()
+        print(
+            "🧠 GENERATED EPISODE MEMORY UPDATE COMPLETE"
+        )
+        print(
+            f"   Episode: {episode_number} - "
+            f"{episode_title}"
+        )
+        print(
+            f"   Scenes processed: {scene_count}"
+        )
+
+        return True
+
+
+    # ========================================================
     # ADD STORY ARC
     # ========================================================
 
@@ -1716,12 +2384,11 @@ def main():
 
     manager = UniverseMemoryManager()
 
-    # 1. Save the generated arc and planned character identities.
+    # 1. Process the story arc and planned universe data.
     manager.process_arc()
 
-    # 2. If Episode Director has already generated an episode,
-    #    persist its canonical characters, appearances, state changes
-    #    and continuity. If the file is absent, this safely skips.
+    # 2. If Episode Director has already created an episode,
+    #    persist its characters and continuity.
     manager.process_generated_episode()
 
     # 3. Save the final universe memory.
