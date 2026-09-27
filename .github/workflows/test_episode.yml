@@ -197,21 +197,23 @@ jobs:
             exit 1
           fi
 
-          shot_count=$(find output/shots -name "shot_*.json" | wc -l)
+          shot_count=$(find output/shots -name "scene_*_shots.json" | wc -l)
 
           if [ "$shot_count" -lt 1 ]; then
-            echo "❌ No shot files found."
+            echo "❌ No scene shot files found."
+            echo "Files currently inside output/shots:"
+            find output/shots -maxdepth 1 -type f -print
             exit 1
           fi
 
-          echo "✅ Found $shot_count shot files."
+          echo "✅ Found $shot_count scene shot files."
 
-          for file in output/shots/shot_*.json; do
+          for file in output/shots/scene_*_shots.json; do
+            echo "Checking: $file"
             python -m json.tool "$file" > /dev/null
           done
 
           echo "✅ All shot JSON files are valid."
-
 
       # =====================================================
       # 14. VERIFY SHOT INDEX
