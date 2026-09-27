@@ -273,7 +273,64 @@ jobs:
 
 
       # =====================================================
-      # 16. UPLOAD GENERATED STORY ARC
+      # 16. GENERATE ONE VEO 3.1 TEST VIDEO
+      # =====================================================
+
+      - name: Generate ONE Veo video test shot
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          VEO_MODEL: "veo-3.1-generate-preview"
+          VEO_MAX_SHOTS: "1"
+          VEO_START_SHOT: "1"
+          VEO_POLL_SECONDS: "10"
+          VEO_MAX_WAIT_SECONDS: "600"
+        run: |
+          echo "=========================================="
+          echo "      VEO 3.1 ONE-SHOT TEST"
+          echo "=========================================="
+          python app/veo_video_generator.py
+
+          echo ""
+          echo "Generated files:"
+          find output/videos -maxdepth 3 -type f -print
+
+      # =====================================================
+      # 17. VERIFY VEO TEST VIDEO
+      # =====================================================
+
+      - name: Verify Veo test video
+        run: |
+          if [ ! -f output/videos/scene_01/shot_01.mp4 ]; then
+            echo "❌ Veo test video was not generated"
+            exit 1
+          fi
+
+          size=$(stat -c%s output/videos/scene_01/shot_01.mp4)
+
+          if [ "$size" -le 0 ]; then
+            echo "❌ Veo test video is empty"
+            exit 1
+          fi
+
+          echo "✅ Veo test video exists"
+          echo "Size: $size bytes"
+
+      # =====================================================
+      # 18. UPLOAD VEO TEST VIDEO
+      # =====================================================
+
+      - name: Upload Veo test video
+        uses: actions/upload-artifact@v4
+        with:
+          name: veo-test-video
+          path: output/videos/
+          if-no-files-found: error
+
+      # =====================================================
+      # 19. UPLOAD GENERATED STORY ARC
+      # =====================================================
+
       # =====================================================
 
       - name: Upload generated arc
