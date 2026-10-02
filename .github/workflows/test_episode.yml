@@ -273,6 +273,28 @@ jobs:
 
 
       # =====================================================
+      # 16. BUILD KATHAIKALAM PIPELINE EXPORT
+      # =====================================================
+
+      - name: Build Kathaikalam Pipeline Export
+        run: |
+          echo "Building automatic Kathaikalam pipeline package..."
+          python app/kathaikalam_pipeline_exporter.py
+          python -m json.tool output/kathaikalam_pipeline.json > /dev/null
+          echo "✅ Kathaikalam pipeline export ready."
+
+      # =====================================================
+      # 17. UPLOAD KATHAIKALAM PIPELINE
+      # =====================================================
+
+      - name: Upload Kathaikalam pipeline
+        uses: actions/upload-artifact@v4
+        with:
+          name: kathaikalam-pipeline
+          path: output/kathaikalam_pipeline.json
+          if-no-files-found: error
+
+      # =====================================================
       # 16. GENERATE ONE VEO 3.1 TEST VIDEO
       # =====================================================
 
