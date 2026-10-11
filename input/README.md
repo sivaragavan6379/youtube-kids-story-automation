@@ -1,14 +1,12 @@
-# Input videos
+# Private video handoff
 
-Upload the MP4 you want to publish to this folder as `episode.mp4`.
+The publishing workflow downloads the MP4 from your private Google Drive and uploads it to YouTube.
 
-Expected path:
-`input/episode.mp4`
+1. Upload the MP4 to Google Drive.
+2. Keep it private; the Google account used for OAuth must own it or have access to it.
+3. Copy the file ID from its Drive URL. Example: in
+   `https://drive.google.com/file/d/FILE_ID/view`, the file ID is `FILE_ID`.
+4. Run **Actions → Publish Episode Video to YouTube** and paste that ID.
 
-The GitHub Actions workflow uploads that file to YouTube. Keep the workflow's
-privacy setting as `unlisted` for the first test.
-
-Important:
-- Do not commit OAuth tokens, API keys, or client-secret JSON files.
-- A short test clip is not a full episode.
-- This step publishes an existing MP4; video generation is a separate stage.
+Do not upload private videos, OAuth tokens, or client-secret files to this public GitHub repository.
+The workflow defaults to **unlisted**. An 8-second test clip is not a full episode.
