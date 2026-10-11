@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+client_secrets.json
+youtube_token.json
+credentials.json
+token.json
+output/videos/
+input/*.mp4
