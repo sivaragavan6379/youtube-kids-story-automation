@@ -3,10 +3,9 @@ name: Publish Episode Video to YouTube
 on:
   workflow_dispatch:
     inputs:
-      video_path:
-        description: "Repository-relative MP4 path (upload the file to the repo first)"
+      google_drive_file_id:
+        description: "Google Drive file ID for the private MP4"
         required: true
-        default: "input/episode.mp4"
         type: string
       title:
         description: "YouTube title"
@@ -23,7 +22,7 @@ on:
           - private
           - public
       made_for_kids:
-        description: "Declare as made for kids (select based on the actual content)"
+        description: "Mark as made for kids only if the content is directed to children"
         required: true
         default: true
         type: boolean
@@ -36,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      VIDEO_PATH: ${{ inputs.video_path }}
+      GOOGLE_DRIVE_FILE_ID: ${{ inputs.google_drive_file_id }}
       YOUTUBE_TITLE: ${{ inputs.title }}
       YOUTUBE_PRIVACY_STATUS: ${{ inputs.privacy }}
       YOUTUBE_MADE_FOR_KIDS: ${{ inputs.made_for_kids }}
@@ -45,42 +44,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install YouTube uploader dependencies
+      - name: Install Google API libraries
         run: |
           python -m pip install --upgrade pip
           pip install google-api-python-client google-auth google-auth-httplib2
-
-      - name: Validate video and credentials
+      - name: Download private MP4 from Google Drive
+        run: python app/download_drive_video.py
+      - name: Validate downloaded video
         run: |
-          python - <<'PY'
-          import json
-          import os
-          from pathlib import Path
-
-          video = Path(os.environ["VIDEO_PATH"])
-          if not video.is_file():
-              raise SystemExit(
-                  f"Video not found: {video}. Upload an MP4 to this repository path first."
-              )
-          if video.stat().st_size == 0:
-              raise SystemExit(f"Video is empty: {video}")
-          if not os.environ.get("YOUTUBE_OAUTH_TOKEN_JSON", "").strip():
-              raise SystemExit("Missing YOUTUBE_OAUTH_TOKEN_JSON GitHub secret.")
-          try:
-              token = json.loads(os.environ["YOUTUBE_OAUTH_TOKEN_JSON"])
-          except json.JSONDecodeError as exc:
-              raise SystemExit(f"YOUTUBE_OAUTH_TOKEN_JSON is not valid JSON: {exc}")
-          if not token.get("refresh_token"):
-              raise SystemExit("OAuth token JSON must include a refresh_token.")
-          print(f"Video ready: {video} ({video.stat().st_size} bytes)")
-          print("OAuth token JSON looks structurally valid.")
-          PY
-
+          test -s input/episode.mp4
+          file input/episode.mp4
+          ls -lh input/episode.mp4
       - name: Upload video to YouTube
         run: python app/youtube_uploader.py
